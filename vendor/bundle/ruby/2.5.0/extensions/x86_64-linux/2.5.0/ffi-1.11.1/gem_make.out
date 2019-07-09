@@ -1,5 +1,5 @@
 current directory: /home/yukoku/work/myportfolio/vendor/bundle/ruby/2.5.0/gems/ffi-1.11.1/ext/ffi_c
-/usr/bin/ruby2.5 -r ./siteconf20190707-32263-t9r0p0.rb extconf.rb
+/usr/bin/ruby2.5 -r ./siteconf20190709-6835-bgdd9w.rb extconf.rb
 checking for ffi.h... no
 checking for ffi.h in /usr/local/include,/usr/include/ffi... no
 checking for shlwapi.h... no
@@ -117,6 +117,7 @@ make[3]: ディレクトリ '/home/yukoku/work/myportfolio/vendor/bundle/ruby/2.
 make[3]: 'all' に対して行うべき事はありません.
 make[3]: ディレクトリ '/home/yukoku/work/myportfolio/vendor/bundle/ruby/2.5.0/gems/ffi-1.11.1/ext/ffi_c/libffi-x86_64-linux-gnu/man' から出ます
 make[3]: ディレクトリ '/home/yukoku/work/myportfolio/vendor/bundle/ruby/2.5.0/gems/ffi-1.11.1/ext/ffi_c/libffi-x86_64-linux-gnu' に入ります
+make[3]: 'all-am' に対して行うべき事はありません.
 make[3]: ディレクトリ '/home/yukoku/work/myportfolio/vendor/bundle/ruby/2.5.0/gems/ffi-1.11.1/ext/ffi_c/libffi-x86_64-linux-gnu' から出ます
 make[2]: ディレクトリ '/home/yukoku/work/myportfolio/vendor/bundle/ruby/2.5.0/gems/ffi-1.11.1/ext/ffi_c/libffi-x86_64-linux-gnu' から出ます
 make[1]: ディレクトリ '/home/yukoku/work/myportfolio/vendor/bundle/ruby/2.5.0/gems/ffi-1.11.1/ext/ffi_c/libffi-x86_64-linux-gnu' から出ます
@@ -152,4 +153,4 @@ compiling Types.c
 compiling Variadic.c
 compiling ffi.c
 linking shared-object ffi_c.so
-/usr/bin/install -c -m 0755 ffi_c.so ./.gem.20190707-32263-1xcxp58
+/usr/bin/install -c -m 0755 ffi_c.so ./.gem.20190709-6835-fhbl7n

@@ -1,5 +1,5 @@
 current directory: /home/yukoku/work/myportfolio/vendor/bundle/ruby/2.5.0/gems/bindex-0.7.0/ext/skiptrace
-/usr/bin/ruby2.5 -r ./siteconf20190707-32263-1eulcos.rb extconf.rb
+/usr/bin/ruby2.5 -r ./siteconf20190709-6835-6ws6nb.rb extconf.rb
 creating Makefile
 
 current directory: /home/yukoku/work/myportfolio/vendor/bundle/ruby/2.5.0/gems/bindex-0.7.0/ext/skiptrace
@@ -12,4 +12,4 @@ linking shared-object skiptrace/cruby.so
 
 current directory: /home/yukoku/work/myportfolio/vendor/bundle/ruby/2.5.0/gems/bindex-0.7.0/ext/skiptrace
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 cruby.so ./.gem.20190707-32263-1qrgqrv/skiptrace
+/usr/bin/install -c -m 0755 cruby.so ./.gem.20190709-6835-11e8zrx/skiptrace

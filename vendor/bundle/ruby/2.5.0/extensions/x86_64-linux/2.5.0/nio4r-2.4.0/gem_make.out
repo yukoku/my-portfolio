@@ -1,5 +1,5 @@
 current directory: /home/yukoku/work/myportfolio/vendor/bundle/ruby/2.5.0/gems/nio4r-2.4.0/ext/nio4r
-/usr/bin/ruby2.5 -r ./siteconf20190707-1967-18wocnl.rb extconf.rb
+/usr/bin/ruby2.5 -r ./siteconf20190709-6835-1in0erl.rb extconf.rb
 checking for unistd.h... yes
 checking for sys/select.h... yes
 checking for port_event_t in poll.h... no
@@ -70,4 +70,4 @@ linking shared-object nio4r_ext.so
 
 current directory: /home/yukoku/work/myportfolio/vendor/bundle/ruby/2.5.0/gems/nio4r-2.4.0/ext/nio4r
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 nio4r_ext.so ./.gem.20190707-1967-1ivnydp
+/usr/bin/install -c -m 0755 nio4r_ext.so ./.gem.20190709-6835-1keir1k

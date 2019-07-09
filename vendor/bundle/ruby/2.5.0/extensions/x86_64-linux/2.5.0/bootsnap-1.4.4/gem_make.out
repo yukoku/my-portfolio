@@ -1,5 +1,5 @@
 current directory: /home/yukoku/work/myportfolio/vendor/bundle/ruby/2.5.0/gems/bootsnap-1.4.4/ext/bootsnap
-/usr/bin/ruby2.5 -r ./siteconf20190707-32263-7hcdwi.rb extconf.rb
+/usr/bin/ruby2.5 -r ./siteconf20190709-6835-szh5uc.rb extconf.rb
 creating Makefile
 
 current directory: /home/yukoku/work/myportfolio/vendor/bundle/ruby/2.5.0/gems/bootsnap-1.4.4/ext/bootsnap
@@ -17,4 +17,4 @@ linking shared-object bootsnap/bootsnap.so
 
 current directory: /home/yukoku/work/myportfolio/vendor/bundle/ruby/2.5.0/gems/bootsnap-1.4.4/ext/bootsnap
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 bootsnap.so ./.gem.20190707-32263-1q9ccav/bootsnap
+/usr/bin/install -c -m 0755 bootsnap.so ./.gem.20190709-6835-1l4j7o8/bootsnap
