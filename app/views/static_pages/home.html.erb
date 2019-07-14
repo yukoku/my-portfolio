@@ -1,3 +1,12 @@
 <% provide(:title, "Home") %>
 <h1>Team Works</h1>
 <p> プロジェクト管理ツール</p>
+<div class="sign-in">
+  <% if user_signed_in? %>
+    <%= link_to "my page", edit_user_registration_path %>
+    <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+  <% else %>
+    <%= link_to "ユーザー登録", new_user_registration_path %>
+    <%= link_to "ログイン", new_user_session_path %>
+  <% end%>
+</div>
