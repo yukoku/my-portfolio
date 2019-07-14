@@ -39,6 +39,9 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
+  gem 'capybara', '~>2.15.2'
+  gem 'launchy', '~> 2.4.3'
+  gem 'webdrivers'
   gem 'factory_bot_rails'
   gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
 end
