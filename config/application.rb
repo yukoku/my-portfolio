@@ -31,5 +31,7 @@ module Myportfolio
     config.generators.system_tests = nil
     # 日本語化
     config.i18n.default_locale = :ja
+    # setting asset pipeline on heroku
+    config.assets.initialize_on_precompile = false
   end
 end
