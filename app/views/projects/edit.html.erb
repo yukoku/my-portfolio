@@ -1,2 +1,5 @@
-<h1>Projects#edit</h1>
-<p>Find me in app/views/projects/edit.html.erb</p>
+<% provide(:title, "プロジェクト編集") %>
+<% provide(:button_text, "更新") %>
+<% provide(:link_to, edit_project_path(@project)) %>
+<h2>プロジェクト編集</h2>
+<%= render 'form'%>

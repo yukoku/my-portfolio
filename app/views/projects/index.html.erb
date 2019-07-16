@@ -4,6 +4,7 @@
   <li>
     <%= link_to project.name, project %>
     <p class="project-description"><%= simple_format(project.description) %></p>
+    <p class="project-due-on"><%= "期日:#{project.due_on}" %></p>
     <% if project.owner_id == current_user.id %>
       <%= link_to "編集", edit_project_path(project) %>
       <%= link_to "削除", project, method: :delete, data: { confirm: '本当に削除しますか?' } %>

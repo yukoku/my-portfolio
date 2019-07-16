@@ -1,4 +1,8 @@
+<% provide(:title, "新しいプロジェクト") %>
+<% provide(:button_text, "作成") %>
+<% provide(:link_to, projects_path) %>
 <h2>新しいプロジェクト</h2>
+
 <%= form_for(@project) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
