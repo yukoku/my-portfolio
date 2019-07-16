@@ -12,7 +12,10 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
+    @project.owner_id = current_user.id
     if @project.save
+      # プロジェクトオーナーは自動的にプロジェクトユーザーに追加する
+      ProjectUser.create(user_id: @project.owner_id, project_id: @project.id)
       flash[:info] = '新しいプロジェクトが作成されました。'
       redirect_to projects_path
     else
@@ -27,6 +30,10 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
+    project_id = params[:id]
+    Project.find(params[:id]).destroy
+    flash[:success] = "プロジェクトを削除しました。"
+    redirect_to projects_path
   end
 
 private

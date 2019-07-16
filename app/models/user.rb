@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
 
-  has_many :project_users
+  has_many :project_users, dependent: :destroy
   has_many :projects, through: :project_users
   validates :name, presence: true, uniqueness: true, length: { maximum: 50 }
 end
