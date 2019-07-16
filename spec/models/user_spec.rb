@@ -17,20 +17,20 @@ RSpec.describe User, type: :model do
   it "is invalid without name" do
     user = FactoryBot.build(:user, name: nil)
     user.valid?
-    expect(user.errors[:name]).to include("を入力してください")
+    expect(user.errors[:name]).to include(I18n.t("errors.messages.blank"))
   end
 
   it "is invalid over length name" do
     user = FactoryBot.build(:user, name: "a" * 51)
     user.valid?
-    expect(user.errors[:name]).to include("は50文字以内で入力してください")
+    expect(user.errors[:name]).to include(I18n.t("errors.messages.too_long", count: 50))
   end
 
   it "is invalid duplicate name" do
     user = FactoryBot.create(:user)
-    other_user = FactoryBot.build(:user, email: "other@example.com")
+    other_user = FactoryBot.build(:user, name: user.name, email: "other@example.com")
     other_user.valid?
-    expect(other_user.errors[:name]).to include("はすでに存在します")
+    expect(other_user.errors[:name]).to include(I18n.t("errors.messages.taken"))
   end
 
   it { is_expected.to validate_presence_of :name }
