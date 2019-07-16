@@ -1,1 +1,1 @@
-Capybara.javascript_driver = :selecnium_chrome_headless
+Capybara.javascript_driver = :selenium_chrome_headless

@@ -5,7 +5,7 @@ FactoryBot.define do
     due_on { 1.day.after }
 
     trait :due_today do
-      due_on { Date.current.in_time_zone }
+      due_on { Time.zone.now }
     end
 
     trait :due_yesterday do
