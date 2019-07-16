@@ -1,2 +1,15 @@
-<h1>Projects#new</h1>
-<p>Find me in app/views/projects/new.html.erb</p>
+<h2>新しいプロジェクト</h2>
+<%= form_for(@project) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name, class: 'form-control' %>
+
+  <%= f.label :description %>
+  <%= f.text_area :description, class: 'form-control' %>
+
+  <%= f.label :due_on %>
+  <%= f.date_field :due_on, value: Time.now.strftime("%Y-%m-%d"), class: 'form-control' %>
+
+  <%= f.submit "作成", class: "btn btn-primary" %>
+<% end %>
