@@ -1,0 +1,31 @@
+<% provide(@project.name) %>
+<div class="row">
+  <aside class="col-md-2">
+    <section class="project-info">
+      <h1>
+        <%= @project.name %>
+      </h1>
+    </section>
+    <section>
+      <p>説明</p>
+      <%= @project.description %>
+    </section>
+    <section>
+      <p>期日</p>
+      <%= @project.due_on %>
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <section class="ticket-items">
+      <ul>
+        <h4>チケットのタイトル</h4>
+        <p>チケットの説明</p>
+      </ul>
+    </section>
+  </div>
+  <div class="col-md-2">
+    <p>ここにプロジェクトメンバーを表示</p>
+    <p>ここにプロジェクトメンバーを表示</p>
+    <p>ここにプロジェクトメンバーを表示</p>
+  </div>
+</div>

@@ -1,13 +1,21 @@
 <% provide(:title, 'Projects') %>
 <h2>参加しているプロジェクト</h2>
-<% @projects.each do |project| %>
-  <li>
-    <%= link_to project.name, project %>
-    <p class="project-description"><%= simple_format(project.description) %></p>
-    <p class="project-due-on"><%= "期日:#{project.due_on}" %></p>
-    <% if project.owner_id == current_user.id %>
-      <%= link_to "編集", edit_project_path(project) %>
-      <%= link_to "削除", project, method: :delete, data: { confirm: '本当に削除しますか?' } %>
-    <% end %>
-  </li>
-<% end %>
+<div class="row">
+  <% @projects.each do |project| %>
+    <ol>
+    <div class="col-md-10">
+      <%= link_to project.name, project %>
+      <p class="project-description"><%= simple_format(project.description) %></p>
+    </div>
+    <div class="col-md-2">
+      <p class="project-due-on"><%= "期日:#{project.due_on}" %></p>
+      <% if project.owner_id == current_user.id %>
+        <div class="owner-selection">
+          <%= link_to "編集", edit_project_path(project) %>
+          <%= link_to "削除", project, method: :delete, data: { confirm: '本当に削除しますか?' } %>
+        </div>
+      <% end %>
+      </div>
+    </ol>
+  <% end %>
+</div>
