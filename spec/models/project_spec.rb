@@ -25,7 +25,7 @@ RSpec.describe Project, type: :model do
   it "is invalid with due on past date" do
     project = FactoryBot.build(:project, :due_yesterday)
     project.valid?
-    expect(project.errors[:due_on]).to include(I18n.t('errors.messages.on_or_after', restriction: Date.current))
+    expect(project.errors[:due_on]).to include(I18n.t('errors.messages.on_or_after', restriction: Time.zone.today))
   end
 
   it "is invalid with same name in same user" do
