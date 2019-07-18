@@ -62,6 +62,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
+gem 'devise_invitable', '~> 2.0.0'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
 gem 'validates_timeliness', '~> 5.0.0.alpha3'

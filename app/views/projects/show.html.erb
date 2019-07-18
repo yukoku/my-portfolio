@@ -24,8 +24,9 @@
     </section>
   </div>
   <div class="col-md-2">
-    <p>ここにプロジェクトメンバーを表示</p>
-    <p>ここにプロジェクトメンバーを表示</p>
-    <p>ここにプロジェクトメンバーを表示</p>
+    <% @project.users.each do |user| %>
+      <ul><%= user.name %></ul>
+    <% end %>
+    <%= link_to "メンバーを追加", new_user_invitation_path %>
   </div>
 </div>
