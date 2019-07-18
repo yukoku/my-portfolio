@@ -287,3 +287,11 @@ span.picture {
     border: 0;
   }
 }
+
+/* flash for device messages */
+.alert-alert {
+  @extend .alert-danger;
+}
+.alert-notice {
+  @extend .alert-info;
+}
