@@ -16,7 +16,8 @@ class ProjectsController < ApplicationController
     @project.owner_id = current_user.id
     if @project.save
       # プロジェクトオーナーは自動的にプロジェクトユーザーに追加する
-      ProjectUser.create(user_id: @project.owner_id, project_id: @project.id)
+      current_user.project_users.create(project_id: @project.id,
+                                        accepted_project_invitation: true)
       flash[:info] = '新しいプロジェクトが作成されました。'
       redirect_to projects_path
     else

@@ -21,7 +21,7 @@ Devise.setup do |config|
   config.mailer_sender = 'noreply@secure-reef-34800.herokuapp.com'
 
   # Configure the class responsible to send e-mails.
-  # config.mailer = 'Devise::Mailer'
+  config.mailer = 'Users::DeviseInviteMailer'
 
   # Configure the parent class responsible to send e-mails.
   # config.parent_mailer = 'ActionMailer::Base'

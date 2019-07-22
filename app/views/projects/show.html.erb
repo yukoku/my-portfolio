@@ -27,6 +27,6 @@
     <% @project.users.each do |user| %>
       <ul><%= user.name %></ul>
     <% end %>
-    <%= link_to "メンバーを追加", new_user_invitation_path %>
+    <%= link_to "メンバーを追加", new_user_invitation_path(project_id: @project) %>
   </div>
 </div>
