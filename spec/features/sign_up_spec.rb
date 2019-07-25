@@ -8,18 +8,15 @@ RSpec.feature "SignUp", type: :feature do
     within ".sign-in" do
       click_link "ユーザー登録"
     end
-    fill_in "名前", with: user.name
-    fill_in "メールアドレス", with: user.email
-    fill_in "パスワード", with: user.password
-    fill_in "確認用パスワード", with: user.password
+    form_label = "activerecord.attributes.user"
+    fill_in I18n.t("#{form_label}.name"), with: user.name
+    fill_in I18n.t("#{form_label}.email"), with: user.email
+    fill_in I18n.t("#{form_label}.password"), with: user.password
+    fill_in I18n.t("#{form_label}.password_confirmation"), with: user.password
 
     expect {
       click_button "Sign up"
-      expect(page).to have_content "アカウント登録が完了しました。"
-      within ".sign-in" do
-        click_link "ログアウト"
-      end
-      expect(page).to have_content "ログアウトしました。"
+      expect(page).to have_content I18n.t("devise.registrations.signed_up_but_unconfirmed")
     }.to change(User, :count).by(1)
   end
 end
