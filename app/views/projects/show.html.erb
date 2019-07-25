@@ -24,9 +24,11 @@
     </section>
   </div>
   <div class="col-md-2">
-    <% @project.users.each do |user| %>
-      <ul><%= user.name %></ul>
+    <% @project.project_users.where(accepted_project_invitation: true).each do |project_member| %>
+      <ul><%= project_member.user.name %></ul>
     <% end %>
-    <%= link_to "メンバーを追加", new_user_invitation_path(project_id: @project) %>
+    <% if current_user.id == @project.owner_id %>
+      <%= link_to "メンバーを追加", new_user_invitation_path(project_id: @project) %>
+    <% end %>
   </div>
 </div>
