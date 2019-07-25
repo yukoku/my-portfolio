@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.feature "Projects", type: :feature do
-  # Todo: テストケースを分割する
   scenario "create new project and edit then delete", js: true do
     user = FactoryBot.create(:user)
     project = FactoryBot.build(:project)
+    user.confirm
     sign_in user
     visit projects_path
 
