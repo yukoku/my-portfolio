@@ -43,6 +43,7 @@ group :development, :test do
   gem 'launchy', '~> 2.4.3'
   gem 'webdrivers'
   gem 'factory_bot_rails'
+  gem 'database_rewinder'
   gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
 end
 
