@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :project do
-    name { "MyString" }
+    sequence(:name) { |n| "MyString#{n}" }
     description { "MyText" }
     due_on { 1.day.after }
 

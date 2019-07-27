@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "Projects", type: :feature do
   scenario "create new project and edit then delete", js: true do
     user = FactoryBot.create(:user)
-    project = FactoryBot.build(:project)
+    project = FactoryBot.build(:project, owner_id: user.id)
     user.confirm
     sign_in user
     visit projects_path
@@ -19,15 +19,20 @@ RSpec.feature "Projects", type: :feature do
       expect(page).to have_content "新しいプロジェクトが作成されました。"
     }.to change(Project, :count).by(1)
 
-    click_link "編集"
-    fill_in "説明", with: project.description + "test description"
+    new_project = Project.last
+    within "#owner-selection-#{new_project.id}" do
+      click_link "編集"
+    end
+    fill_in "説明", with: new_project.description + "test description"
     click_button "更新"
     expect(page).to have_content "プロジェクトを更新しました。"
 
     visit projects_path
 
     expect {
-      click_link "削除"
+      within "#owner-selection-#{new_project.id}" do
+        click_link "削除"
+      end
       # confirmダイアログのテスト
       confirmation_dialog = page.driver.browser.switch_to.alert
       expect(confirmation_dialog.text).to eq "本当に削除しますか?"

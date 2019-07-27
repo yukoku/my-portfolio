@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
 protected
   def send_devise_notification(notification, *args)
-    return super(notification, *args) if notification != :invitation_instructions
+    return super(notification, *args) unless notification == :invitation_instructions
 
     # ToDo:メッセージ送ってないを条件に探すのは良くないので改善する
     project_user = self.project_users.find_by(has_sent_message: false)

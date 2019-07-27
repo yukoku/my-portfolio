@@ -33,5 +33,11 @@ module Myportfolio
     config.i18n.default_locale = :ja
     # setting asset pipeline on heroku
     config.assets.initialize_on_precompile = false
+    config.generators do |g|
+      g.test_frameword :rspec,
+      view_specs: false,
+      helper_specs: false,
+      routing_specs: false
+    end
   end
 end
