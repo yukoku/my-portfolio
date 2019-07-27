@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
       # プロジェクトオーナーは自動的にプロジェクトユーザーに追加する
       current_user.project_users.create(project_id: @project.id,
                                         accepted_project_invitation: true)
-      flash[:info] = '新しいプロジェクトが作成されました。'
+      flash[:info] = I18n.t("project.crud.flash.created")
       redirect_to projects_path
     else
       render 'new'
@@ -32,7 +32,7 @@ class ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
     if (@project.update_attributes(project_params))
-      flash[:success] = "プロジェクトを更新しました。"
+      flash[:success] = I18n.t("project.crud.flash.updated")
       redirect_to @project
     else
       render 'edit'
@@ -42,7 +42,7 @@ class ProjectsController < ApplicationController
   def destroy
     project_id = params[:id]
     Project.find(params[:id]).destroy
-    flash[:success] = "プロジェクトを削除しました。"
+    flash[:success] = I18n.t("project.crud.flash.deleted")
     redirect_to projects_path
   end
 

@@ -17,7 +17,7 @@ RSpec.feature "UserInvitation", type: :feature do
     sign_in user
 
     visit project_path(ownered_project)
-    click_link("メンバーを追加")
+    click_link I18n.t("project.project_member.create")
 
     invite_user = FactoryBot.build(:user)
     form_label = "activerecord.attributes.user"

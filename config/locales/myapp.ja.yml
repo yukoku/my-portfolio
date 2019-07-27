@@ -26,5 +26,9 @@ ja:
       edit: '編集'
       delete: '削除'
       confirm_delete: '本当に削除しますか?'
+      flash:
+        created: '新しいプロジェクトが作成されました。'
+        updated: 'プロジェクトを更新しました。'
+        deleted: 'プロジェクトを削除しました。'
     project_member:
       create: 'ユーザーを追加'

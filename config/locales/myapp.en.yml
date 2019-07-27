@@ -26,5 +26,9 @@ en:
       edit: 'edit'
       delete: 'delete'
       confirm_delete: 'Are you sure you want to delete this project?'
+      flash:
+        created: 'New project has been created'
+        updated: 'Project has been updated'
+        deleted: 'Project has been deleted'
     project_member:
       create: 'add member'

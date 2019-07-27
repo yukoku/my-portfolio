@@ -15,7 +15,7 @@ RSpec.feature "SignUp", type: :feature do
     visit root_path
 
     within ".sign-in" do
-      click_link "ユーザー登録"
+      click_link I18n.t("common_layout.header.sign_up")
     end
     form_label = "activerecord.attributes.user"
     fill_in I18n.t("#{form_label}.name"), with: user.name
@@ -24,25 +24,25 @@ RSpec.feature "SignUp", type: :feature do
     fill_in I18n.t("#{form_label}.password_confirmation"), with: user.password
 
     expect {
-      click_button "Sign up"
-      expect(page).to have_content I18n.t("devise.registrations.signed_up_but_unconfirmed")
+      click_button I18n.t("users.registrations.new.sign_up")
+      expect(page).to have_content I18n.t("users.registrations.signed_up_but_unconfirmed")
     }.to change(ActionMailer::Base.deliveries, :count).by(1)
 
     mail = ActionMailer::Base.deliveries.last
     url = extract_confirmation_url(mail)
     visit url
-    expect(page).to have_content I18n.t("devise.confirmations.confirmed")
+    expect(page).to have_content I18n.t("users.confirmations.confirmed")
 
     # log in
     fill_in I18n.t("#{form_label}.email"), with: user.email
     fill_in I18n.t("#{form_label}.password"), with: user.password
-    click_button "Log in"
-    expect(page).to have_content I18n.t("devise.sessions.signed_in")
+    click_button I18n.t("users.sessions.new.sign_in")
+    expect(page).to have_content I18n.t("users.sessions.signed_in")
 
     within ".sign-in" do
-      click_link I18n.t("devise.sessions.new.sign_out")
+      click_link I18n.t("users.sessions.new.sign_out")
     end
-    expect(page).to have_content I18n.t("devise.sessions.signed_out")
+    expect(page).to have_content I18n.t("users.sessions.signed_out")
   end
 
 end
