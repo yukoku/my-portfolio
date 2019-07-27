@@ -1,5 +1,5 @@
-<% provide(:title, "プロジェクト編集") %>
-<% provide(:button_text, "更新") %>
+<% provide(:title, t("project.title.edit")) %>
+<% provide(:button_text, t("helpers.submit.update")) %>
 <% provide(:link_to, project_path(@project)) %>
-<h2>プロジェクト編集</h2>
+<h2><%= t("project.title.edit") %></h2>
 <%= render 'form'%>

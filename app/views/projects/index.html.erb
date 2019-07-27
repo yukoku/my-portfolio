@@ -1,5 +1,5 @@
-<% provide(:title, 'Projects') %>
-<h2>参加しているプロジェクト</h2>
+<% provide(:title, t('project.title.index')) %>
+<h2><%= t('project.title.index') %></h2>
 <div class="row">
   <% @projects.each do |project| %>
     <ol>
@@ -8,11 +8,11 @@
       <p class="project-description"><%= simple_format(project.description) %></p>
     </div>
     <div class="col-md-2">
-      <p class="project-due-on"><%= "期日:#{project.due_on}" %></p>
+      <p class="project-due-on"><%= "#{t("activerecord.attributes.project.due_on")}:#{project.due_on}" %></p>
       <% if project.owner_id == current_user.id %>
         <div id="owner-selection-<%= project.id%>">
-          <%= link_to "編集", edit_project_path(project) %>
-          <%= link_to "削除", project, method: :delete, data: { confirm: '本当に削除しますか?' } %>
+          <%= link_to t("project.crud.edit"), edit_project_path(project) %>
+          <%= link_to t("project.crud.delete"), project, method: :delete, data: { confirm: t("project.crud.confirm_delete") } %>
         </div>
       <% end %>
       </div>

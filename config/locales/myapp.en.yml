@@ -1,0 +1,30 @@
+en:
+  my_app:
+    title: 'Team Works'
+    description: 'project management tool'
+  common_layout:
+    header:
+      home: 'Home'
+      help: 'Help'
+      about: 'About'
+      my_page: 'my page'
+      projects: 'Projects'
+      sign_up: 'sign up'
+  satic_pages:
+    home: 'home'
+  project:
+    title:
+      new: 'new project'
+      edit: 'edit project'
+      index: 'Projects'
+      show:
+        tickets: 'tickets'
+    header:
+      top: 'project top'
+      new_project: 'new project'
+    crud:
+      edit: 'edit'
+      delete: 'delete'
+      confirm_delete: 'Are you sure you want to delete this project?'
+    project_member:
+      create: 'add member'

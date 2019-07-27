@@ -1,12 +1,12 @@
 <% provide(:title, "Home") %>
-<h1>Team Works</h1>
-<p> プロジェクト管理ツール</p>
+<h1><%= t("my_app.title") %></h1>
+<p><%= t("my_app.description") %></p>
 <div class="sign-in">
   <% if user_signed_in? %>
-    <%= link_to "my page", edit_user_registration_path %>
+    <%= link_to t("common_layout.header.my_page"), edit_user_registration_path %>
     <%= link_to t("devise.sessions.new.sign_out"), destroy_user_session_path, method: :delete %>
   <% else %>
-    <%= link_to "ユーザー登録", new_user_registration_path %>
+    <%= link_to t("common_layout.header.sign_up"), new_user_registration_path %>
     <%= link_to t("devise.sessions.new.sign_in"), new_user_session_path %>
   <% end%>
 </div>

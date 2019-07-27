@@ -1,7 +1,7 @@
-<% provide(:title, "新しいプロジェクト") %>
-<% provide(:button_text, "作成") %>
+<% provide(:title, t("project.title.new")) %>
+<% provide(:button_text, t("helper.submit.create")) %>
 <% provide(:link_to, projects_path) %>
-<h2>新しいプロジェクト</h2>
+<h2><%= t("project.title.new") %></h2>
 
 <%= form_for(@project) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
@@ -15,5 +15,5 @@
   <%= f.label :due_on %>
   <%= f.date_field :due_on, value: Time.now.strftime("%Y-%m-%d"), class: 'form-control' %>
 
-  <%= f.submit "作成", class: "btn btn-primary" %>
+  <%= f.submit t("helpers.submit.create"), class: "btn btn-primary" %>
 <% end %>

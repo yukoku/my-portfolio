@@ -7,18 +7,18 @@
       </h1>
     </section>
     <section>
-      <p>説明</p>
+      <p><%= t("activerecord.attributes.project.description") %></p>
       <%= @project.description %>
     </section>
     <section>
-      <p>期日</p>
+      <p><%= t("activerecord.attributes.project.due_on") %></p>
       <%= @project.due_on %>
     </section>
   </aside>
   <div class="col-md-8">
     <section class="ticket-items">
       <ul>
-        <h4>チケットのタイトル</h4>
+        <h4><%= t("project.title.show.tickets") %></h4>
         <p>チケットの説明</p>
       </ul>
     </section>
@@ -28,7 +28,7 @@
       <ul><%= project_member.user.name %></ul>
     <% end %>
     <% if current_user.id == @project.owner_id %>
-      <%= link_to "メンバーを追加", new_user_invitation_path(project_id: @project) %>
+      <%= link_to t("project.project_member.create"), new_user_invitation_path(project_id: @project) %>
     <% end %>
   </div>
 </div>

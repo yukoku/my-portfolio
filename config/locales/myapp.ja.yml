@@ -1,0 +1,30 @@
+ja:
+  my_app:
+    title: 'Team Works'
+    description: 'プロジェクト管理ツール'
+  common_layout:
+    header:
+      home: 'Home'
+      help: 'Help'
+      about: 'About'
+      my_page: 'my page'
+      projects: 'Projects'
+      sign_up: 'ユーザー登録'
+  satic_pages:
+    home: 'home'
+  project:
+    title:
+      new: '新しいプロジェクト'
+      edit: 'プロジェクト編集'
+      index: '参加しているプロジェクト'
+      show:
+        tickets: 'チケット一覧'
+    header:
+      top: 'プロジェクトトップ'
+      new_project: '新しいプロジェクト'
+    crud:
+      edit: '編集'
+      delete: '削除'
+      confirm_delete: '本当に削除しますか?'
+    project_member:
+      create: 'ユーザーを追加'
