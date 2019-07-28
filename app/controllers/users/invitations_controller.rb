@@ -32,7 +32,7 @@ private
     # ユーザー招待後に自動でプロジェクトに参加するため
     # メール送信前に関係テーブルに追加しておく
     project_invitation_token = encript_token(user.raw_invitation_token)
-    user.project_users.create(project_id: @inviting_project.id, project_invitation_token: project_invitation_token)
+    user.project_members.create(project_id: @inviting_project.id, project_invitation_token: project_invitation_token)
     user.deliver_invitation
     user
   end
@@ -46,9 +46,9 @@ private
   def accept_resource
     user = User.accept_invitation!(update_resource_params)
     project_invitation_token = encript_token(update_resource_params[:invitation_token])
-    project_user = user.project_users.find_by(project_invitation_token: project_invitation_token)
-    project_user.update(accepted_project_invitation: true)
-    @invited_project = Project.find(project_user.project_id)
+    project_member = user.project_members.find_by(project_invitation_token: project_invitation_token)
+    project_member.update(accepted_project_invitation: true)
+    @invited_project = Project.find(project_member.project_id)
     user
   end
 

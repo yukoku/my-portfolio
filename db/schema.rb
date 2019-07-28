@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_22_140321) do
+ActiveRecord::Schema.define(version: 2019_07_28_004044) do
 
-  create_table "project_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "project_members", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "project_id"
     t.datetime "created_at", null: false
@@ -20,9 +20,9 @@ ActiveRecord::Schema.define(version: 2019_07_22_140321) do
     t.boolean "accepted_project_invitation", default: false
     t.boolean "has_sent_message", default: false
     t.string "project_invitation_token"
-    t.index ["project_id"], name: "index_project_users_on_project_id"
-    t.index ["project_invitation_token"], name: "index_project_users_on_project_invitation_token", unique: true
-    t.index ["user_id"], name: "index_project_users_on_user_id"
+    t.index ["project_id"], name: "index_project_members_on_project_id"
+    t.index ["project_invitation_token"], name: "index_project_members_on_project_invitation_token", unique: true
+    t.index ["user_id"], name: "index_project_members_on_user_id"
   end
 
   create_table "projects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2019_07_22_140321) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "project_users", "projects"
-  add_foreign_key "project_users", "users"
+  add_foreign_key "project_members", "projects"
+  add_foreign_key "project_members", "users"
   add_foreign_key "projects", "users", column: "owner_id"
 end

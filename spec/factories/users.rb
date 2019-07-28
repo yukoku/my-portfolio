@@ -5,8 +5,8 @@ FactoryBot.define do
     password { "password" }
 
     after(:create) do |user|
-      create(:project_user, user: user, project: create(:project, owner_id: user.id))
-      create(:project_user, :not_accepted_invitation, user: user, project: create(:project, owner_id: user.id))
+      create(:project_member, user: user, project: create(:project, owner_id: user.id))
+      create(:project_member, :not_accepted_invitation, user: user, project: create(:project, owner_id: user.id))
     end
   end
 end
