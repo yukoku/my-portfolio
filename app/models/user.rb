@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_many :project_members, dependent: :destroy
   has_many :projects, through: :project_members
+  has_many :assignee, class_name: "Ticket", foreign_key: "assignee_id"
+  has_many :creator, class_name: "Ticket", foreign_key: "creator_id"
   validates :name, presence: true, uniqueness: true, length: { maximum: 50 }
 
 protected
