@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :project_user do
+  factory :project_member do
     user
     project
     accepted_project_invitation { true }

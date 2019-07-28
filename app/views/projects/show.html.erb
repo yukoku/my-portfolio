@@ -24,7 +24,7 @@
     </section>
   </div>
   <div class="col-md-2">
-    <% @project.project_users.where(accepted_project_invitation: true).each do |project_member| %>
+    <% @project.project_members.where(accepted_project_invitation: true).each do |project_member| %>
       <ul><%= project_member.user.name %></ul>
     <% end %>
     <% if current_user.id == @project.owner_id %>
