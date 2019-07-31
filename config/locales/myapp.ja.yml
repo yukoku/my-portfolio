@@ -20,7 +20,7 @@ ja:
       show:
         tickets: 'チケット一覧'
     header:
-      top: 'プロジェクトトップ'
+      top: 'プロジェクト一覧'
       new_project: '新しいプロジェクト'
     crud:
       edit: '編集'
@@ -32,3 +32,43 @@ ja:
         deleted: 'プロジェクトを削除しました。'
     project_member:
       create: 'ユーザーを追加'
+    tickets:
+      create: 'チケットを作成する'
+  ticket:
+    title:
+      new: '新しいチケットを作成する'
+      edit: 'チケットを編集する'
+    item:
+      attribute: '属性'
+      status: 'ステータス'
+      priority: '優先度'
+      creator: '作成者'
+      assignee: '担当者'
+      due_on: '期日'
+      description: '説明'
+    header:
+      top: '担当チケット一覧'
+    crud:
+      edit: '編集'
+      delete: '削除'
+      confirm_delete: '本当に削除しますか?'
+      flash:
+        created: '新しいチケットが作成されました。'
+        updated: 'チケットを更新しました。'
+        deleted: 'チケットを削除しました。'
+    attribute:
+      bug: 'バグ'
+      feature: '機能'
+      support: 'サポート'
+      environment: '環境構築'
+      document: 'ドキュメント'
+    status:
+      todo: '未着手'
+      doing: '着手中'
+      done: '完了'
+    priority:
+      very_high: 'とても高い'
+      high: '高い'
+      normal: '普通'
+      low: '低い'
+      very_low: 'とても低い'

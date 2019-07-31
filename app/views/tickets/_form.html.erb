@@ -1,0 +1,26 @@
+<%= form_for(@ticket, url: yield(:link_to)) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.label :title %>
+  <%= f.text_field :title, class: 'form-control' %>
+
+  <%= f.label :description %>
+  <%= f.text_area :description, class: 'form-control' %>
+
+  <%= f.label :assignee %>
+  <%= f.collection_select :assignee_id, @project.users, :id, :name, {prompt: ""}, class: 'form-control' %>
+
+  <%= f.label :attribute %>
+  <%= f.collection_select :ticket_attribute_id, @project.ticket_attributes, :id, :ticket_attribute, {prompt: ""}, class: 'form-control' %>
+
+  <%= f.label :status %>
+  <%= f.collection_select :ticket_status_id, @project.ticket_statuses, :id, :status, {prompt: ""}, class: 'form-control' %>
+
+  <%= f.label :priority %>
+  <%= f.collection_select :ticket_priority_id, @project.ticket_priorities, :id, :priority, {prompt: ""}, class: 'form-control' %>
+
+  <%= f.label :due_on %>
+  <%= f.date_field :due_on, value: (f.object.due_on || Time.now.strftime("%Y-%m-%d")), class: 'form-control' %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>

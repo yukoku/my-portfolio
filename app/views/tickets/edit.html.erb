@@ -1,0 +1,5 @@
+<% provide(:title, t("ticket.title.edit")) %>
+<% provide(:button_text, t("helpers.submit.update")) %>
+<% provide(:link_to, project_ticket_path(@project, @ticket)) %>
+<h2><%= t("ticket.title.edit") %></h2>
+<%= render 'form'%>

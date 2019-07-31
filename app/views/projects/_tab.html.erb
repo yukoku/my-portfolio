@@ -1,4 +1,5 @@
 <ul class="nav nav-tabs">
    <li><%= link_to t("project.header.top"), projects_path %></li>
    <li><%= link_to t("project.header.new_project"), new_project_path %></li>
+   <li><%= link_to t("ticket.header.top"), tickets_path(current_user.id) %></li>
 </ul>
