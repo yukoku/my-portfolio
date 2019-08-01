@@ -8,4 +8,15 @@ class Project < ApplicationRecord
   accepts_nested_attributes_for :project_members
   validates :name, presence: true, uniqueness: { scope: :owner_id }
   validates_date :due_on, on_or_after: lambda { Time.zone.today }, allow_blank: true
+
+  after_create :create_default_data_related_to_ticket
+
+private
+
+  def create_default_data_related_to_ticket
+    TicketAttribute.default_setting(self.id)
+    TicketStatus.default_setting(self.id)
+    TicketPriority.default_setting(self.id)
+  end
+
 end
