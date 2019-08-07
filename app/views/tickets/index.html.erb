@@ -1,0 +1,10 @@
+<% provide(:title, I18n.t("ticket.header.top")) %>
+<h2><%= I18n.t("ticket.header.top") %></h2>
+<% @tickets.each do |ticket| %>
+    <section class="ticket-items">
+      <ul>
+        <%= link_to ticket.title, project_ticket_path(ticket.project_id, ticket) %>
+        <p><%= ticket.description %></p>
+      </ul>
+    </section>
+<% end %>

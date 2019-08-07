@@ -32,3 +32,43 @@ en:
         deleted: 'Project has been deleted'
     project_member:
       create: 'add member'
+    tickets:
+      create: 'create new ticket'
+  ticket:
+    title:
+      new: 'New'
+      edit: 'Edit'
+      flash:
+        created: 'New ticket has been created'
+        updated: 'Ticket has been updated'
+        deleted: 'Ticket has been deleted'
+    item:
+      attribute: 'attribute'
+      status: 'status'
+      priority: 'priority'
+      creator: 'created by'
+      assignee: 'assignee'
+      due_on: 'due on'
+      description: 'description'
+    header:
+      top: 'assignee tickets'
+    crud:
+      edit: 'edit'
+      delete: 'delete'
+      confirm_delete: 'Are you sure you want to delete this project?'
+    attribute:
+      bug: 'bug'
+      feature: 'feature'
+      support: 'support'
+      environment: 'environment'
+      document: 'document'
+    status:
+      todo: 'todo'
+      doing: 'doing'
+      done: 'done'
+    priority:
+      very_high: 'very high'
+      high: 'high'
+      normal: 'normal'
+      low: 'low'
+      very_low: 'very low'

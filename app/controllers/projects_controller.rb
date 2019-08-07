@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  before_action :authenticate_project_member, except: [:index, :new, :create]
   def index
     @projects = current_user.projects
   end
@@ -40,7 +41,6 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    project_id = params[:id]
     Project.find(params[:id]).destroy
     flash[:success] = I18n.t("project.crud.flash.deleted")
     redirect_to projects_path
@@ -50,5 +50,10 @@ private
 
   def project_params
     params.require(:project).permit(:name, :description, :due_on)
+  end
+
+  def authenticate_project_member
+    @project = Project.find(params[:id])
+    redirect_to projects_path if @project&.users.where(id: current_user.id).empty?
   end
 end

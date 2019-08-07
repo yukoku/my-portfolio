@@ -1,0 +1,20 @@
+<% provide(:title, @ticket.title) %>
+<div class="row">
+  <div class="col-md-12">
+    <section class="ticket-item">
+      <h1><%= @ticket.title%></h1>
+      <p><%= I18n.t("ticket.item.attribute") + ": " + @ticket.ticket_attribute.ticket_attribute %></p>
+      <p><%= I18n.t("ticket.item.status") + ": " + @ticket.ticket_status.status %></p>
+      <p><%= I18n.t("ticket.item.priority") + ": " + @ticket.ticket_priority.priority %></p>
+      <p><%= I18n.t("ticket.item.creator") + ": " + @ticket.creator.name %></p>
+      <p><%= I18n.t("ticket.item.assignee") + ": " + @ticket.assignee.name %></p>
+      <p><%= I18n.t("ticket.item.due_on") + ": " + @ticket.due_on.to_s %></p>
+      <h3><%= I18n.t("ticket.item.description") %></h3>
+      <p><%= @ticket.description %></p>
+      <%= link_to I18n.t("ticket.crud.edit"), edit_project_ticket_path(project_id: @ticket.project_id, id: @ticket) %>
+      <%= link_to I18n.t("ticket.crud.delete"), project_ticket_path(project_id: @ticket.project_id, id: @ticket),  method: :delete, data: { confirm: I18n.t("ticket.crud.confirm_delete") } %>
+    </section>
+    <section class="ticket-comment">
+    </section>
+  </div>
+</div>

@@ -19,7 +19,13 @@
     <section class="ticket-items">
       <ul>
         <h4><%= t("project.title.show.tickets") %></h4>
-        <p>チケットの説明</p>
+        <% @project.tickets.each do |ticket| %>
+          <ul>
+            <%= link_to ticket.title, project_ticket_path(@project, ticket) %>
+            <p><%= ticket.description %></p>
+          </ul>
+        <% end %>
+        <%= link_to t("project.tickets.create"), new_project_ticket_path(@project) %>
       </ul>
     </section>
   </div>
