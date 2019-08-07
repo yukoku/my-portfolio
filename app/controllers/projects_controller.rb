@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  before_action :authenticate_project_member, except: [:index, :new, :create]
   def index
     @projects = current_user.projects
   end
@@ -49,5 +50,10 @@ private
 
   def project_params
     params.require(:project).permit(:name, :description, :due_on)
+  end
+
+  def authenticate_project_member
+    @project = Project.find(params[:id])
+    redirect_to projects_path if @project.users.where(id: current_user.id).empty?
   end
 end

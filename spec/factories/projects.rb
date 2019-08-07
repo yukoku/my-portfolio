@@ -11,9 +11,9 @@ FactoryBot.define do
     trait :due_yesterday do
       due_on { 1.day.ago }
     end
-  end
 
-  factory :owner, class: User do
-    name { "name" }
+    trait :invalid do
+      due_on { 1.day.ago }
+    end
   end
 end

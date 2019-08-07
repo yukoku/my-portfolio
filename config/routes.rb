@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get '/about', to: 'static_pages#about'
   get '/users/:id/tickets', to: 'tickets#index', as: 'tickets'
   resources :projects do
-    resources :tickets
+    resources :tickets, except: :index
   end
 
   if Rails.env.development?

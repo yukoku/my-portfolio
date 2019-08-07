@@ -3,9 +3,9 @@ FactoryBot.define do
     title { "MyString" }
     description { "MyText" }
     due_on { 1.day.after }
-    assignee
+    association :assignee, factory: :user
     creator
-    project
+    association :project, factory: :project, name: "test"
     ticket_attribute
     ticket_status
     ticket_priority
