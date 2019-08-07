@@ -1,0 +1,22 @@
+<% provide(@user.name) %>
+<div class="row">
+  <aside class="col-md-10">
+    <section class="project-info">
+      <h1>
+        <%= @user.name %>
+      </h1>
+    </section>
+    <section>
+      <p><%= t("project.title.index") %></p>
+      <% @user.projects.each do |project| %>
+        <% if project.users.include?(current_user) %>
+          <ol><%= link_to project.name, project_path(project) %></ol>
+        <% else %>
+          <ol><%= project.name %></ol>
+        <% end %>
+      <% end %>
+    </section>
+  </aside>
+  <div class="col-md-2">
+  </div>
+</div>

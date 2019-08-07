@@ -12,6 +12,16 @@ ja:
       sign_up: 'ユーザー登録'
   satic_pages:
     home: 'home'
+  user:
+    header:
+      top: 'ユーザー一覧'
+    title:
+      index: 'ユーザー一覧'
+    crud:
+      delete: "削除"
+      confirm_delete: "本当に削除しますか?"
+      flush:
+        deleted: "ユーザーを削除しました。"
   project:
     title:
       new: '新しいプロジェクト'
