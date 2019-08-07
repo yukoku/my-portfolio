@@ -60,12 +60,12 @@ private
 
   def project_member
     @project = Project.find(params[:project_id])
-    redirect_to(root_url) unless @project.users.include?(current_user)
+    redirect_to(root_url) unless @project&.users.include?(current_user)
   end
 
   def project_ticket
     @project = Project.find(params[:project_id])
     @ticket = Ticket.find(params[:id])
-    redirect_to(root_url) unless @project.tickets.include?(@ticket)
+    redirect_to(root_url) unless @project&.tickets.include?(@ticket)
   end
 end

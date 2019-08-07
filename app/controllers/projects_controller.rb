@@ -54,6 +54,6 @@ private
 
   def authenticate_project_member
     @project = Project.find(params[:id])
-    redirect_to projects_path if @project.users.where(id: current_user.id).empty?
+    redirect_to projects_path if @project&.users.where(id: current_user.id).empty?
   end
 end
