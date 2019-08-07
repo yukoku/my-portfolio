@@ -3,6 +3,7 @@ FactoryBot.define do
     sequence(:name) { |n| "name#{n}" }
     sequence(:email) { |n| "test#{n}@example.com" }
     password { "password" }
+    admin { true }
 
     after(:create) do |user|
       project = create(:project, owner_id: user.id)
