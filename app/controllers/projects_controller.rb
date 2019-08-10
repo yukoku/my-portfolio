@@ -17,7 +17,7 @@ class ProjectsController < ApplicationController
     if @project.save
       # プロジェクトオーナーは自動的にプロジェクトユーザーに追加する
       current_user.project_members.create(project_id: @project.id,
-                                        accepted_project_invitation: true)
+                                        accepted_project_invitation: true, has_sent_message: true)
       current_user.project_owners.create(project_id: @project.id)
       flash[:info] = I18n.t("project.crud.flash.created")
       redirect_to projects_path

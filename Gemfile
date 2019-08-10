@@ -68,3 +68,4 @@ gem 'devise_invitable', '~> 2.0.0'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
 gem 'validates_timeliness', '~> 5.0.0.alpha3'
+gem 'faker' # production環境でも使用する

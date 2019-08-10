@@ -6,56 +6,70 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-TicketAttribute.create!(
-  [
-    {
-      ticket_attribute: 'ticket.attribute.bug'
-    },
-    {
-      ticket_attribute: 'ticket.attribute.feature'
-    },
-    {
-      ticket_attribute: 'ticket.attribute.support'
-    },
-    {
-      ticket_attribute: 'ticket.attribute.environment'
-    },
-    {
-      ticket_attribute: 'ticket.attribute.document'
-    },
-  ]
-)
+Faker::Config.locale = :ja
 
-TicketStatus.create!(
-  [
-    {
-      status: 'ticket.status.todo'
-    },
-    {
-      status: 'ticket.status.doing'
-    },
-    {
-      status: 'ticket.status.done'
-    }
-  ]
-)
+admin_user = User.new(
+  name: "admin",
+  email: "admin@example.com",
+  password: "password",
+  admin: true)
+admin_user.skip_confirmation!
+admin_user.save!
+admin_user.confirm
 
-TicketPriority.create!(
-  [
-    {
-      priority: 'ticket.priority.very_high'
-    },
-    {
-      priority: 'ticket.priority.high'
-    },
-    {
-      priority: 'ticket.priority.normal'
-    },
-    {
-      priority: 'ticket.priority.low'
-    },
-    {
-      priority: 'ticket.priority.very_low'
-    }
-  ]
-)
+test_user = User.new(
+  name: "test_user",
+  email: "test_user@example.com",
+  password: "password")
+test_user.skip_confirmation!
+test_user.save!
+test_user.confirm
+
+50.times do |n|
+  name = Faker::Name.unique.name
+  email = "test#{n + 1}@example.com"
+  password = 'password'
+  user = User.new(name: name,
+               email: email,
+               password: password)
+  user.skip_confirmation!
+  user.save!
+  user.confirm
+end
+
+all_users = User.all
+owners = all_users.slice(0, 5)
+members = all_users.slice(5, 45)
+
+# create projects
+owners.each do |owner|
+  description = Faker::Lorem.sentence
+  project_name = "#{owner.name}'s project"
+  project = owner.projects.create!(name: project_name, description: description, due_on: 1.year.after)
+  owner.project_members.last.update!(accepted_project_invitation: true, has_sent_message: true)
+  owner.project_owners.create!(project_id: project.id)
+end
+
+# add project members and create tickets
+Project.all.each do |project|
+  project_members = members.sample(8)
+  project_members.each do |member|
+    project.project_members.create!(user_id: member.id,
+                                    accepted_project_invitation: true,
+                                    has_sent_message: true)
+  end
+  project_members << project.owners.first
+
+  30.times do |n|
+    ticket_attributes = {}
+    ticket_attributes[:title] = Faker::Lorem.sentence
+    ticket_attributes[:description] = Faker::Lorem.paragraph
+    ticket_attributes[:due_on] = rand(100).day.after
+    ticket_attributes[:assignee_id] = project_members.sample.id
+    ticket_attributes[:creator_id] = project_members.sample.id
+    ticket_attributes[:ticket_attribute_id] = project.ticket_attributes.sample.id
+    ticket_attributes[:ticket_status_id] = project.ticket_statuses.sample.id
+    ticket_attributes[:ticket_priority_id] = project.ticket_priorities.sample.id
+    project.tickets.create!(ticket_attributes)
+  end
+end
