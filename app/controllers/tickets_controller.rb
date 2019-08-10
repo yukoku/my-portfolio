@@ -37,7 +37,7 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find(params[:id])
     if @ticket.update_attributes(ticket_params)
       flash[:success] = I18n.t("ticket.crud.flash.updated")
-      redirect_to @project
+      redirect_to project_ticket_url(@project, @ticket)
     else
       render 'edit'
     end
@@ -55,7 +55,7 @@ private
 
   def ticket_params
     params.require(:ticket).permit(:title, :description, :due_on, :assignee_id,
-                                   :ticket_attribute_id, :ticket_status_id, :ticket_priority_id)
+                                   :ticket_attribute_id, :ticket_status_id, :ticket_priority_id, attached_files: [])
   end
 
   def project_member

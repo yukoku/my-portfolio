@@ -88,7 +88,7 @@ RSpec.describe "Tickets", type: :request do
           patch project_ticket_path(@project, @ticket), params: { ticket: @ticket.attributes }
           @ticket.reload
         }.to change { @ticket.description }
-        expect(response).to redirect_to(project_path(@project))
+        expect(response).to redirect_to(project_ticket_path(@project, @ticket))
       end
     end
     context "with invalid attributes" do
