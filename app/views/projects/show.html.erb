@@ -33,7 +33,7 @@
     <% @project.project_members.where(accepted_project_invitation: true).each do |project_member| %>
       <ul><%= project_member.user.name %></ul>
     <% end %>
-    <% if current_user.id == @project.owner_id %>
+    <% if @project.owners.include?(current_user) %>
       <%= link_to t("project.project_member.create"), new_user_invitation_path(project_id: @project) %>
     <% end %>
   </div>

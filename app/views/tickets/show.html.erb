@@ -3,11 +3,11 @@
   <div class="col-md-12">
     <section class="ticket-item">
       <h1><%= @ticket.title%></h1>
-      <p><%= I18n.t("ticket.item.attribute") + ": " + @ticket.ticket_attribute.ticket_attribute %></p>
-      <p><%= I18n.t("ticket.item.status") + ": " + @ticket.ticket_status.status %></p>
-      <p><%= I18n.t("ticket.item.priority") + ": " + @ticket.ticket_priority.priority %></p>
-      <p><%= I18n.t("ticket.item.creator") + ": " + @ticket.creator.name %></p>
-      <p><%= I18n.t("ticket.item.assignee") + ": " + @ticket.assignee.name %></p>
+      <p><%= I18n.t("ticket.item.attribute") + ": " + (@ticket.ticket_attribute&.ticket_attribute).to_s %></p>
+      <p><%= I18n.t("ticket.item.status") + ": " + (@ticket.ticket_status&.status).to_s %></p>
+      <p><%= I18n.t("ticket.item.priority") + ": " + (@ticket.ticket_priority&.priority).to_s %></p>
+      <p><%= I18n.t("ticket.item.creator") + ": " + (@ticket.creator&.name).to_s %></p>
+      <p><%= I18n.t("ticket.item.assignee") + ": " + (@ticket.assignee&.name).to_s %></p>
       <p><%= I18n.t("ticket.item.due_on") + ": " + @ticket.due_on.to_s %></p>
       <h3><%= I18n.t("ticket.item.description") %></h3>
       <p><%= @ticket.description %></p>

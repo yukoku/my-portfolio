@@ -6,9 +6,12 @@ class User < ApplicationRecord
 
   has_many :project_members, dependent: :destroy
   has_many :projects, through: :project_members
+  has_many :project_owners, dependent: :destroy
+  has_many :owned_projects, through: :project_owners, source: :project
   has_many :assigned_tickets, class_name: "Ticket", foreign_key: "assignee_id"
   has_many :created_tickets, class_name: "Ticket", foreign_key: "creator_id"
   validates :name, presence: true, uniqueness: true, length: { maximum: 50 }
+  before_destroy :update_tickets_items_to_nil
 
 protected
   def send_devise_notification(notification, *args)
@@ -24,5 +27,10 @@ protected
   end
 
 private
+
+  def update_tickets_items_to_nil
+    Ticket.where("creator_id = ?", self.id).update_all(creator_id: nil)
+    Ticket.where("assignee_id = ?", self.id).update_all(assignee_id: nil)
+  end
 
 end
