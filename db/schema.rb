@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_07_140618) do
+ActiveRecord::Schema.define(version: 2019_08_09_232838) do
 
   create_table "project_members", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
@@ -25,14 +25,21 @@ ActiveRecord::Schema.define(version: 2019_08_07_140618) do
     t.index ["user_id"], name: "index_project_members_on_user_id"
   end
 
+  create_table "project_owners", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_project_owners_on_project_id"
+    t.index ["user_id"], name: "index_project_owners_on_user_id"
+  end
+
   create_table "projects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.date "due_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "owner_id"
-    t.index ["owner_id"], name: "index_projects_on_owner_id"
   end
 
   create_table "ticket_attributes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -101,7 +108,8 @@ ActiveRecord::Schema.define(version: 2019_08_07_140618) do
 
   add_foreign_key "project_members", "projects"
   add_foreign_key "project_members", "users"
-  add_foreign_key "projects", "users", column: "owner_id"
+  add_foreign_key "project_owners", "projects"
+  add_foreign_key "project_owners", "users"
   add_foreign_key "ticket_attributes", "projects"
   add_foreign_key "ticket_priorities", "projects"
   add_foreign_key "ticket_statuses", "projects"
