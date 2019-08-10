@@ -6,7 +6,8 @@ FactoryBot.define do
     admin { true }
 
     after(:create) do |user|
-      project = create(:project, owner_id: user.id)
+      project = create(:project)
+      create(:project_owner, user: user, project: project)
       create(:project_member, user: user, project: project)
       create(:ticket, assignee: user, creator: user, project: project,
                       ticket_attribute: project.ticket_attributes.first,

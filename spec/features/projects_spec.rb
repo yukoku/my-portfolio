@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "Projects", type: :feature do
   scenario "create new project and edit then delete", js: true do
     user = FactoryBot.create(:user)
-    project = FactoryBot.build(:project, owner_id: user.id)
+    project = user.projects.first
     user.confirm
     sign_in user
     visit projects_path

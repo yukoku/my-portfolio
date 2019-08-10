@@ -28,11 +28,10 @@ RSpec.describe Project, type: :model do
     expect(project.errors[:due_on]).to include(I18n.t('errors.messages.on_or_after', restriction: Time.zone.today))
   end
 
-  it "is invalid with same name in same user" do
-    project = FactoryBot.create(:project)
-    other_project = FactoryBot.build(:project, name: project.name)
-    other_project.valid?
-    expect(other_project.errors[:name]).to include(I18n.t("errors.messages.taken"))
+  it "is invalid with name length over 25"do
+    project = FactoryBot.build(:project, name: 'a' * 26)
+    project.valid?
+    expect(project.errors[:name]).to include(I18n.t("errors.messages.too_long", count: 25))
   end
 
 end
