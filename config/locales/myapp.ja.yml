@@ -20,7 +20,7 @@ ja:
     crud:
       delete: "削除"
       confirm_delete: "本当に削除しますか?"
-      flush:
+      flash:
         deleted: "ユーザーを削除しました。"
   project:
     title:
