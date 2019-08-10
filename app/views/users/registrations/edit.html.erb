@@ -36,10 +36,16 @@
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
+
   <div class="actions">
     <%= f.submit t('.update') %>
   </div>
 <% end %>
+
+<div class="edit-gravatar">
+  <p><%= gravatar_for resource %></p>
+  <p><%= t(".access_gravatar_if_you_want_to_change_avatar_html", link_to_gravatar: link_to("gravatar", "https://gravatar.com", target: :_blank)) %></p>
+</div>
 
 <h3><%= t('.cancel_my_account') %></h3>
 

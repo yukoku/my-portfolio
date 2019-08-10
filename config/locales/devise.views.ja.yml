@@ -100,6 +100,7 @@ ja:
         unhappy: 気に入りません
         update: 更新
         we_need_your_current_password_to_confirm_your_changes: 変更を反映するには現在のパスワードを入力してください
+        access_gravatar_if_you_want_to_change_avatar_html: "もし、アバターを変更したいならば%{link_to_gravatar}で行ってください"
       new:
         sign_up: アカウント登録
       signed_up: アカウント登録が完了しました。

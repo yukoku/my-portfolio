@@ -102,6 +102,7 @@ en:
         unhappy: Unhappy?
         update: Update
         we_need_your_current_password_to_confirm_your_changes: we need your current password to confirm your changes
+        access_gravatar_if_you_want_to_change_avatar_html: "if you want to change avatar, please access %{link_to_gravatar}."
       new:
         sign_up: Sign up
       signed_up: Welcome! You have signed up successfully.
