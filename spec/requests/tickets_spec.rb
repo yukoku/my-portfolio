@@ -83,8 +83,10 @@ RSpec.describe "Tickets", type: :request do
   describe "PATCH #update" do
     context "with valid attributes" do
       it "success to update ticket" do
+        file_path = Rails.root.to_s + '/spec/support/test_files/test_01.png'
         expect {
           @ticket.description += "test"
+          File.open(file_path) { |f| @ticket.attached_files.attach(io: f, filename: "test.png", content_type: 'image/png')}
           patch project_ticket_path(@project, @ticket), params: { ticket: @ticket.attributes }
           @ticket.reload
         }.to change { @ticket.description }
@@ -108,6 +110,39 @@ RSpec.describe "Tickets", type: :request do
           patch project_ticket_path(project, @ticket), params: { ticket: @ticket.attributes }
           @ticket.reload
         }.to_not change { @ticket }
+      end
+    end
+    context "with attached files" do
+      context "512KB size file" do
+        it "success to update ticket" do
+          file_path = Rails.root.to_s + '/spec/support/test_files/test_512KB.png'
+          expect {
+            File.open(file_path) { |f| @ticket.attached_files.attach(io: f, filename: "test.png", content_type: 'image/png')}
+            patch project_ticket_path(@project, @ticket), params: { ticket: @ticket.attributes }
+            @ticket.reload
+          }.to change(@ticket.attached_files, :count).by(1)
+          expect(response).to redirect_to(project_ticket_path(@project, @ticket))
+        end
+      end
+      context "over 512KB size file" do
+        it "fails to update ticket for file size validation" do
+          file_path = Rails.root.to_s + '/spec/support/test_files/test_513KB.png'
+          File.open(file_path) { |f| @ticket.attached_files.attach(io: f, filename: "test.png", content_type: 'image/png')}
+          patch project_ticket_path(@project, @ticket), params: { ticket: @ticket.attributes }
+          @ticket.reload
+          expect(response.body.include?(I18n.t("errors.messages.file_too_large", file_size: "512Kbyte"))).to eq(true)
+        end
+      end
+      context "too many files" do
+        it "fails to update ticket for file count validation" do
+          11.times do |n|
+            file_path = Rails.root.to_s + "/spec/support/test_files/test_#{(n + 1).to_s.rjust(2, '0')}.png"
+            File.open(file_path) { |f| @ticket.attached_files.attach(io: f, filename: "test.png", content_type: 'image/png')}
+          end
+          patch project_ticket_path(@project, @ticket), params: { ticket: @ticket.attributes }
+          @ticket.reload
+          expect(response.body.include?(I18n.t("errors.messages.file_too_many", file_count: 10))).to eq(true)
+        end
       end
     end
   end
