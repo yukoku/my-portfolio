@@ -23,7 +23,7 @@
   <%= f.date_field :due_on, value: (f.object.due_on || Time.now.strftime("%Y-%m-%d")), class: 'form-control' %>
 
   <%= f.label :attached_files %>
-  <%= f.file_field :attached_files, multiple: true, direct_upload: true %>
+  <%= f.file_field :attached_files, multiple: true %>
   <ul>
     <% @ticket.attached_files.each do |attached_file| %>
       <!-- 保存に失敗したファイルをpurgeしても表示されるのでため -->
