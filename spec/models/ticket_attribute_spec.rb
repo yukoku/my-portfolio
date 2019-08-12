@@ -1,6 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe TicketAttribute, type: :model do
+  describe "association" do
+    describe "belongs_to" do
+      it { is_expected.to belong_to(:project)}
+    end
+    describe "has_many" do
+      it { is_expected.to have_many(:ticket)}
+    end
+  end
+
   it "is valid with ticket attribute and project id" do
     project = FactoryBot.create(:project)
     ticket_attribute = TicketAttribute.create(ticket_attribute: "my attribute",
