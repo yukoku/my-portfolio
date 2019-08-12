@@ -11,7 +11,7 @@ Faker::Config.locale = :ja
 admin_user = User.new(
   name: "admin",
   email: "admin@example.com",
-  password: "password",
+  password: ENV['ADMIN_PASSWORD'],
   admin: true)
 admin_user.skip_confirmation!
 admin_user.save!
