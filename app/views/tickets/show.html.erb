@@ -11,6 +11,23 @@
       <p><%= I18n.t("ticket.item.due_on") + ": " + @ticket.due_on.to_s %></p>
       <h3><%= I18n.t("ticket.item.description") %></h3>
       <p><%= @ticket.description %></p>
+      <p><%= I18n.t("ticket.item.attached_file") %></p>
+      <ul>
+        <% @ticket.attached_files.each do |attached_file| %>
+          <li>
+            <% if attached_file.previewable? %>
+              <%= image_tag attached_file.preview(resize: "100x100>") %>
+            <% elsif attached_file.variable? %>
+              <%= image_tag attached_file.variant(resize: "100x100>") %>
+            <% end %>
+            <%= link_to attached_file.filename, url_for(attached_file) %>
+            <%= link_to I18n.t("ticket.crud.delete"),
+                        destroy_attached_file_project_ticket_path(@project, @ticket, attached_file_id: attached_file.id),
+                        method: :delete,
+                        data: { confirm: I18n.t("ticket.crud.confirm_delete") } %>
+          </li>
+        <% end %>
+      </ul>
       <%= link_to I18n.t("ticket.crud.edit"), edit_project_ticket_path(project_id: @ticket.project_id, id: @ticket) %>
       <%= link_to I18n.t("ticket.crud.delete"), project_ticket_path(project_id: @ticket.project_id, id: @ticket),  method: :delete, data: { confirm: I18n.t("ticket.crud.confirm_delete") } %>
     </section>

@@ -22,5 +22,24 @@
   <%= f.label :due_on %>
   <%= f.date_field :due_on, value: (f.object.due_on || Time.now.strftime("%Y-%m-%d")), class: 'form-control' %>
 
+  <%= f.label :attached_files %>
+  <%= f.file_field :attached_files, multiple: true, direct_upload: true %>
+  <ul>
+    <% @ticket.attached_files.each do |attached_file| %>
+      <!-- 保存に失敗したファイルをpurgeしても表示されるのでため -->
+      <!-- 保存されていないファイルは表示しない -->
+      <% unless attached_file.saved_changes? %>
+        <li>
+          <% if attached_file.previewable? %>
+            <%= image_tag attached_file.preview(resize: "100x100>") %>
+          <% elsif attached_file.variable? %>
+            <%= image_tag attached_file.variant(resize: "100x100>") %>
+          <% end %>
+          <%= link_to attached_file.filename, url_for(attached_file) %>
+        </li>
+      <% end%>
+    <% end %>
+  </ul>
+
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>

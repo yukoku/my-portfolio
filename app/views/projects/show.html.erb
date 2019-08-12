@@ -30,7 +30,7 @@
     </section>
   </div>
   <div class="col-md-2">
-    <% @project.project_members.where(accepted_project_invitation: true).each do |project_member| %>
+    <% @project.project_members.where(accepted_project_invitation: true).includes(:user).each do |project_member| %>
       <ul><%= project_member.user.name %></ul>
     <% end %>
     <% if @project.owners.include?(current_user) %>

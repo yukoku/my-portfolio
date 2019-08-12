@@ -60,6 +60,7 @@ en:
       assignee: 'assignee'
       due_on: 'due on'
       description: 'description'
+      attached_file: 'attached file'
     header:
       top: 'assignee tickets'
     crud:

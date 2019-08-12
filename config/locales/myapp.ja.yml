@@ -56,6 +56,7 @@ ja:
       assignee: '担当者'
       due_on: '期日'
       description: '説明'
+      attached_file: '添付ファイル'
     header:
       top: '担当チケット一覧'
     crud:

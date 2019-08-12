@@ -1,6 +1,6 @@
 class TicketsController < ApplicationController
   before_action :project_member, except: %i[index]
-  before_action :project_ticket, only: %i[edit show update destroy]
+  before_action :project_ticket, only: %i[edit show update destroy destroy_attached_file]
   def new
     @project = Project.find(params[:project_id])
     @ticket = Ticket.new
@@ -51,11 +51,20 @@ class TicketsController < ApplicationController
     redirect_to @project
   end
 
+  def destroy_attached_file
+    if @ticket.attached_files.attached?
+      @attached_file = @ticket.attached_files.find_by(id: params[:attached_file_id])
+      @attached_file&.purge_later
+      redirect_to project_ticket_url(@project, @ticket)
+    end
+  end
+
 private
 
   def ticket_params
     params.require(:ticket).permit(:title, :description, :due_on, :assignee_id,
-                                   :ticket_attribute_id, :ticket_status_id, :ticket_priority_id, attached_files: [])
+                                   :ticket_attribute_id, :ticket_status_id, :ticket_priority_id,
+                                   attached_files: [])
   end
 
   def project_member

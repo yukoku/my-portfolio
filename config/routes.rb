@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   get '/about', to: 'static_pages#about'
   resources :users, only: %i[index show destroy], controller: 'users/users'
   resources :projects do
-    resources :tickets, except: :index
+    resources :tickets, except: :index do
+      delete 'destroy_attached_file', on: :member
+    end
   end
   get '/users/:id/tickets', to: 'tickets#index', as: 'tickets'
 
