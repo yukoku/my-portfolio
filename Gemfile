@@ -74,3 +74,4 @@ gem 'validates_timeliness', '~> 5.0.0.alpha3'
 gem 'faker' # production環境でも使用する
 gem 'kaminari'
 gem 'kaminari-bootstrap', '~> 3.0.1'
+gem 'gretel'
