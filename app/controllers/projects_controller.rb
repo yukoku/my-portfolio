@@ -1,11 +1,19 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_project_member, except: [:index, :new, :create]
+
+  PER = 5
+
   def index
-    @projects = current_user.projects
+    @projects = current_user.projects.page(params[:page]).per(PER)
   end
 
   def show
     @project = Project.find(params[:id])
+    if @project
+      @tickets = Ticket.where(project_id: @project.id).page(params[:page]).per(PER)
+    else
+      redirect_to root_path
+    end
   end
 
   def new

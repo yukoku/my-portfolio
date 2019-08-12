@@ -1,8 +1,9 @@
 class Users::UsersController < ApplicationController
   before_action :admin_user, only: %i[destroy]
+  PER = 10
 
   def index
-    @users = User.all
+    @users = User.page(params[:page]).per(PER)
   end
 
   def show

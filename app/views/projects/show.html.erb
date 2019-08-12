@@ -19,14 +19,15 @@
     <section class="ticket-items">
       <ul>
         <h4><%= t("project.title.show.tickets") %></h4>
-        <% @project.tickets.each do |ticket| %>
+        <% @tickets.each do |ticket| %>
           <ul>
             <%= link_to ticket.title, project_ticket_path(@project, ticket) %>
             <p><%= ticket.description %></p>
           </ul>
         <% end %>
-        <%= link_to t("project.tickets.create"), new_project_ticket_path(@project) %>
+        <%= paginate @tickets %>
       </ul>
+      <%= link_to t("project.tickets.create"), new_project_ticket_path(@project) %>
     </section>
   </div>
   <div class="col-md-2">

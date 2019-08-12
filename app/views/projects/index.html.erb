@@ -1,7 +1,7 @@
 <% provide(:title, t('project.title.index')) %>
 <h2><%= t('project.title.index') %></h2>
-<div class="row">
-  <% @projects.each do |project| %>
+<% @projects.each do |project| %>
+  <div class="row">
     <ol>
     <div class="col-md-10">
       <%= link_to project.name, project %>
@@ -17,5 +17,6 @@
       <% end %>
       </div>
     </ol>
-  <% end %>
-</div>
+  </div>
+<% end %>
+<%= paginate @projects %>

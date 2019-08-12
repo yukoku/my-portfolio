@@ -1,6 +1,9 @@
 class TicketsController < ApplicationController
   before_action :project_member, except: %i[index]
   before_action :project_ticket, only: %i[edit show update destroy destroy_attached_file]
+
+  PER = 5
+
   def new
     @project = Project.find(params[:project_id])
     @ticket = Ticket.new
@@ -12,7 +15,7 @@ class TicketsController < ApplicationController
   end
 
   def index
-    @tickets = Ticket.where(assignee_id: current_user.id)
+    @tickets = Ticket.where(assignee_id: current_user.id).page(params[:page]).per(PER)
   end
 
   def create
