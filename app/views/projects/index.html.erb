@@ -10,7 +10,7 @@
     </div>
     <div class="col-xs-2">
       <p class="project-due-on"><%= "#{t("activerecord.attributes.project.due_on")}:#{project.due_on}" %></p>
-      <% if project.owners.include?(current_user) %>
+      <% if project.owners.include?(current_user) || current_user.admin? %>
         <div id="owner-selection-<%= project.id%>">
           <%= link_to t("project.crud.edit"), edit_project_path(project) %>
           <%= link_to t("project.crud.delete"), project, method: :delete, data: { confirm: t("project.crud.confirm_delete") } %>

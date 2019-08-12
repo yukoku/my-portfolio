@@ -4,7 +4,11 @@ class ProjectsController < ApplicationController
   PER = 5
 
   def index
-    @projects = current_user.projects.page(params[:page]).per(PER)
+    if current_user.admin?
+      @projects = Project.page(params[:page]).per(PER)
+    else
+      @projects = current_user.projects.page(params[:page]).per(PER)
+    end
   end
 
   def show
@@ -62,6 +66,6 @@ private
 
   def authenticate_project_member
     @project = Project.find(params[:id])
-    redirect_to projects_path if @project&.users.where(id: current_user.id).empty?
+    redirect_to projects_path if @project&.users.where(id: current_user.id).empty? && !current_user.admin?
   end
 end

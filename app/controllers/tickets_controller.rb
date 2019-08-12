@@ -15,7 +15,11 @@ class TicketsController < ApplicationController
   end
 
   def index
-    @tickets = Ticket.where(assignee_id: current_user.id).page(params[:page]).per(PER)
+    if current_user.admin?
+      @tickets = Ticket.page(params[:page]).per(PER)
+    else
+      @tickets = Ticket.where(assignee_id: current_user.id).page(params[:page]).per(PER)
+    end
   end
 
   def create
@@ -72,7 +76,7 @@ private
 
   def project_member
     @project = Project.find(params[:project_id])
-    redirect_to(root_url) unless @project&.users.include?(current_user)
+    redirect_to(root_url) unless @project&.users.include?(current_user) || current_user.admin?
   end
 
   def project_ticket

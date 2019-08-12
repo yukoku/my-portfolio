@@ -3,7 +3,11 @@ FactoryBot.define do
     sequence(:name) { |n| "name#{n}" }
     sequence(:email) { |n| "test#{n}@example.com" }
     password { "password" }
-    admin { true }
+    admin { false }
+
+    trait :admin_user do
+      admin { true }
+    end
 
     after(:create) do |user|
       project = create(:project)
