@@ -22,7 +22,7 @@ class TicketsController < ApplicationController
     @ticket.project_id = @project.id
     if @ticket.save
       flash[:info] = I18n.t("ticket.crud.flash.created")
-      redirect_to @project
+      redirect_to project_ticket_url(@project, @ticket)
     else
       render 'new'
     end

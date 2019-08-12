@@ -28,8 +28,10 @@
           </li>
         <% end %>
       </ul>
-      <%= link_to I18n.t("ticket.crud.edit"), edit_project_ticket_path(project_id: @ticket.project_id, id: @ticket) %>
-      <%= link_to I18n.t("ticket.crud.delete"), project_ticket_path(project_id: @ticket.project_id, id: @ticket),  method: :delete, data: { confirm: I18n.t("ticket.crud.confirm_delete") } %>
+      <div class="ticket-crud">
+        <%= link_to I18n.t("ticket.crud.edit"), edit_project_ticket_path(project_id: @ticket.project_id, id: @ticket) %>
+        <%= link_to I18n.t("ticket.crud.delete"), project_ticket_path(project_id: @ticket.project_id, id: @ticket),  method: :delete, data: { confirm: I18n.t("ticket.crud.confirm_delete") } %>
+      </div>
     </section>
     <section class="ticket-comment">
     </section>

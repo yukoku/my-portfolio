@@ -12,6 +12,15 @@ ja:
         name: "名前"
         description: "説明"
         due_on: "期日"
+      ticket:
+        title: "タイトル"
+        description: "説明"
+        assignee: "担当者"
+        attribute: "属性"
+        status: "ステータス"
+        priority: "優先度"
+        due_on: "期日"
+        attached_files: "添付ファイル"
   date:
     abbr_day_names:
     - 日
