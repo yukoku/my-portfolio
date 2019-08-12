@@ -57,7 +57,7 @@ RSpec.describe "Tickets", type: :request do
         expect {
           post project_tickets_path(@project), params: { ticket: ticket_attribute }
         }.to change(@project.tickets, :count).by(1)
-        expect(response).to redirect_to(project_path(@project))
+        expect(response).to redirect_to(project_ticket_path(@project, @project.tickets.last.id))
       end
     end
 
