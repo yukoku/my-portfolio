@@ -178,4 +178,21 @@ RSpec.describe "Tickets", type: :request do
       end
     end
   end
+
+  describe "DELETE #destroy_attached_file" do
+    def setup_attached_file
+      file_path = Rails.root.to_s + '/spec/support/test_files/test_01.png'
+      File.open(file_path) { |f| @ticket.attached_files.attach(io: f, filename: "test.png", content_type: 'image/png')}
+      @ticket.save
+    end
+    it "delete an attached file" do
+      setup_attached_file
+      attached_file_id = @ticket.attached_files.first.id
+      expect {
+        delete destroy_attached_file_project_ticket_path(@project, @ticket, attached_file_id: attached_file_id)
+        @ticket.reload
+      }.to change(@ticket.attached_files, :count).by(-1)
+      expect(response).to redirect_to(project_ticket_url(@project, @ticket))
+    end
+  end
 end
