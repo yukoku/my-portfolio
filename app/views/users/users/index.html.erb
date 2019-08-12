@@ -1,15 +1,18 @@
 <% provide(:title, t('user.title.index')) %>
 <h2><%= t('user.title.index') %></h2>
+<div class='pagination-items'>
+  <%= paginate @users%>
+</div>
 <% @users.each do |user| %>
   <div class="row">
     <ol>
-    <div class="col-md-8">
+    <div class="col-xs-10">
       <ol>
         <%= link_to(gravatar_for(user), user_path(user)) %>
         <%= link_to user.name, user_path(user) %>
       </ol>
     </div>
-    <div class="col-md-4">
+    <div class="col-xs-2">
       <% if current_user.admin? %>
         <div>
           <%= link_to t("user.crud.delete"), user, method: :delete, data: { confirm: t("user.crud.confirm_delete") } %>
@@ -19,4 +22,6 @@
     </ol>
   </div>
 <% end %>
-<%= paginate @users%>
+<div class='pagination-items'>
+  <%= paginate @users%>
+</div>

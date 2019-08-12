@@ -14,6 +14,7 @@
       <p><%= t("activerecord.attributes.project.due_on") %></p>
       <%= @project.due_on %>
     </section>
+    <p><%= link_to t("project.tickets.create"), new_project_ticket_path(@project) %></p>
   </aside>
   <div class="col-md-8">
     <section class="ticket-items">
@@ -25,9 +26,10 @@
             <p><%= ticket.description %></p>
           </ul>
         <% end %>
-        <%= paginate @tickets %>
+        <div class='pagination-items'>
+          <%= paginate @tickets %>
+        </div>
       </ul>
-      <%= link_to t("project.tickets.create"), new_project_ticket_path(@project) %>
     </section>
   </div>
   <div class="col-md-2">
