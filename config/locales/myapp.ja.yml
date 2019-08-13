@@ -22,6 +22,7 @@ ja:
       confirm_delete: "本当に削除しますか?"
       flash:
         deleted: "ユーザーを削除しました。"
+        forbidden_change_profile_for_test_user: "テストユーザーに対する変更はできません"
   project:
     title:
       new: '新しいプロジェクト'

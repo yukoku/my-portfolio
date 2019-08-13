@@ -22,6 +22,7 @@ en:
       confirm_delete: 'Are you sure you want to delete this user?'
       flash:
         deleted: 'User has been deleted'
+        forbidden_change_profile_for_test_user: "You can't change profile for test user"
   project:
     title:
       new: 'new project'
