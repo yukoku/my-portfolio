@@ -20,6 +20,8 @@ en:
         priority: "priority"
         due_on: "due on"
         attached_files: "attached files"
+      comment:
+        content: "content"
   date:
     abbr_day_names:
     - Sun

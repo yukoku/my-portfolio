@@ -21,6 +21,8 @@ ja:
         priority: "優先度"
         due_on: "期日"
         attached_files: "添付ファイル"
+      comment:
+        content: "内容"
   date:
     abbr_day_names:
     - 日
