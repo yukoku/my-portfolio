@@ -6,6 +6,7 @@ class Ticket < ApplicationRecord
   belongs_to :ticket_status, optional: true
   belongs_to :ticket_priority, optional: true
   has_many_attached :attached_files
+  has_many :comments, dependent: :destroy
   validates_date :due_on, on_or_after: lambda { Time.zone.today }, allow_blank: true
   validate :validate_file_size
   validate :validate_file_count

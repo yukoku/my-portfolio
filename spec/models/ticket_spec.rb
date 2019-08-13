@@ -11,6 +11,9 @@ RSpec.describe Ticket, type: :model do
       it { is_expected.to belong_to(:ticket_status) }
       it { is_expected.to belong_to(:ticket_priority) }
     end
+    describe "has_many" do
+      it { is_expected.to have_many(:comments) }
+    end
   end
 
   it "is valid with title, description, due_on and project_id" do

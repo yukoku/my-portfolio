@@ -9,6 +9,7 @@ RSpec.describe User, type: :model do
       it { is_expected.to have_many(:owned_projects).through(:project_owners).source(:project) }
       it { is_expected.to have_many(:assigned_tickets).class_name("Ticket") }
       it { is_expected.to have_many(:created_tickets).class_name("Ticket") }
+      it { is_expected.to have_many(:comments) }
     end
   end
   it "is valid with name, email and password" do
