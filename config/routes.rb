@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :projects do
     resources :tickets, except: :index do
       delete 'destroy_attached_file', on: :member
+      resources :comments, only: %i[create destroy]
     end
   end
   get '/users/:id/tickets', to: 'tickets#index', as: 'tickets'

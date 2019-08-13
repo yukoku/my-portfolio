@@ -84,3 +84,17 @@ ja:
       normal: '普通'
       low: '低い'
       very_low: 'とても低い'
+  comment:
+    title:
+      index: "コメント一覧"
+      new: "新しいコメントを追加する"
+      edit: "コメントを編集する"
+    crud:
+      create: "コメントする"
+      edit: "編集"
+      delete: "削除"
+      confirm_delete: "本当に削除しますか"
+      flash:
+        created: "コメントが追加されました"
+        updated: "コメントを更新しました"
+        deleted: "コメントが削除されました"

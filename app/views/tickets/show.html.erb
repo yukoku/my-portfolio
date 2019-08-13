@@ -1,5 +1,6 @@
 <% breadcrumb :project_ticket, @project, @ticket %>
 <% provide(:title, @ticket.title) %>
+
 <div class="row">
   <div class="col-md-12">
     <section class="ticket-item">
@@ -31,10 +32,25 @@
       </ul>
       <div class="ticket-crud">
         <%= link_to I18n.t("ticket.crud.edit"), edit_project_ticket_path(project_id: @ticket.project_id, id: @ticket) %>
-        <%= link_to I18n.t("ticket.crud.delete"), project_ticket_path(project_id: @ticket.project_id, id: @ticket),  method: :delete, data: { confirm: I18n.t("ticket.crud.confirm_delete") } %>
+        <%= link_to I18n.t("ticket.crud.delete"), project_ticket_path(project_id: @ticket.project_id, id: @ticket),
+                                             method: :delete, data: { confirm: I18n.t("ticket.crud.confirm_delete") } %>
       </div>
     </section>
+    <h2><%= I18n.t("comment.title.index") %></h2>
     <section class="ticket-comment">
+      <% @ticket.comments.each do |comment| %>
+        <div class="comment-content">
+          <p><%= comment.content %></p>
+          <p><%= comment.user.name + " : " + comment.updated_at.localtime.to_s(:db) %></p>
+          <%= link_to I18n.t("comment.crud.delete"), project_ticket_comment_path(@project, @ticket, comment),
+                                             method: :delete, data: { confirm: I18n.t("comment.crud.confirm_delete") } %>
+        </div>
+      <% end %>
+    </section>
+    <section class="comment-form">
+      <% provide(:button_text, t("helpers.submit.create")) %>
+      <% provide(:link_to, project_ticket_comments_path(@project, @ticket)) %>
+      <%= render 'tickets/comment_form' %>
     </section>
   </div>
 </div>
