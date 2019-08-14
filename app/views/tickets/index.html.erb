@@ -5,6 +5,7 @@
 <% provide(:link_to, tickets_path(current_user)) %>
 <% provide(:search_button_offset, "10") %>
 <%= render 'tickets/search_form'%>
+<br></br>
 <section class="ticket-items">
   <% @tickets.each do |ticket| %>
     <div class='panel panel-default'>
