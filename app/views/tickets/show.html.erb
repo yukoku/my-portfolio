@@ -4,49 +4,98 @@
 <div class="row">
   <div class="col-md-12">
     <section class="ticket-item">
-      <h1><%= @ticket.title%></h1>
-      <p><%= I18n.t("ticket.item.attribute") + ": " + (@ticket.ticket_attribute&.ticket_attribute).to_s %></p>
-      <p><%= I18n.t("ticket.item.status") + ": " + (@ticket.ticket_status&.status).to_s %></p>
-      <p><%= I18n.t("ticket.item.priority") + ": " + (@ticket.ticket_priority&.priority).to_s %></p>
-      <p><%= I18n.t("ticket.item.creator") + ": " + (@ticket.creator&.name).to_s %></p>
-      <p><%= I18n.t("ticket.item.assignee") + ": " + (@ticket.assignee&.name).to_s %></p>
-      <p><%= I18n.t("ticket.item.due_on") + ": " + @ticket.due_on.to_s %></p>
-      <h3><%= I18n.t("ticket.item.description") %></h3>
-      <p><%= @ticket.description %></p>
-      <p><%= I18n.t("ticket.item.attached_file") %></p>
-      <ul>
-        <% @ticket.attached_files.includes(:blob).each do |attached_file| %>
-          <li>
-            <% if attached_file.previewable? %>
-              <%= image_tag attached_file.preview(resize: "100x100>") %>
-            <% elsif attached_file.variable? %>
-              <%= image_tag attached_file.variant(resize: "100x100>") %>
-            <% end %>
-            <%= link_to attached_file.filename, url_for(attached_file) %>
-            <%= link_to I18n.t("ticket.crud.delete"),
-                        destroy_attached_file_project_ticket_path(@project, @ticket, attached_file_id: attached_file.id),
-                        method: :delete,
-                        data: { confirm: I18n.t("ticket.crud.confirm_delete") } %>
-          </li>
-        <% end %>
-      </ul>
-      <div class="ticket-crud">
-        <%= link_to I18n.t("ticket.crud.edit"), edit_project_ticket_path(project_id: @ticket.project_id, id: @ticket) %>
-        <%= link_to I18n.t("ticket.crud.delete"), project_ticket_path(project_id: @ticket.project_id, id: @ticket),
-                                             method: :delete, data: { confirm: I18n.t("ticket.crud.confirm_delete") } %>
+      <div class='well'>
+        <h1><%= @ticket.title%></h1>
+        <table class='table table-condensed'>
+          <tbody>
+            <tr>
+              <th><%= I18n.t("ticket.item.attribute") %></th>
+              <th><%= (@ticket.ticket_attribute&.ticket_attribute).to_s %></th>
+            </tr>
+            <tr>
+              <th><%= I18n.t("ticket.item.status") %></th>
+              <th><%= (@ticket.ticket_status&.status).to_s %></th>
+            </tr>
+            <tr>
+              <th><%= I18n.t("ticket.item.priority") %></th>
+              <th><%= (@ticket.ticket_priority&.priority).to_s %></th>
+            </tr>
+            <tr>
+              <th><%= I18n.t("ticket.item.creator") %></th>
+              <th><%= (@ticket.creator&.name).to_s %></th>
+            </tr>
+            <tr>
+              <th><%= I18n.t("ticket.item.assignee") %></th>
+              <th><%= (@ticket.assignee&.name).to_s %></th>
+            </tr>
+            <tr>
+              <th><%= I18n.t("ticket.item.due_on") %></th>
+              <th><%= @ticket.due_on.to_s %></th>
+            </tr>
+          </tbody>
+        </table>
+        <h3><%= I18n.t("ticket.item.description") %></h3>
+        <p><%= simple_format(h(@ticket.description)) %></p>
+
+        <h2><%= I18n.t("ticket.item.attached_file") %></h2>
+        <ul class='list-group'>
+          <% @ticket.attached_files.includes(:blob).each do |attached_file| %>
+            <li class='list-group-item'>
+              <div class='row'>
+                <div class='col-sm-2'>
+                  <% if attached_file.previewable? %>
+                    <%= image_tag attached_file.preview(resize: "100x100>") %>
+                  <% elsif attached_file.variable? %>
+                    <%= image_tag attached_file.variant(resize: "100x100>") %>
+                  <% end %>
+                </div>
+                <div class='col-sm-8'>
+                  <%= link_to attached_file.filename, url_for(attached_file) %>
+                </div>
+                <div class='col-sm-2 text-right'>
+                  <strong><%= link_to I18n.t("ticket.crud.delete"),
+                              destroy_attached_file_project_ticket_path(@project, @ticket, attached_file_id: attached_file.id),
+                              method: :delete,
+                              data: { confirm: I18n.t("ticket.crud.confirm_delete") } %></strong>
+                  <span class='glyphicon glyphicon-trash' aria-hidden='true'></span>
+                </div>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+
+        <div class="ticket-crud text-right">
+          <strong><%= link_to I18n.t("ticket.crud.edit"), edit_project_ticket_path(project_id: @ticket.project_id, id: @ticket) %></strong>
+          <span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>
+          <strong><%= link_to I18n.t("ticket.crud.delete"), project_ticket_path(project_id: @ticket.project_id, id: @ticket),
+                                              method: :delete, data: { confirm: I18n.t("ticket.crud.confirm_delete") } %></strong>
+          <span class='glyphicon glyphicon-trash' aria-hidden='true'></span>
+        </div>
+
       </div>
     </section>
-    <h2><%= I18n.t("comment.title.index") %></h2>
+
     <section class="ticket-comment">
+      <h2><%= I18n.t("comment.title.index") %></h2>
+      <table class='table table-hover'>
+      <tbody>
       <% @ticket.comments.includes(:user).each do |comment| %>
-        <div id=<%= "comment-content-#{comment.id}" %>>
-          <p><%= comment.content %></p>
-          <p><%= comment.user.name + " : " + comment.updated_at.localtime.to_s(:db) %></p>
-          <%= link_to I18n.t("comment.crud.delete"), project_ticket_comment_path(@project, @ticket, comment),
-                                             method: :delete, data: { confirm: I18n.t("comment.crud.confirm_delete") } %>
-        </div>
+        <tr id=<%= "comment-content-#{comment.id}" %>>
+          <th><%= simple_format(h(comment.content)) %></th>
+          <th>
+            <%= comment.user.name %>
+            <span class='glyphicon glyphicon-user' aria-hidden='true'></span>
+          </th>
+           <th><%= comment.updated_at.localtime.to_s(:db) %></th>
+          <th><strong><%= link_to I18n.t("comment.crud.delete"), project_ticket_comment_path(@project, @ticket, comment),
+                                             method: :delete, data: { confirm: I18n.t("comment.crud.confirm_delete") } %></strong>
+          <span class='glyphicon glyphicon-trash' aria-hidden='true'></span></th>
+        </tr>
       <% end %>
+      </tbody>
+    </table>
     </section>
+
     <section class="comment-form">
       <% provide(:button_text, t("comment.crud.create")) %>
       <% provide(:link_to, project_ticket_comments_path(@project, @ticket)) %>
