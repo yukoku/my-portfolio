@@ -79,6 +79,9 @@ GEM
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
     builder (3.2.3)
+    bullet (6.0.1)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     byebug (11.0.1)
     capybara (2.15.4)
       addressable
@@ -162,6 +165,10 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
+    lol_dba (2.1.8)
+      actionpack (>= 3.0, < 6.0)
+      activerecord (>= 3.0, < 6.0)
+      railties (>= 3.0, < 6.0)
     loofah (2.2.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -279,6 +286,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
+    uniform_notifier (1.12.1)
     validates_timeliness (5.0.0.alpha5)
       timeliness (>= 0.3.10, < 1)
     warden (1.2.8)
@@ -305,6 +313,7 @@ DEPENDENCIES
   aws-sdk-s3
   bootsnap (>= 1.1.0)
   bootstrap-sass (>= 3.3.7)
+  bullet
   byebug
   capybara (~> 2.15.2)
   coffee-rails (~> 4.2)
@@ -324,6 +333,7 @@ DEPENDENCIES
   letter_opener
   letter_opener_web
   listen (>= 3.0.5, < 3.2)
+  lol_dba
   mini_magick (~> 4.8)
   mysql2 (>= 0.4.4, < 0.6.0)
   puma (~> 3.11)

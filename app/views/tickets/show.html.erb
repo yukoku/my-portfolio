@@ -15,7 +15,7 @@
       <p><%= @ticket.description %></p>
       <p><%= I18n.t("ticket.item.attached_file") %></p>
       <ul>
-        <% @ticket.attached_files.each do |attached_file| %>
+        <% @ticket.attached_files.includes(:blob).each do |attached_file| %>
           <li>
             <% if attached_file.previewable? %>
               <%= image_tag attached_file.preview(resize: "100x100>") %>
@@ -38,7 +38,7 @@
     </section>
     <h2><%= I18n.t("comment.title.index") %></h2>
     <section class="ticket-comment">
-      <% @ticket.comments.each do |comment| %>
+      <% @ticket.comments.includes(:user).each do |comment| %>
         <div id=<%= "comment-content-#{comment.id}" %>>
           <p><%= comment.content %></p>
           <p><%= comment.user.name + " : " + comment.updated_at.localtime.to_s(:db) %></p>

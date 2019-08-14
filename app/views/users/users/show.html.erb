@@ -10,7 +10,7 @@
     </section>
     <section>
       <p><%= t("project.title.index") %></p>
-      <% @user.projects.each do |project| %>
+      <% @user.projects.includes(:users).each do |project| %>
         <% if project.users.include?(current_user) %>
           <ol><%= link_to project.name, project_path(project) %></ol>
         <% else %>

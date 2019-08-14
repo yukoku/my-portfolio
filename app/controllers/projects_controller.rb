@@ -5,9 +5,9 @@ class ProjectsController < ApplicationController
 
   def index
     if current_user.admin?
-      @projects = Project.page(params[:page]).per(PER)
+      @projects = Project.includes(:owners).page(params[:page]).per(PER)
     else
-      @projects = current_user.projects.page(params[:page]).per(PER)
+      @projects = current_user.projects.includes(:owners).page(params[:page]).per(PER)
     end
   end
 

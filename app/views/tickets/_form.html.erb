@@ -25,7 +25,7 @@
   <%= f.label :attached_files %>
   <%= f.file_field :attached_files, multiple: true %>
   <ul>
-    <% @ticket.attached_files.each do |attached_file| %>
+    <% @ticket.attached_files.includes(:blob).each do |attached_file| %>
       <!-- 保存に失敗したファイルをpurgeしても表示されるのでため -->
       <!-- 保存されていないファイルは表示しない -->
       <% unless attached_file.saved_changes? %>
