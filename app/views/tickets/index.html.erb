@@ -5,14 +5,25 @@
 <% provide(:link_to, tickets_path(current_user)) %>
 <% provide(:search_button_offset, "10") %>
 <%= render 'tickets/search_form'%>
-<% @tickets.each do |ticket| %>
-    <section class="ticket-items">
-      <ul>
-        <%= link_to ticket.title, project_ticket_path(ticket.project_id, ticket) %>
-        <p><%= ticket.description %></p>
-      </ul>
-    </section>
-<% end %>
+<section class="ticket-items">
+  <% @tickets.each do |ticket| %>
+    <div class='panel panel-default'>
+      <div class='panel-heading'>
+        <div class='row'>
+          <div class='col-sm-9'>
+            <%= link_to ticket.title, project_ticket_path(ticket.project_id, ticket) %>
+          </div>
+          <div class='col-sm-3 text-right'>
+            <%= I18n.t("ticket.item.due_on") + " : "+ ticket.due_on.to_s %>
+          </div>
+        </div>
+      </div>
+      <div class='panel-body'>
+        <%= simple_format(h(ticket.description)) %>
+      </div>
+    </div>
+  <% end %>
+</section>
 <div class='pagination-items'>
   <%= paginate @tickets%>
 </div>
