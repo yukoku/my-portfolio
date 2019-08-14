@@ -1,29 +1,55 @@
-<%= form_for(@ticket, url: yield(:link_to)) do |f| %>
+<%= form_for(@ticket, url: yield(:link_to), class: 'form-horizontal') do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
-  <%= f.label :title %>
-  <%= f.text_field :title, class: 'form-control' %>
+  <div class='form-group'>
+    <%= f.label :title, class: 'col-sm-2 text-right control-label' %>
+    <div class='col-sm-10'>
+      <%= f.text_field :title, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class='form-group'>
+    <%= f.label :assignee, class: 'col-sm-2 text-right control-label' %>
+    <div class='col-sm-10'>
+      <%= f.collection_select :assignee_id, @project.users, :id, :name, {prompt: ""}, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class='form-group'>
+    <%= f.label :attribute, class: 'col-sm-2 text-right control-label' %>
+    <div class='col-sm-10'>
+      <%= f.collection_select :ticket_attribute_id, @project.ticket_attributes, :id, :ticket_attribute, {prompt: ""}, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class='form-group'>
+    <%= f.label :status, class: 'col-sm-2 text-right control-label' %>
+    <div class='col-sm-10'>
+      <%= f.collection_select :ticket_status_id, @project.ticket_statuses, :id, :status, {prompt: ""}, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class='form-group'>
+    <%= f.label :priority, class: 'col-sm-2 text-right control-label' %>
+    <div class='col-sm-10'>
+      <%= f.collection_select :ticket_priority_id, @project.ticket_priorities, :id, :priority, {prompt: ""}, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class='form-group'>
+    <%= f.label :due_on, class: 'col-sm-2 text-right control-label' %>
+    <div class='col-sm-10'>
+      <%= f.date_field :due_on, value: (f.object.due_on || Time.now.strftime("%Y-%m-%d")), class: 'form-control' %>
+    </div>
+  </div>
 
   <%= f.label :description %>
-  <%= f.text_area :description, class: 'form-control' %>
-
-  <%= f.label :assignee %>
-  <%= f.collection_select :assignee_id, @project.users, :id, :name, {prompt: ""}, class: 'form-control' %>
-
-  <%= f.label :attribute %>
-  <%= f.collection_select :ticket_attribute_id, @project.ticket_attributes, :id, :ticket_attribute, {prompt: ""}, class: 'form-control' %>
-
-  <%= f.label :status %>
-  <%= f.collection_select :ticket_status_id, @project.ticket_statuses, :id, :status, {prompt: ""}, class: 'form-control' %>
-
-  <%= f.label :priority %>
-  <%= f.collection_select :ticket_priority_id, @project.ticket_priorities, :id, :priority, {prompt: ""}, class: 'form-control' %>
-
-  <%= f.label :due_on %>
-  <%= f.date_field :due_on, value: (f.object.due_on || Time.now.strftime("%Y-%m-%d")), class: 'form-control' %>
+  <%= f.text_area :description, class: 'form-control', rows: 10 %>
 
   <%= f.label :attached_files %>
-  <%= f.file_field :attached_files, multiple: true %>
+  <span class="glyphicon glyphicon-open" aria-hidden="true"></span>
+  <%= f.file_field :attached_files, multiple: true, class: 'form-control' %>
+
   <ul>
     <% @ticket.attached_files.includes(:blob).each do |attached_file| %>
       <!-- 保存に失敗したファイルをpurgeしても表示されるのでため -->
