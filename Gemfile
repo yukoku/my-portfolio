@@ -6,6 +6,7 @@ ruby '2.5.5'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
 gem 'bootstrap-sass', '>= 3.3.7'
+gem 'jquery-rails'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 # Use Puma as the app server
@@ -75,3 +76,4 @@ gem 'faker' # production環境でも使用する
 gem 'kaminari'
 gem 'kaminari-bootstrap', '~> 3.0.1'
 gem 'gretel'
+gem 'ransack'

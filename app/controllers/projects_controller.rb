@@ -12,9 +12,10 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find(params[:id])
+    @project ||= Project.find(params[:id])
     if @project
-      @tickets = Ticket.where(project_id: @project.id).page(params[:page]).per(PER)
+      @search = @project.tickets.ransack(params[:q])
+      @tickets = @search.result.page(params[:page]).per(PER)
     else
       redirect_to root_path
     end

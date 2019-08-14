@@ -43,6 +43,7 @@ en:
         deleted: 'Project has been deleted'
     project_member:
       create: 'add member'
+      index: 'Project member'
     tickets:
       create: 'create new ticket'
   ticket:
@@ -54,6 +55,7 @@ en:
         updated: 'Ticket has been updated'
         deleted: 'Ticket has been deleted'
     item:
+      title: 'title'
       attribute: 'attribute'
       status: 'status'
       priority: 'priority'

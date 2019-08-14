@@ -43,6 +43,7 @@ ja:
         deleted: 'プロジェクトを削除しました。'
     project_member:
       create: 'ユーザーを追加'
+      index: 'プロジェクトメンバー'
     tickets:
       create: 'チケットを作成する'
   ticket:
@@ -50,6 +51,7 @@ ja:
       new: '新しいチケットを作成する'
       edit: 'チケットを編集する'
     item:
+      title: 'タイトル'
       attribute: '属性'
       status: 'ステータス'
       priority: '優先度'

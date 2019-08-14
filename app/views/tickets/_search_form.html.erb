@@ -1,0 +1,49 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-offset-<%= "#{yield(:search_button_offset)}"%>" >
+      <a class="btn btn-default" aria-label="Search" data-toggle="collapse" href="#search-form">
+        <%= I18n.t("ransack.search_form") %>
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="collapse" id="search-form">
+  <div class="well">
+    <%= search_form_for(@search, url: yield(:link_to)) do |f| %>
+      <div class='form-group'>
+        <%= f.label :title_cont, "search", class: 'sr-only'%>
+        <%= f.search_field :title_or_description_cont,
+                            placeholder: I18n.t("ticket.item.title") + " " +
+                                          I18n.t("ransack.or") + " " +
+                                          I18n.t("ticket.item.description"),
+                            class: 'form-control' %>
+      </div>
+
+      <% if @project %>
+        <div class='form-group'>
+          <%= f.label :attribute_id_eq, class: 'sr-only' %>
+          <%= f.collection_select :ticket_attribute_id_eq, @project.ticket_attributes, :id, :ticket_attribute,
+                                  {include_blank: I18n.t("ransack.blank"), prompt: I18n.t("ticket.item.attribute") }, class: 'form-control' %>
+
+          <%= f.label :status_id_eq, class: 'sr-only' %>
+          <%= f.collection_select :ticket_status_id_eq, @project.ticket_statuses, :id, :status,
+                                  {include_blank: I18n.t("ransack.blank"), prompt: I18n.t("ticket.item.status")}, class: 'form-control' %>
+
+          <%= f.label :priority_id_eq, class: 'sr-only' %>
+          <%= f.collection_select :ticket_priority_id_eq, @project.ticket_priorities, :id, :priority,
+                                  {include_blank: I18n.t("ransack.blank"), prompt: I18n.t("ticket.item.priority") }, class: 'form-control' %>
+        </div>
+      <% end %>
+
+      <div class='form-group'>
+        <%= f.label :due_on %>
+        <%= f.date_field :due_on_gteq, include_blank: true, class: 'form-control' %><span>~</span>
+        <%= f.date_field :due_on_lteq, include_blank: true, class: 'form-control' %>
+      </div>
+
+      <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

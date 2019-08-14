@@ -20,7 +20,12 @@
   <div class="col-md-8">
     <section class="ticket-items">
       <ul>
-        <h4><%= t("project.title.show.tickets") %></h4>
+        <h2><%= t("project.title.show.tickets") %></h4>
+        <% provide(:button_text, t("ransack.search")) %>
+        <% provide(:link_to, project_path(@project)) %>
+        <% provide(:search_button_offset, "8") %>
+        <%= render 'tickets/search_form'%>
+
         <% @tickets.each do |ticket| %>
           <ul>
             <%= link_to ticket.title, project_ticket_path(@project, ticket) %>
@@ -34,6 +39,7 @@
     </section>
   </div>
   <div class="col-md-2">
+    <h2><%= I18n.t("project.project_member.index") %></h2>
     <% @project.project_members.where(accepted_project_invitation: true).includes(:user).each do |project_member| %>
       <ul><%= project_member.user.name %></ul>
     <% end %>

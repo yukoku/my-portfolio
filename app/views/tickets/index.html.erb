@@ -1,6 +1,10 @@
 <% breadcrumb :user_tickets, current_user %>
 <% provide(:title, I18n.t("ticket.header.top")) %>
 <h2><%= I18n.t("ticket.header.top") %></h2>
+<% provide(:button_text, t("ransack.search")) %>
+<% provide(:link_to, tickets_path(current_user)) %>
+<% provide(:search_button_offset, "10") %>
+<%= render 'tickets/search_form'%>
 <% @tickets.each do |ticket| %>
     <section class="ticket-items">
       <ul>
