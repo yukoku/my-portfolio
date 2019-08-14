@@ -13,37 +13,65 @@
   <div class="well">
     <%= search_form_for(@search, url: yield(:link_to)) do |f| %>
       <div class='form-group'>
-        <%= f.label :title_cont, "search", class: 'sr-only'%>
-        <%= f.search_field :title_or_description_cont,
-                            placeholder: I18n.t("ticket.item.title") + " " +
-                                          I18n.t("ransack.or") + " " +
-                                          I18n.t("ticket.item.description"),
-                            class: 'form-control' %>
+        <div class='row'>
+          <div class='col-sm-offset-2 col-sm-8'>
+            <%= f.label :title_cont, "search", class: 'sr-only'%>
+            <%= f.search_field :title_or_description_cont,
+                                placeholder: I18n.t("ticket.item.title") + " " +
+                                              I18n.t("ransack.or") + " " +
+                                              I18n.t("ticket.item.description"),
+                                class: 'form-control' %>
+          </div>
+        </div>
       </div>
 
       <% if @project %>
         <div class='form-group'>
-          <%= f.label :attribute_id_eq, class: 'sr-only' %>
-          <%= f.collection_select :ticket_attribute_id_eq, @project.ticket_attributes, :id, :ticket_attribute,
-                                  {include_blank: I18n.t("ransack.blank"), prompt: I18n.t("ticket.item.attribute") }, class: 'form-control' %>
+          <div class='row'>
+            <div class='col-sm-offset-2 col-sm-8'>
+              <%= f.label :attribute_id_eq, class: 'sr-only' %>
+              <%= f.collection_select :ticket_attribute_id_eq, @project.ticket_attributes, :id, :ticket_attribute,
+                                      {include_blank: I18n.t("ransack.blank"), prompt: I18n.t("ticket.item.attribute") }, class: 'form-control' %>
+            </div>
+          </div>
 
-          <%= f.label :status_id_eq, class: 'sr-only' %>
-          <%= f.collection_select :ticket_status_id_eq, @project.ticket_statuses, :id, :status,
-                                  {include_blank: I18n.t("ransack.blank"), prompt: I18n.t("ticket.item.status")}, class: 'form-control' %>
-
-          <%= f.label :priority_id_eq, class: 'sr-only' %>
-          <%= f.collection_select :ticket_priority_id_eq, @project.ticket_priorities, :id, :priority,
-                                  {include_blank: I18n.t("ransack.blank"), prompt: I18n.t("ticket.item.priority") }, class: 'form-control' %>
+          <div class='row'>
+            <div class='col-sm-offset-2 col-sm-8'>
+              <%= f.label :status_id_eq, class: 'sr-only' %>
+              <%= f.collection_select :ticket_status_id_eq, @project.ticket_statuses, :id, :status,
+                                      {include_blank: I18n.t("ransack.blank"), prompt: I18n.t("ticket.item.status")}, class: 'form-control' %>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-sm-offset-2 col-sm-8'>
+              <%= f.label :priority_id_eq, class: 'sr-only' %>
+              <%= f.collection_select :ticket_priority_id_eq, @project.ticket_priorities, :id, :priority,
+                                      {include_blank: I18n.t("ransack.blank"), prompt: I18n.t("ticket.item.priority") }, class: 'form-control' %>
+            </div>
+          </div>
         </div>
       <% end %>
 
       <div class='form-group'>
-        <%= f.label :due_on %>
-        <%= f.date_field :due_on_gteq, include_blank: true, class: 'form-control' %><span>~</span>
-        <%= f.date_field :due_on_lteq, include_blank: true, class: 'form-control' %>
+        <div class='form-inline'>
+          <div class='row'>
+            <div class='col-sm-3 text-right'>
+              <%= f.label :due_on %>
+            </div>
+            <div class='col-sm-9'>
+              <%= f.date_field :due_on_gteq, include_blank: true, class: 'form-control' %>
+              <span>~</span>
+              <%= f.date_field :due_on_lteq, include_blank: true, class: 'form-control' %>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+      <div class='row'>
+        <div class='col-sm-offset-4 col-sm-3'>
+          <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+        </div>
+      </div>
     <% end %>
   </div>
 </div>
