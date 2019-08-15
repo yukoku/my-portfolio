@@ -46,6 +46,7 @@ ja:
       index: 'プロジェクトメンバー'
     tickets:
       create: 'チケットを作成する'
+      count: 'チケット数'
   ticket:
     title:
       new: '新しいチケットを作成する'

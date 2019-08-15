@@ -46,6 +46,7 @@ en:
       index: 'Project member'
     tickets:
       create: 'create new ticket'
+      count: 'number of tickets'
   ticket:
     title:
       new: 'New'
