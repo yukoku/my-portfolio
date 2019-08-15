@@ -5,16 +5,16 @@ class ProjectsController < ApplicationController
 
   def index
     if current_user.admin?
-      @projects = Project.includes(:owners).page(params[:page]).per(PER)
+      @projects = Project.includes(:owners).order(:due_on).page(params[:page]).per(PER)
     else
-      @projects = current_user.projects.includes(:owners).page(params[:page]).per(PER)
+      @projects = current_user.projects.includes(:owners).order(:due_on).page(params[:page]).per(PER)
     end
   end
 
   def show
     @project ||= Project.find(params[:id])
     if @project
-      @search = @project.tickets.ransack(params[:q])
+      @search = @project.tickets.order(:due_on).ransack(params[:q])
       @tickets = @search.result.page(params[:page]).per(PER)
     else
       redirect_to root_path
