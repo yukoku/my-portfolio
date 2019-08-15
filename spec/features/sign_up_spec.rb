@@ -14,7 +14,7 @@ RSpec.feature "SignUp", type: :feature do
     user = FactoryBot.build(:user)
     visit root_path
 
-    within ".sign-in" do
+    within ".jumbotron" do
       click_link I18n.t("common_layout.header.sign_up")
     end
     form_label = "activerecord.attributes.user"
@@ -39,7 +39,7 @@ RSpec.feature "SignUp", type: :feature do
     click_button I18n.t("users.sessions.new.sign_in")
     expect(page).to have_content I18n.t("users.sessions.signed_in")
 
-    within ".sign-in" do
+    within ".jumbotron" do
       click_link I18n.t("users.sessions.new.sign_out")
     end
     expect(page).to have_content I18n.t("users.sessions.signed_out")

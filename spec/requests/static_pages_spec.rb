@@ -11,10 +11,5 @@ RSpec.describe "StaticPages", type: :request do
       get '/about'
       expect(response).to have_http_status(200)
     end
-
-    it "responds successfully from help" do
-      get '/help'
-      expect(response).to have_http_status(200)
-    end
   end
 end
