@@ -1,50 +1,75 @@
 <% breadcrumb :project, @project %>
 <% provide(@project.name) %>
 <div class="row">
-  <aside class="col-md-2">
+  <aside class="col-lg-4">
     <section class="project-info">
-      <h1>
-        <%= @project.name %>
-      </h1>
-    </section>
-    <section>
-      <p><%= t("activerecord.attributes.project.description") %></p>
-      <%= @project.description %>
-    </section>
-    <section>
-      <p><%= t("activerecord.attributes.project.due_on") %></p>
-      <%= @project.due_on %>
-    </section>
-    <p><%= link_to t("project.tickets.create"), new_project_ticket_path(@project) %></p>
-  </aside>
-  <div class="col-md-8">
-    <section class="ticket-items">
-      <ul>
-        <h2><%= t("project.title.show.tickets") %></h4>
-        <% provide(:button_text, t("ransack.search")) %>
-        <% provide(:link_to, project_path(@project)) %>
-        <% provide(:search_button_offset, "8") %>
-        <%= render 'tickets/search_form'%>
-
-        <% @tickets.each do |ticket| %>
-          <ul>
-            <%= link_to ticket.title, project_ticket_path(@project, ticket) %>
-            <p><%= ticket.description %></p>
-          </ul>
-        <% end %>
-        <div class='pagination-items'>
-          <%= paginate @tickets %>
+      <div class='panel panel-default'>
+        <div class='panel-heading'>
+          <h1><%= @project.name %></h1>
+          <div class='text-right'>
+            <%= I18n.t("ticket.item.due_on") + " : "+ @project.due_on.to_s %>
+          </div>
         </div>
-      </ul>
+        <p><%= t("activerecord.attributes.project.description") %></p>
+        <%= simple_format(h(@project.description)) %>
+      </div>
+      <% if @project.owners.include?(current_user) || current_user.admin? %>
+        <div class='text-right'>
+          <strong><%= link_to t("project.crud.edit"), edit_project_path(@project) %></strong>
+          <span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>
+          <strong><%= link_to t("project.crud.delete"), @project, method: :delete, data: { confirm: t("project.crud.confirm_delete") } %></strong>
+          <span class='glyphicon glyphicon-trash' aria-hidden='true'></span></th>
+        </div>
+      <% end %>
+    </section>
+  </aside>
+
+  <div class="col-lg-6">
+    <section class="ticket-items">
+      <h2><%= t("project.title.show.tickets") %></h2>
+      <div class='text-center'>
+        <button class='btn btn-info active' type='button'>
+          <%= I18n.t("project.tickets.count") %>
+          <span class='badge'>
+            <%= @project.tickets.count %>
+          </span>
+        </button>
+        <%= link_to t("project.tickets.create"), new_project_ticket_path(@project) %>
+        <span class='glyphicon glyphicon-plus'></span>
+      </div>
+      <br />
+      <% provide(:button_text, t("ransack.search")) %>
+      <% provide(:link_to, project_path(@project)) %>
+      <% provide(:search_button_offset, "8") %>
+      <%= render 'tickets/search_form'%>
+      <br />
+
+      <% @tickets.each do |ticket| %>
+        <ul class='list-group'>
+          <li class='list-group-item'>
+            <%= link_to ticket.title, project_ticket_path(@project, ticket) %>
+            <p><%= simple_format(h(ticket.description.truncate(30))) %></p>
+          </li>
+        </ul>
+      <% end %>
+      <div class='pagination-items'>
+        <%= paginate @tickets %>
+      </div>
     </section>
   </div>
-  <div class="col-md-2">
+
+  <div class="col-lg-2">
     <h2><%= I18n.t("project.project_member.index") %></h2>
-    <% @project.project_members.where(accepted_project_invitation: true).includes(:user).each do |project_member| %>
-      <ul><%= project_member.user.name %></ul>
-    <% end %>
-    <% if @project.owners.include?(current_user) %>
-      <%= link_to t("project.project_member.create"), new_user_invitation_path(project_id: @project) %>
-    <% end %>
+    <div class='text-center'>
+      <% @project.project_members.where(accepted_project_invitation: true).includes(:user).each do |project_member| %>
+        <ul>
+          <%= link_to project_member.user.name, user_path(project_member.user) %>
+        </ul>
+      <% end %>
+      <% if @project.owners.include?(current_user) %>
+        <%= link_to t("project.project_member.create"), new_user_invitation_path(project_id: @project) %>
+        <span class='glyphicon glyphicon-plus'></span>
+      <% end %>
+    </div>
   </div>
 </div>

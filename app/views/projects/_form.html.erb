@@ -1,14 +1,22 @@
-<%= form_for(@project, url: yield(:link_to)) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
+<div class='row'>
+  <div class='col-sm-offset-3 col-sm-6 well'>
+    <%= form_for(@project, url: yield(:link_to)) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
 
-  <%= f.label :name %>
-  <%= f.text_field :name, class: 'form-control' %>
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
 
-  <%= f.label :description %>
-  <%= f.text_area :description, class: 'form-control' %>
+      <%= f.label :description %>
+      <%= f.text_area :description, class: 'form-control', rows: 6 %>
 
-  <%= f.label :due_on %>
-  <%= f.date_field :due_on, value: (f.object.due_on || Time.now.strftime("%Y-%m-%d")), class: 'form-control' %>
+      <%= f.label :due_on %>
+      <%= f.date_field :due_on, value: (f.object.due_on || Time.now.strftime("%Y-%m-%d")), class: 'form-control' %>
 
-  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
-<% end %>
+      <div class='row'>
+        <div class='col-sm-offset-4 col-sm-4'>
+          <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

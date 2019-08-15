@@ -3,18 +3,4 @@
 <% provide(:button_text, t("helpers.submit.create")) %>
 <% provide(:link_to, projects_path) %>
 <h2><%= t("project.title.new") %></h2>
-
-<%= form_for(@project) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-
-  <%= f.label :name %>
-  <%= f.text_field :name, class: 'form-control' %>
-
-  <%= f.label :description %>
-  <%= f.text_area :description, class: 'form-control' %>
-
-  <%= f.label :due_on %>
-  <%= f.date_field :due_on, value: Time.now.strftime("%Y-%m-%d"), class: 'form-control' %>
-
-  <%= f.submit t("helpers.submit.create"), class: "btn btn-primary" %>
-<% end %>
+<%= render 'form'%>

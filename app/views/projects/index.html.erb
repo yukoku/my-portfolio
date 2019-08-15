@@ -2,22 +2,36 @@
 <% provide(:title, t('project.title.index')) %>
 <h2><%= t('project.title.index') %></h2>
 <% @projects.each do |project| %>
-  <div class="row">
-    <ol>
-    <div class="col-xs-10">
-      <%= link_to project.name, project %>
-      <p class="project-description"><%= simple_format(project.description) %></p>
-    </div>
-    <div class="col-xs-2">
-      <p class="project-due-on"><%= "#{t("activerecord.attributes.project.due_on")}:#{project.due_on}" %></p>
-      <% if project.owners.include?(current_user) || current_user.admin? %>
-        <div id="owner-selection-<%= project.id%>">
-          <%= link_to t("project.crud.edit"), edit_project_path(project) %>
-          <%= link_to t("project.crud.delete"), project, method: :delete, data: { confirm: t("project.crud.confirm_delete") } %>
+  <div class='panel panel-default'>
+    <div class='panel-heading'>
+      <div class='row'>
+        <div class='col-sm-3'>
+          <button class='btn btn-info active' type='button'>
+            <%= I18n.t("project.tickets.count") %>
+            <span class='badge'>
+              <%= project.tickets.count %>
+            </span>
+          </button>
         </div>
-      <% end %>
+        <div class='col-sm-6'>
+          <h2><%= link_to project.name, project %></h2>
+        </div>
+        <div class='col-sm-3 text-right'>
+          <p class="project-due-on"><%= "#{t("activerecord.attributes.project.due_on")}:#{project.due_on}" %></p>
+          <% if project.owners.include?(current_user) || current_user.admin? %>
+            <div id="owner-selection-<%= project.id%>">
+              <strong><%= link_to t("project.crud.edit"), edit_project_path(project) %></strong>
+              <span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>
+              <strong><%= link_to t("project.crud.delete"), project, method: :delete, data: { confirm: t("project.crud.confirm_delete") } %></strong>
+              <span class='glyphicon glyphicon-trash' aria-hidden='true'></span></th>
+            </div>
+          <% end %>
+        </div>
       </div>
-    </ol>
+    </div>
+    <div class='panel-body'>
+      <p class="project-description"><%= simple_format(h(project.description)) %></p>
+    </div>
   </div>
 <% end %>
 <div class='pagination-items'>
