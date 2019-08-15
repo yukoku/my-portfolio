@@ -86,3 +86,18 @@ en:
       normal: 'normal'
       low: 'low'
       very_low: 'very low'
+  comment:
+    placeholder: 'write a comment'
+    title:
+      index: "Comments"
+      new: "Add new comment"
+      edit: "Edit comment"
+    crud:
+      create: "comment"
+      edit: "edit"
+      delete: "delete"
+      confirm_delete: 'Are you sure you want to delete this comment?'
+      flash:
+        created: 'New comment has been created'
+        updated: 'Comment has been updated'
+        deleted: 'Comment has been deleted'

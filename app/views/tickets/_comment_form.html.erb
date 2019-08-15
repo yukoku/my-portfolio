@@ -1,8 +1,10 @@
-<%= form_for(@comment, url: yield(:link_to)) do |f| %>
+<%= form_for(@comment, url: yield(:link_to), class: 'form-inline') do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
-  <%= f.label :content %>
-  <%= f.text_area :content, class: 'form-control input-lg' %>
+  <div class='form-group'>
+    <%= f.label :content, class: 'sr-only' %>
+    <%= f.text_area :content, class: 'form-control', rows: 5, placeholder: I18n.t("comment.placeholder") %>
+  </div>
 
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>

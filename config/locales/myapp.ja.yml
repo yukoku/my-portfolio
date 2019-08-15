@@ -87,6 +87,7 @@ ja:
       low: '低い'
       very_low: 'とても低い'
   comment:
+    placeholder: 'コメントを書く'
     title:
       index: "コメント一覧"
       new: "新しいコメントを追加する"
