@@ -5,7 +5,6 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     invitations: 'users/invitations'
   }
-  get '/help', to: 'static_pages#help'
   get '/about', to: 'static_pages#about'
   resources :users, only: %i[index show destroy], controller: 'users/users'
   resources :projects do
