@@ -1,6 +1,10 @@
 <ul class="nav nav-tabs">
-   <li><%= link_to t("project.header.top"), projects_path %></li>
-   <li><%= link_to t("project.header.new_project"), new_project_path %></li>
-   <li><%= link_to t("ticket.header.top"), tickets_path(current_user.id) %></li>
-   <li><%= link_to t("user.header.top"), users_path %></li>
+  <% [{ path: new_project_path, label: t("project.header.new_project") },
+      { path: projects_path, label: t("project.header.top") },
+      { path: tickets_path(current_user.id), label: t("ticket.header.top") },
+      { path: users_path, label: t("user.header.top") } ].each do |item| %>
+      <li class=<%= current_page?(item[:path]) ? "active":nil %>>
+         <%= link_to item[:label], item[:path] %>
+      </li>
+   <% end %>
 </ul>
