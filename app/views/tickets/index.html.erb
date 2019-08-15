@@ -11,8 +11,13 @@
     <div class='panel panel-default'>
       <div class='panel-heading'>
         <div class='row'>
-          <div class='col-sm-9'>
-            <%= link_to ticket.title, project_ticket_path(ticket.project_id, ticket) %>
+          <div class='col-sm-2'>
+            <span class='label label-info'>
+              <%= link_to ticket.project.name, project_path(ticket.project_id), class: 'text-muted project-label-text' %>
+            </span>
+          </div>
+          <div class='col-sm-6 text-center'>
+            <strong><%= link_to ticket.title, project_ticket_path(ticket.project_id, ticket) %></strong>
           </div>
           <div class='col-sm-3 text-right'>
             <%= I18n.t("ticket.item.due_on") + " : "+ ticket.due_on.to_s %>
