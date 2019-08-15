@@ -304,3 +304,18 @@ span.picture {
     display: flex;
     flex-wrap: wrap;
 }
+
+.jumbotron {
+  background-image: url("adults-analysis-brainstorming-1661004_censored.jpg");
+  background-size: cover;
+  background-position: center 60%;
+  height: 600px;
+  color: white;
+  h1 {
+    font-size: 120px;
+  }
+  h3 {
+    padding: 50px 0;
+    font-size: 40px;
+  }
+}
