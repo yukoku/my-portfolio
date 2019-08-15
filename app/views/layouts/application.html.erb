@@ -9,7 +9,7 @@
   <body>
     <%= render 'layouts/header' %>
     <div class="container">
-      <%= breadcrumbs style: :bootstrap %>
+      <%= render 'layouts/breadcrumbs' %>
       <% if user_signed_in? %>
         <%= render "layouts/tab" %>
       <% end %>
