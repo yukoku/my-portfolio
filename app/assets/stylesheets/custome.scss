@@ -319,3 +319,16 @@ span.picture {
     font-size: 40px;
   }
 }
+
+.user-info {
+  text-align: center;
+  .gravatar {
+    float: none;
+  }
+  .thumbnail {
+    height: 200px;
+  }
+  .caption {
+    font-size: 20px;
+  }
+}

@@ -4,25 +4,26 @@
 <div class='pagination-items'>
   <%= paginate @users%>
 </div>
-<% @users.each do |user| %>
   <div class="row">
-    <ol>
-    <div class="col-xs-10">
-      <ol>
-        <%= link_to(gravatar_for(user), user_path(user)) %>
-        <%= link_to user.name, user_path(user) %>
-      </ol>
-    </div>
-    <div class="col-xs-2">
-      <% if current_user.admin? && current_user != user %>
-        <div>
-          <%= link_to t("user.crud.delete"), user, method: :delete, data: { confirm: t("user.crud.confirm_delete") } %>
-        </div>
+    <ul class='media-list'>
+      <% @users.each do |user| %>
+        <li class='media'>
+          <div class="col-xs-10">
+            <%= link_to(gravatar_for(user), user_path(user), class: 'media-left')%>
+            <div class='media-body'>
+              <%= link_to user.name, user_path(user), class: 'media-heading' %>
+            </div>
+          </div>
+          <div class="col-xs-2">
+            <% if current_user.admin? && current_user != user %>
+              <%= link_to t("user.crud.delete"), user, method: :delete, data: { confirm: t("user.crud.confirm_delete") } %>
+              <span class='glyphicon glyphicon-trash'></span>
+            <% end %>
+          </div>
+        </li>
       <% end %>
-      </div>
-    </ol>
+    </ul>
   </div>
-<% end %>
 <div class='pagination-items'>
   <%= paginate @users%>
 </div>
