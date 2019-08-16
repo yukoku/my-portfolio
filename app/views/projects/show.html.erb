@@ -66,10 +66,6 @@
           <%= link_to project_member.user.name, user_path(project_member.user) %>
         </ul>
       <% end %>
-      <% if @project.owners.include?(current_user) %>
-        <%= link_to t("project.project_member.create"), new_user_invitation_path(project_id: @project) %>
-        <span class='glyphicon glyphicon-plus'></span>
-      <% end %>
     </div>
   </div>
 </div>

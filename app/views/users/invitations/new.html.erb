@@ -1,4 +1,4 @@
-<% breadcrumb :project_invitation, @invited_project %>
+<% breadcrumb :user_invitation %>
 <h2><%= t "devise.invitations.new.header" %></h2>
 
 <div class='row'>
@@ -12,9 +12,6 @@
           <%= f.text_field field %>
         </div>
       <% end -%>
-      <div class="field">
-        <%= hidden_field :invited_project, :id %>
-      </div>
 
       <div class='row'>
         <div class='col-sm-offset-2 col-sm-8'>

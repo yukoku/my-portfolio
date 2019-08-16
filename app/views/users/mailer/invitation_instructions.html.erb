@@ -1,9 +1,9 @@
 <p><%= t("devise.mailer.invitation_instructions.hello", email: @resource.email) %></p>
 
 <p><%= t("devise.mailer.invitation_instructions.someone_invited_you",
-          project_owner: @resource.invited_by.name, project: @invited_project.name) %></p>
+          user: @resource.invited_by.name) %></p>
 
-<p><%= link_to t("devise.mailer.invitation_instructions.accept"), accept_invitation_url(@resource, invitation_token: @token, project_id: @invited_project.id) %></p>
+<p><%= link_to t("devise.mailer.invitation_instructions.accept"), accept_invitation_url(@resource, invitation_token: @token) %></p>
 
 <% if @resource.invitation_due_at %>
   <p><%= t("devise.mailer.invitation_instructions.accept_until", due_date: l(@resource.invitation_due_at, format: :'devise.mailer.invitation_instructions.accept_until_format')) %></p>

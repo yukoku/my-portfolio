@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   devise_for :users, :controllers => {
     registrations: 'users/registrations',
-    sessions: 'users/sessions',
     invitations: 'users/invitations'
   }
+
   get '/about', to: 'static_pages#about'
   resources :users, only: %i[index show destroy], controller: 'users/users'
   resources :projects do

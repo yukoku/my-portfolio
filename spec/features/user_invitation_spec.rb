@@ -10,14 +10,13 @@ RSpec.feature "UserInvitation", type: :feature do
     body[/http[^"]+/]
   end
 
-  scenario "invite user to ownered project" do
+  scenario "invite user to my application" do
     user = FactoryBot.create(:user)
-    ownered_project = user.projects.first
     user.confirm
     sign_in user
 
-    visit project_path(ownered_project)
-    click_link I18n.t("project.project_member.create")
+    visit root_path
+    click_link I18n.t("devise.invitations.new.header")
 
     invite_user = FactoryBot.build(:user)
     form_label = "activerecord.attributes.user"
@@ -38,6 +37,5 @@ RSpec.feature "UserInvitation", type: :feature do
     fill_in I18n.t("#{form_label}.password_confirmation"), with: invite_user.password
     click_button I18n.t("devise.invitations.edit.submit_button")
     expect(page).to have_content I18n.t("devise.invitations.updated")
-    expect(page).to have_content ownered_project.name
   end
 end

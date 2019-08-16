@@ -3,7 +3,7 @@ class Users::UsersController < ApplicationController
   PER = 10
 
   def index
-    @users = User.page(params[:page]).per(PER)
+    @users = User.where.not(confirmed_at: nil).page(params[:page]).per(PER)
   end
 
   def show

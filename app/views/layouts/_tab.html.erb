@@ -2,7 +2,8 @@
   <% [{ path: new_project_path, label: t("project.header.new_project") },
       { path: projects_path, label: t("project.header.top") },
       { path: tickets_path(current_user.id), label: t("ticket.header.top") },
-      { path: users_path, label: t("user.header.top") } ].each do |item| %>
+      { path: users_path, label: t("user.header.top") },
+      { path: new_user_invitation_path, label: t("devise.invitations.new.header") } ].each do |item| %>
       <li class=<%= current_page?(item[:path]) ? "active":nil %>>
          <%= link_to item[:label], item[:path] %>
       </li>

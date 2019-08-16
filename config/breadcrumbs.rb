@@ -10,6 +10,10 @@ crumb :projects do
   link "Projects", projects_path
 end
 
+crumb :user_invitation do
+  link "Invitation", new_user_invitation_path
+end
+
 crumb :user do |user|
   link user.name || "New user", user
   parent :users
