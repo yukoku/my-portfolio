@@ -46,8 +46,7 @@ owners.each do |owner|
   description = Faker::Lorem.sentence
   project_name = "#{owner.name}'s project"
   project = owner.projects.create!(name: project_name, description: description, due_on: 1.year.after)
-  owner.project_members.last.update!(accepted_project_invitation: true, has_sent_message: true)
-  owner.project_owners.create!(project_id: project.id)
+  owner.project_members.last.update!(accepted_project_invitation: true, owner: true)
 end
 
 # add project members and create tickets
@@ -55,10 +54,9 @@ Project.all.each do |project|
   project_members = members.sample(8)
   project_members.each do |member|
     project.project_members.create!(user_id: member.id,
-                                    accepted_project_invitation: true,
-                                    has_sent_message: true)
+                                    accepted_project_invitation: true)
   end
-  project_members << project.owners.first
+  project_members << project.project_members.where(owner: true).first
 
   30.times do |n|
     ticket_attributes = {}

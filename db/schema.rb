@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_14_061341) do
+ActiveRecord::Schema.define(version: 2019_08_17_082453) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -49,21 +49,11 @@ ActiveRecord::Schema.define(version: 2019_08_14_061341) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "accepted_project_invitation", default: false
-    t.boolean "has_sent_message", default: false
     t.string "project_invitation_token"
+    t.boolean "owner", default: false
     t.index ["project_id"], name: "index_project_members_on_project_id"
     t.index ["project_invitation_token"], name: "index_project_members_on_project_invitation_token", unique: true
     t.index ["user_id"], name: "index_project_members_on_user_id"
-  end
-
-  create_table "project_owners", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "project_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["project_id", "user_id"], name: "index_project_owners_on_project_id_and_user_id"
-    t.index ["project_id"], name: "index_project_owners_on_project_id"
-    t.index ["user_id"], name: "index_project_owners_on_user_id"
   end
 
   create_table "projects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -144,8 +134,6 @@ ActiveRecord::Schema.define(version: 2019_08_14_061341) do
   add_foreign_key "comments", "users"
   add_foreign_key "project_members", "projects"
   add_foreign_key "project_members", "users"
-  add_foreign_key "project_owners", "projects"
-  add_foreign_key "project_owners", "users"
   add_foreign_key "ticket_attributes", "projects"
   add_foreign_key "ticket_priorities", "projects"
   add_foreign_key "ticket_statuses", "projects"

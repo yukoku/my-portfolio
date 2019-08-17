@@ -5,15 +5,16 @@ class ProjectsController < ApplicationController
 
   def index
     if current_user.admin?
-      @projects = Project.includes(:owners).order(:due_on).page(params[:page]).per(PER)
+      @projects = Project.joins(:project_members).includes(:project_members).order(:due_on).page(params[:page]).per(PER)
     else
-      @projects = current_user.projects.includes(:owners).order(:due_on).page(params[:page]).per(PER)
+      @projects = current_user.projects.joins(:project_members).includes(:project_members).order(:due_on).page(params[:page]).per(PER)
     end
   end
 
   def show
     @project ||= Project.find(params[:id])
     if @project
+      @project_owners = @project.project_members.where(owner: true)
       @search = @project.tickets.order(:due_on).ransack(params[:q])
       @tickets = @search.result.page(params[:page]).per(PER)
     else
@@ -30,8 +31,7 @@ class ProjectsController < ApplicationController
     if @project.save
       # プロジェクトオーナーは自動的にプロジェクトユーザーに追加する
       current_user.project_members.create(project_id: @project.id,
-                                        accepted_project_invitation: true, has_sent_message: true)
-      current_user.project_owners.create(project_id: @project.id)
+                                        accepted_project_invitation: true, owner: true)
       flash[:info] = I18n.t("project.crud.flash.created")
       redirect_to projects_path
     else

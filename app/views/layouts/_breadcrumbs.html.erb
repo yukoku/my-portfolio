@@ -1,5 +1,5 @@
 <!-- bootstrap適用かつhome iconを表示するためにgretelを手動で設定-->
-<% breadcrumbs do |links| %>
+<% breadcrumbs.tap do |links| %>
   <% if links.any? %>
     <ol class='breadcrumb'>
     <li><span class='glyphicon glyphicon-home' aria-hidden='true'></span></li>

@@ -1,8 +1,6 @@
 class Project < ApplicationRecord
   has_many :project_members, dependent: :destroy
   has_many :users, through: :project_members
-  has_many :project_owners, dependent: :destroy
-  has_many :owners, through: :project_owners, source: :user
   has_many :tickets, dependent: :destroy
   has_many :ticket_attributes, dependent: :destroy
   has_many :ticket_priorities, dependent: :destroy

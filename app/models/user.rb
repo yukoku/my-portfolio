@@ -6,8 +6,6 @@ class User < ApplicationRecord
 
   has_many :project_members, dependent: :destroy
   has_many :projects, through: :project_members
-  has_many :project_owners, dependent: :destroy
-  has_many :owned_projects, through: :project_owners, source: :project
   has_many :assigned_tickets, class_name: "Ticket", foreign_key: "assignee_id"
   has_many :created_tickets, class_name: "Ticket", foreign_key: "creator_id"
   has_many :comments

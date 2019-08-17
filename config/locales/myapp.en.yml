@@ -68,6 +68,7 @@ en:
           some_error: "You fail to join the project"
           invalid_token: 'Invalid authentication token'
           already_accepted: 'You already join the project'
+          deleted: 'Omitted user from this project'
     tickets:
       create: 'create new ticket'
       count: 'number of tickets'

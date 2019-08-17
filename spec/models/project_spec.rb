@@ -5,8 +5,6 @@ RSpec.describe Project, type: :model do
     describe "has_many" do
       it { is_expected.to have_many(:project_members).dependent(:destroy) }
       it { is_expected.to have_many(:users).through(:project_members) }
-      it { is_expected.to have_many(:project_owners).dependent(:destroy) }
-      it { is_expected.to have_many(:owners).through(:project_owners) }
       it { is_expected.to have_many(:tickets).dependent(:destroy) }
       it { is_expected.to have_many(:ticket_attributes).dependent(:destroy) }
       it { is_expected.to have_many(:ticket_priorities).dependent(:destroy) }

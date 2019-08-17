@@ -11,7 +11,6 @@ FactoryBot.define do
 
     after(:create) do |user|
       project = create(:project)
-      create(:project_owner, user: user, project: project)
       create(:project_member, user: user, project: project)
       ticket = create(:ticket, assignee: user, creator: user, project: project,
                        ticket_attribute: project.ticket_attributes.first,

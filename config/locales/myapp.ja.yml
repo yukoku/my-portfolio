@@ -35,7 +35,7 @@ ja:
     header:
       top: 'プロジェクト一覧'
       new_project: '新しいプロジェクト'
-      new_member: 'プロジェクトメンバーを招待する'
+      new_member: 'プロジェクトメンバーに招待する'
     crud:
       edit: '編集'
       delete: '削除'
@@ -68,6 +68,7 @@ ja:
           some_error: "プロジェクトの参加に失敗しました。"
           invalid_token: '認証トークンが不正です'
           already_accepted: 'すでにプロジェクトに参加しています'
+          deleted: 'プロジェクトメンバーから除外しました'
     tickets:
       create: 'チケットを作成する'
       count: 'チケット数'

@@ -1,6 +1,5 @@
 class ProjectMembersController < ApplicationController
   before_action :project_owner, only: %i[new create destroy]
-  skip_before_action :authenticate_user!, only: %i[edit update]
   before_action :confirm_token, only: %i[edit]
   before_action :already_accepted, only: %i[update]
 
@@ -49,7 +48,7 @@ class ProjectMembersController < ApplicationController
   def destroy
     ProjectMember.find(params[:id]).destroy
     @project = Project.find(params[:project_id])
-    flash[:success] = I18n.t("project.crud.flash.deleted")
+    flash[:success] = I18n.t("project.project_member.invitation.flash.deleted")
     redirect_to project_path(@project)
   end
 
@@ -60,7 +59,7 @@ private
 
   def project_owner
     @project = Project.find(params[:project_id])
-    redirect_to(root_url) unless @project&.owners.include?(current_user) || current_user.admin?
+    redirect_to(root_url) unless @project&.project_members.where(user_id: current_user.id).first.owner || current_user.admin?
   end
 
   def encript_token(token)

@@ -5,8 +5,6 @@ RSpec.describe User, type: :model do
     describe "has_many" do
       it { is_expected.to have_many(:project_members).dependent(:destroy) }
       it { is_expected.to have_many(:projects).through(:project_members) }
-      it { is_expected.to have_many(:project_owners).dependent(:destroy) }
-      it { is_expected.to have_many(:owned_projects).through(:project_owners).source(:project) }
       it { is_expected.to have_many(:assigned_tickets).class_name("Ticket") }
       it { is_expected.to have_many(:created_tickets).class_name("Ticket") }
       it { is_expected.to have_many(:comments) }
