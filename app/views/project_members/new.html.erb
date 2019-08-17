@@ -1,0 +1,6 @@
+<% breadcrumb :project_member, @project %>
+<% provide(:title, t("project.title.new_member", project_name: @project.name)) %>
+<% provide(:button_text, t("project.project_member.invitation.invite")) %>
+<% provide(:link_to, project_members_path(@project)) %>
+<h2><%= t("project.title.new_member", project_name: @project.name) %></h2>
+<%= render 'project_members/form' %>

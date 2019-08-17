@@ -66,6 +66,7 @@
           <%= link_to project_member.user.name, user_path(project_member.user) %>
         </ul>
       <% end %>
+      <%= link_to I18n.t("project.header.new_member"), new_project_member_path(@project) %>
     </div>
   </div>
 </div>

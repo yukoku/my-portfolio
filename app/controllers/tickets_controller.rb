@@ -16,10 +16,10 @@ class TicketsController < ApplicationController
 
   def index
     if current_user.admin?
-      @search = Ticket.order(:due_on).ransack(params[:q])
+      @search = Ticket.includes(:project).order(:due_on).ransack(params[:q])
       @tickets = @search.result.page(params[:page]).per(PER)
     else
-      @search = Ticket.where(assignee_id: current_user.id).order(:due_on).ransack(params[:q])
+      @search = Ticket.includes(:project).where(assignee_id: current_user.id).order(:due_on).ransack(params[:q])
       @tickets = @search.result.page(params[:page]).per(PER)
     end
   end

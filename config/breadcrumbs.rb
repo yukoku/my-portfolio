@@ -29,8 +29,8 @@ crumb :project_ticket do |project, ticket|
   parent :project, project
 end
 
-crumb :project_invitation do |project|
-  link "Invitation", new_user_invitation_path
+crumb :project_member do |project|
+  link "Invitation", new_project_member_path
   parent :project, project
 end
 

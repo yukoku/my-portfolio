@@ -1,0 +1,8 @@
+<p><%= t("project.project_member.invitation.mail.instructions.hello", invitee: @invitee.name) %></p>
+
+<p><%= t("project.project_member.invitation.mail.instructions.owner_invited_you",
+          inviter: @inviter.name, project: @project.name) %></p>
+
+<p><%= link_to t("project.project_member.invitation.mail.instructions.accept"), accept_project_invitation_url(@project, @project_member, invitation_token: @raw_token) %></p>
+
+<p><%= t("project.project_member.invitation.mail.instructions.ignore") %></p>

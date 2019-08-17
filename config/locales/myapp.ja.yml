@@ -30,9 +30,12 @@ ja:
       index: '参加しているプロジェクト'
       show:
         tickets: 'チケット一覧'
+      new_member: '%{project_name}に招待する'
+      confirm_member : '%{project_name}プロジェクトに参加する'
     header:
       top: 'プロジェクト一覧'
       new_project: '新しいプロジェクト'
+      new_member: 'プロジェクトメンバーを招待する'
     crud:
       edit: '編集'
       delete: '削除'
@@ -41,9 +44,30 @@ ja:
         created: '新しいプロジェクトが作成されました。'
         updated: 'プロジェクトを更新しました。'
         deleted: 'プロジェクトを削除しました。'
+        invited: '%{user}さんをプロジェクトに招待しました。'
     project_member:
       create: 'ユーザーを追加'
       index: 'プロジェクトメンバー'
+      invitation:
+        invite: '招待する'
+        join: '参加する'
+        confirm_accept: 'このプロジェクトに参加する場合はボタンを押してください'
+        item:
+          project_name: 'プロジェクト名'
+        mail:
+          subject: '%{user}さんから%{project}プロジェクトに招待されています'
+          instructions:
+            hello: "こんにちは、%{invitee}さん"
+            owner_invited_you: "%{inviter}さんが%{project}プロジェクトに招待しました。以下のリンクから承認できます。"
+            accept: "招待を承認する"
+            ignore: "招待を承認しない場合は、このメールを無視してください。"
+        errors:
+          already_invited_or_not_selected: 'ユーザーが選択されていないか、すでにプロジェクトのメンバーです'
+        flash:
+          success: '%{project}プロジェクトに参加しました。'
+          some_error: "プロジェクトの参加に失敗しました。"
+          invalid_token: '認証トークンが不正です'
+          already_accepted: 'すでにプロジェクトに参加しています'
     tickets:
       create: 'チケットを作成する'
       count: 'チケット数'

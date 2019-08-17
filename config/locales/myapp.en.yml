@@ -30,9 +30,12 @@ en:
       index: 'Projects'
       show:
         tickets: 'tickets'
+      new_member: 'invite to %{project_name}'
+      confirm_member : 'join to %{project_name} project'
     header:
       top: 'project top'
       new_project: 'new project'
+      new_member: 'invite new project member'
     crud:
       edit: 'edit'
       delete: 'delete'
@@ -41,9 +44,30 @@ en:
         created: 'New project has been created'
         updated: 'Project has been updated'
         deleted: 'Project has been deleted'
+        invited: 'invite %{user} to your project'
     project_member:
       create: 'add member'
       index: 'Project member'
+      invitation:
+        invite: 'invite'
+        join: 'join'
+        confirm_accept: 'if you join this project, click the button.'
+        item:
+          project_name: 'Project name'
+        mail:
+          subject: '%{user} invited you to %{project} project'
+          instructions:
+            hello: "Hello,%{invitee}"
+            owner_invited_you: "%{inviter} has invited you to %{project} project, you can accept it through the link below."
+            accept: "Accept invitation"
+            ignore: "If you don't want to accept the invitation, please ignore this email. Your account won't be created until you access the link above and set your password."
+        errors:
+          already_invited_or_not_selected: 'User is not selected, or already invited to project'
+        flash:
+          success: 'You join the %{project}プロジェクト'
+          some_error: "You fail to join the project"
+          invalid_token: 'Invalid authentication token'
+          already_accepted: 'You already join the project'
     tickets:
       create: 'create new ticket'
       count: 'number of tickets'

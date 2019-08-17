@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/about', to: 'static_pages#about'
   resources :users, only: %i[index show destroy], controller: 'users/users'
   resources :projects do
+    resources :members, only: %i[new create edit update destroy], controller: 'project_members'
     resources :tickets, except: :index do
       delete 'destroy_attached_file', on: :member
       resources :comments, only: %i[create destroy]
