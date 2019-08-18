@@ -16,9 +16,16 @@
 
 if ENV['RAILS_ENV'] == 'test'
   require 'simplecov'
-
-  SimpleCov.start 'rails'
+  SimpleCov.start 'rails' do
+    add_filter [
+      'app/channels/',
+      'app/controllers/users/devise_invite_mailer.rb',
+      'app/models/application_record.rb',
+      'app/jobs/']
+  end
+  puts "required simplecov"
 end
+
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
