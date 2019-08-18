@@ -43,9 +43,6 @@
       ],
       "/home/yukoku/work/myportfolio/app/helpers/project_members_helper.rb": [
         1,
-        1,
-        0,
-        null,
         null
       ],
       "/home/yukoku/work/myportfolio/app/helpers/projects_helper.rb": [
@@ -605,6 +602,6 @@
         null
       ]
     },
-    "timestamp": 1566118159
+    "timestamp": 1566118250
   }
 }
