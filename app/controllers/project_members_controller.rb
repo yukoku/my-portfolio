@@ -38,13 +38,9 @@ class ProjectMembersController < ApplicationController
 
   def update
     @project_member = ProjectMember.find(params[:id])
-    if @project_member.update(accepted_project_invitation: true, project_invitation_token: nil)
-      flash[:success] = I18n.t("project.project_member.invitation.flash.success", project: @project_member.project.name)
-      redirect_to project_path(id: @project_member.project_id)
-    else
-      flash[:danger] = I18n.t("project.project_member.invitation.flash.some_error")
-      redirect_to root_url
-    end
+    @project_member.update!(accepted_project_invitation: true, project_invitation_token: nil)
+    flash[:success] = I18n.t("project.project_member.invitation.flash.success", project: @project_member.project.name)
+    redirect_to project_path(id: @project_member.project_id)
   end
 
   def destroy

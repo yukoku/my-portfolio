@@ -12,14 +12,9 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project ||= Project.find(params[:id])
-    if @project
-      @project_owners = @project.project_members.where(owner: true)
-      @search = @project.tickets.order(:due_on).ransack(params[:q])
-      @tickets = @search.result.page(params[:page]).per(PER)
-    else
-      redirect_to root_path
-    end
+    @project_owners = @project.project_members.where(owner: true)
+    @search = @project.tickets.order(:due_on).ransack(params[:q])
+    @tickets = @search.result.page(params[:page]).per(PER)
   end
 
   def new
@@ -30,7 +25,7 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     if @project.save
       # プロジェクトオーナーは自動的にプロジェクトユーザーに追加する
-      current_user.project_members.create(project_id: @project.id,
+      current_user.project_members.create!(project_id: @project.id,
                                         accepted_project_invitation: true, owner: true)
       flash[:info] = I18n.t("project.crud.flash.created")
       redirect_to projects_path
@@ -66,7 +61,7 @@ private
   end
 
   def authenticate_project_member
-    @project = Project.find(params[:id])
+    @project = Project.find_by(id: params[:id])
     redirect_to projects_path if @project&.users.where(id: current_user.id).empty? && !current_user.admin?
   end
 end
