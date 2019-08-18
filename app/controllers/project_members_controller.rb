@@ -57,7 +57,7 @@ private
 
   def project_owner
     @project = Project.find(params[:project_id])
-    redirect_to(root_url) unless @project&.project_members.where(user_id: current_user.id).first.owner || current_user.admin?
+    redirect_to(root_url) unless @project&.project_members.where(user_id: current_user.id).first&.owner || current_user.admin?
   end
 
   def encript_token(token)
