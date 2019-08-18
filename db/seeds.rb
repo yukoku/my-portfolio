@@ -57,10 +57,6 @@ Project.all.each do |project|
                                     accepted_project_invitation: true)
   end
 
-  unless project.users.include?(test_user)
-    project.project_members.create!(user_id: test_user.id, accepted_project_invitation: true)
-    project_members << test_user
-  end
   project_members << project.project_members.where(owner: true).first
 
   30.times do |i|
@@ -74,10 +70,5 @@ Project.all.each do |project|
     ticket_attributes[:ticket_status_id] = project.ticket_statuses.sample.id
     ticket_attributes[:ticket_priority_id] = project.ticket_priorities.sample.id
     ticket = project.tickets.create!(ticket_attributes)
-    5.times do |j|
-      user = project_members.sample
-      content = Faker::Lorem.sentence
-      ticket.comments.create(user_id: user.id, content: content)
-    end
   end
 end
