@@ -43,7 +43,7 @@ members = all_users.slice(5, 45)
 
 # create projects
 owners.each do |owner|
-  description = Faker::Lorem.sentence
+  description = Faker::Lorem.paragraphs.inject { |result, paragraph| result + paragraph + "\n" }
   project_name = "#{owner.name}'s project"
   project = owner.projects.create!(name: project_name, description: description, due_on: 1.year.after)
   owner.project_members.last.update!(accepted_project_invitation: true, owner: true)
@@ -56,18 +56,28 @@ Project.all.each do |project|
     project.project_members.create!(user_id: member.id,
                                     accepted_project_invitation: true)
   end
+
+  unless project.users.include?(test_user)
+    project.project_members.create!(user_id: test_user.id, accepted_project_invitation: true)
+    project_members << test_user
+  end
   project_members << project.project_members.where(owner: true).first
 
-  30.times do |n|
+  30.times do |i|
     ticket_attributes = {}
     ticket_attributes[:title] = Faker::Lorem.sentence
-    ticket_attributes[:description] = Faker::Lorem.paragraph
+    ticket_attributes[:description] = Faker::Lorem.paragraphs.inject { |result, paragraph| result + paragraph +  "\n"}
     ticket_attributes[:due_on] = rand(100).day.after
     ticket_attributes[:assignee_id] = project_members.sample.id
     ticket_attributes[:creator_id] = project_members.sample.id
     ticket_attributes[:ticket_attribute_id] = project.ticket_attributes.sample.id
     ticket_attributes[:ticket_status_id] = project.ticket_statuses.sample.id
     ticket_attributes[:ticket_priority_id] = project.ticket_priorities.sample.id
-    project.tickets.create!(ticket_attributes)
+    ticket = project.tickets.create!(ticket_attributes)
+    5.times do |j|
+      user = project_members.sample
+      content = Faker::Lorem.sentence
+      ticket.comments.create(user_id: user.id, content: content)
+    end
   end
 end
