@@ -2,6 +2,7 @@ en:
   my_app:
     title: 'Team Works'
     description: 'project management tool'
+    caution: "You can sign in as test user"
   common_layout:
     header:
       home: 'Home'

@@ -3,6 +3,7 @@
 <div class='jumbotron text-center'>
   <h1><%= t("my_app.title") %></h1>
   <h3><%= t("my_app.description") %></h3>
+  <p><%= t("my_app.caution") %></p>
   <p>
     <% if user_signed_in? %>
       <%= link_to t("common_layout.header.my_page"), edit_user_registration_path, class: 'btn btn-primary btn-lg active' %>

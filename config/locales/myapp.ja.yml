@@ -1,7 +1,8 @@
 ja:
   my_app:
     title: 'Team Works'
-    description: 'プロジェクト管理ツール'
+    description: "プロジェクト管理ツール"
+    caution: "ログインボタンから、テストユーザーとしてすぐにログインできます"
   common_layout:
     header:
       home: 'Home'
