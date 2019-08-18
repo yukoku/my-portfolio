@@ -3,7 +3,7 @@
     <%= form_for(@project_member, url: yield(:link_to)) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
-      <%= f.label :user, class: 'control-label' %>
+      <%= f.label :new_member, class: 'control-label' %>
       <%= f.collection_select :user_id, @users, :id, :name, {prompt: ""}, class: 'form-control' %>
 
       <div class='row'>

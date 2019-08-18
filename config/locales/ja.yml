@@ -23,6 +23,8 @@ ja:
         attached_files: "添付ファイル"
       comment:
         content: "内容"
+      project_member:
+        new_member: '新しいメンバー'
   date:
     abbr_day_names:
     - 日

@@ -44,7 +44,6 @@ ja:
         created: '新しいプロジェクトが作成されました。'
         updated: 'プロジェクトを更新しました。'
         deleted: 'プロジェクトを削除しました。'
-        invited: '%{user}さんをプロジェクトに招待しました。'
     project_member:
       create: 'ユーザーを追加'
       index: 'プロジェクトメンバー'
@@ -64,9 +63,11 @@ ja:
         errors:
           already_invited_or_not_selected: 'ユーザーが選択されていないか、すでにプロジェクトのメンバーです'
         flash:
+          invited: '%{user}さんをプロジェクトに招待しました。'
           success: '%{project}プロジェクトに参加しました。'
           some_error: "プロジェクトの参加に失敗しました。"
           invalid_token: '認証トークンが不正です'
+          invalid_user: '不正なユーザーです'
           already_accepted: 'すでにプロジェクトに参加しています'
           deleted: 'プロジェクトメンバーから除外しました'
     tickets:

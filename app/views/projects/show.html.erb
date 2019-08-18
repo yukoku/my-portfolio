@@ -63,15 +63,27 @@
     <div class='text-center'>
       <% @project.project_members.where(accepted_project_invitation: true).includes(:user).each do |project_member| %>
         <ul>
-          <%= link_to project_member.user.name, user_path(project_member.user) %>
-          <% if @project_owners.any? { |owner| owner.user_id == current_user.id } %>
-            <strong><%= link_to t("project.crud.delete"), project_member_path(@project, project_member),
-                        method: :delete, data: { confirm: t("project.crud.confirm_delete") } %></strong>
-            <span class='glyphicon glyphicon-trash' aria-hidden='true'></span></th>
-          <% end %>
+          <div id="project-member-list-<%= project_member.id%>">
+            <div class='row'>
+              <div class='col-sm-6'>
+                <%= link_to project_member.user.name, user_path(project_member.user) %>
+              </div>
+              <div class='col-sm-6'>
+                <% if @project_owners.any? { |owner| owner.user_id == current_user.id } %>
+                  <% if project_member.user_id != current_user.id%>
+                    <strong><%= link_to t("project.crud.delete"), project_member_path(@project, project_member),
+                                method: :delete, data: { confirm: t("project.crud.confirm_delete") } %></strong>
+                    <span class='glyphicon glyphicon-trash' aria-hidden='true'></span></th>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
         </ul>
       <% end %>
-      <%= link_to I18n.t("project.header.new_member"), new_project_member_path(@project) %>
+      <div class='add-project-member-link'>
+        <%= link_to I18n.t("project.header.new_member"), new_project_member_path(@project) %>
+      </div>
     </div>
   </div>
 </div>

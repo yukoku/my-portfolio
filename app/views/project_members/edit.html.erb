@@ -4,7 +4,7 @@
 
 <div class='row'>
   <div class='col-sm-offset-3 col-sm-6 well'>
-    <%= form_for(@project_member, url: project_member_path(@project, @project_member), class: 'form-horizontal') do |f| %>
+    <%= form_for(@project_member, url: project_member_path(@project, @project_member, params: { invitation_token: @token }), class: 'form-horizontal') do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
       <div class="form-group text-center">
         <%= f.label t("project.project_member.invitation.item.project_name"), class: 'control-label' %>

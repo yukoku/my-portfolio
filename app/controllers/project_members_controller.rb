@@ -1,6 +1,7 @@
 class ProjectMembersController < ApplicationController
   before_action :project_owner, only: %i[new create destroy]
-  before_action :confirm_token, only: %i[edit]
+  before_action :confirm_token, only: %i[edit update]
+  before_action :inviting_member, only: %i[edit update]
   before_action :already_accepted, only: %i[update]
 
   def new
@@ -21,7 +22,7 @@ class ProjectMembersController < ApplicationController
                                    project: @project,
                                    project_member: @project_member,
                                    token: raw_token).invitation_email.deliver_later
-    flash[:success] = I18n.t("project.crud.flash.invited", user: @user.name)
+    flash[:success] = I18n.t("project.project_member.invitation.flash.invited", user: @user.name)
     redirect_to project_path(@project)
     else
       @users = User.where.not(confirmed_at: nil)
@@ -32,6 +33,7 @@ class ProjectMembersController < ApplicationController
   def edit
     @project_member = ProjectMember.find(params[:id])
     @project = Project.find(@project_member.project_id)
+    @token = params[:invitation_token]
   end
 
   def update
@@ -63,7 +65,7 @@ private
   end
 
   def encript_token(token)
-    Digest::MD5.hexdigest(token)
+    Digest::MD5.hexdigest(token.to_s)
   end
 
   def new_token
@@ -74,6 +76,14 @@ private
     @project_member = ProjectMember.find(params[:id])
     unless @project_member.project_invitation_token == encript_token(params[:invitation_token])
       flash[:danger] = I18n.t("project.project_member.invitation.flash.invalid_token")
+      redirect_to root_url
+    end
+  end
+
+  def inviting_member
+    @project_member = ProjectMember.find(params[:id])
+    unless @project_member.user_id == current_user.id
+      flash[:danger] = I18n.t("project.project_member.invitation.flash.invalid_user")
       redirect_to root_url
     end
   end
