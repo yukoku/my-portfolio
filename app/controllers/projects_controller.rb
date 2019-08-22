@@ -5,9 +5,9 @@ class ProjectsController < ApplicationController
 
   def index
     if current_user.admin?
-      @projects = Project.includes(:project_members).order(:due_on).page(params[:page]).per(PER)
+      @projects = Project.order(:due_on).page(params[:page]).per(PER)
     else
-      @projects = current_user.projects.includes(:project_members).order(:due_on).page(params[:page]).per(PER)
+      @projects = current_user.projects.order(:due_on).page(params[:page]).per(PER)
     end
   end
 
