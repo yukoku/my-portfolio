@@ -12,9 +12,9 @@
   <div class='col-sm-6'>
     <section>
       <h2><%= t("project.title.index") %></h2>
-      <% @user.projects.includes(:users).each do |project| %>
+      <% @user.projects.each do |project| %>
         <ul class='list-group'>
-        <% if project.users.include?(current_user) %>
+        <% if project.users.exists?(current_user.id) %>
           <li class='list-group-item'><%= link_to project.name, project_path(project) %></li>
         <% else %>
           <li class='list-group-item'><%= project.name %></li>
