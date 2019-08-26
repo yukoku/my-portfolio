@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Projects", type: :feature do
+RSpec.feature "Projects", type: :system do
   scenario "create new project and edit then delete", js: true do
     user = FactoryBot.create(:user)
     project = user.projects.first

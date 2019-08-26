@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "InviteProjectMembers", type: :feature do
+RSpec.feature "InviteProjectMembers", type: :system do
   background do
     ActionMailer::Base.deliveries.clear
   end

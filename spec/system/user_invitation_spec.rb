@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "UserInvitation", type: :feature do
+RSpec.feature "UserInvitation", type: :system do
   background do
     ActionMailer::Base.deliveries.clear
   end

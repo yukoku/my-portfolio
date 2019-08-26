@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Comments", type: :feature do
+RSpec.feature "Comments", type: :system do
   scenario "create comment and delete", js: true do
     user = FactoryBot.create(:user)
     project = user.projects.first

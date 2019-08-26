@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "StaticPages", type: :feature do
+RSpec.feature "StaticPages", type: :system do
   scenario "link to static pages" do
     visit root_path
     click_link "Home"
