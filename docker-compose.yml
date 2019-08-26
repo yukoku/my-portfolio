@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - .:/myapp
+      - bundle:/usr/local/bundle
+    environment:
+      MY_SQL_DB_PASS: $MY_SQL_DB_PASS
+      ADMIN_PASSWORD: $ADMIN_PASSWORD
+    depends_on:
+      - db
+      - chrome
+  chrome:
+    image: selenium/standalone-chrome:3.141.59-titanium
+    volumes:
+      - .:/myapp
+    ports:
+      - 4444:4444
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - '3307:3306'
+    volumes:
+      - mysql_data:/var/lib/mysql
+volumes:
+  bundle:
+  mysql_data:

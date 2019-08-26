@@ -30,3 +30,4 @@
 
 # Ignore simplecov result files
 /coverage/*
+/.env
