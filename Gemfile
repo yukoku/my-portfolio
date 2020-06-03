@@ -59,5 +59,5 @@ gem 'validates_timeliness', '~> 5.0.0.alpha3'
 gem 'faker', '~> 2.1'      # production環境でも使用する
 gem 'kaminari', '~> 1.1'
 gem 'kaminari-bootstrap', '~> 3.0.1'
-gem 'gretel', '~> 3.0'
+gem 'gretel', '~> 3.0', '>= 3.0.9'
 gem 'ransack', '~> 2.1'
