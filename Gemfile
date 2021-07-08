@@ -22,7 +22,7 @@ group :development, :test do
   gem 'byebug', '~> 11.0', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 3.8'
   gem 'simplecov', '>= 0.17.0'
-  gem 'capybara', '~>2.15.2'
+  gem 'capybara', '~> 2.15.4'
   gem 'launchy', '~> 2.4.3'
   gem 'webdrivers', '~> 4.1'
   gem 'factory_bot_rails', '~> 5.0'
@@ -38,7 +38,7 @@ group :development do
   gem 'spring', '~> 2.1.0'
   gem 'spring-commands-rspec', '~> 1.0.4'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'letter_opener', '>= 1.0'
+  gem 'letter_opener', '>= 1.7.0'
   gem 'letter_opener_web', '>= 1.3.4'
   gem 'lol_dba', '>= 2.1.8'
   gem 'bullet', '>= 6.0.1'
