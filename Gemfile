@@ -3,12 +3,12 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.5'
 
-gem 'rails', '~> 5.2.3'
+gem 'rails', '~> 7.0.8', '>= 7.0.8.7'
 gem 'bootstrap-sass', '>= 3.3.7'
 gem 'jquery-rails', '~> 4.3.5'
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 gem 'puma', '~> 3.11'
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 6.0', '>= 6.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder', '~> 2.5'
@@ -59,5 +59,5 @@ gem 'validates_timeliness', '~> 5.0.0.alpha3'
 gem 'faker', '~> 2.1'      # production環境でも使用する
 gem 'kaminari', '~> 1.1'
 gem 'kaminari-bootstrap', '~> 3.0.1'
-gem 'gretel', '~> 3.0'
-gem 'ransack', '~> 2.1'
+gem 'gretel', '~> 4.1', '>= 4.1.0'
+gem 'ransack', '~> 2.3', '>= 2.3.1'
