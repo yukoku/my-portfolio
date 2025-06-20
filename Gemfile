@@ -25,7 +25,7 @@ group :development, :test do
   gem 'capybara', '~>2.15.2'
   gem 'launchy', '~> 2.4.3'
   gem 'webdrivers', '~> 4.1'
-  gem 'factory_bot_rails', '~> 5.0'
+  gem 'factory_bot_rails', '~> 6.5', '>= 6.5.0'
   gem 'database_rewinder', '>= 0.9.1'
   gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
 end
