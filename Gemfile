@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.5'
 
-gem 'rails', '~> 5.2.3'
+gem 'rails', '~> 7.1.5', '>= 7.1.5.2'
 gem 'bootstrap-sass', '>= 3.3.7'
 gem 'jquery-rails', '~> 4.3.5'
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
@@ -40,7 +40,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'letter_opener', '>= 1.0'
   gem 'letter_opener_web', '>= 1.3.4'
-  gem 'lol_dba', '>= 2.1.8'
+  gem 'lol_dba', '>= 2.4.0'
   gem 'bullet', '>= 6.0.1'
 end
 
@@ -57,7 +57,7 @@ gem 'devise-i18n', '~> 1.8'
 gem 'devise-i18n-views', '~> 0.3'
 gem 'validates_timeliness', '~> 5.0.0.alpha3'
 gem 'faker', '~> 2.1'      # production環境でも使用する
-gem 'kaminari', '~> 1.1'
+gem 'kaminari', '~> 1.2', '>= 1.2.0'
 gem 'kaminari-bootstrap', '~> 3.0.1'
-gem 'gretel', '~> 3.0'
-gem 'ransack', '~> 2.1'
+gem 'gretel', '~> 4.0', '>= 4.0.0'
+gem 'ransack', '~> 2.3', '>= 2.3.1'
