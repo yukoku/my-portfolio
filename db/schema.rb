@@ -2,17 +2,17 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2019_08_17_082453) do
 
-  create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2019_08_17_082453) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "active_storage_blobs", charset: "utf8", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2019_08_17_082453) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "comments", charset: "utf8", force: :cascade do |t|
     t.text "content"
     t.bigint "ticket_id"
     t.bigint "user_id"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2019_08_17_082453) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "project_members", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "project_members", charset: "utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "project_id"
     t.datetime "created_at", null: false
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 2019_08_17_082453) do
     t.index ["user_id"], name: "index_project_members_on_user_id"
   end
 
-  create_table "projects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "projects", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.date "due_on"
@@ -64,25 +64,25 @@ ActiveRecord::Schema.define(version: 2019_08_17_082453) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "ticket_attributes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "ticket_attributes", charset: "utf8", force: :cascade do |t|
     t.string "ticket_attribute"
     t.bigint "project_id"
     t.index ["project_id"], name: "index_ticket_attributes_on_project_id"
   end
 
-  create_table "ticket_priorities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "ticket_priorities", charset: "utf8", force: :cascade do |t|
     t.string "priority"
     t.bigint "project_id"
     t.index ["project_id"], name: "index_ticket_priorities_on_project_id"
   end
 
-  create_table "ticket_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "ticket_statuses", charset: "utf8", force: :cascade do |t|
     t.string "status"
     t.bigint "project_id"
     t.index ["project_id"], name: "index_ticket_statuses_on_project_id"
   end
 
-  create_table "tickets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "tickets", charset: "utf8", force: :cascade do |t|
     t.bigint "project_id"
     t.bigint "creator_id"
     t.bigint "assignee_id"
@@ -102,7 +102,7 @@ ActiveRecord::Schema.define(version: 2019_08_17_082453) do
     t.index ["ticket_status_id"], name: "index_tickets_on_ticket_status_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "users", charset: "utf8", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false

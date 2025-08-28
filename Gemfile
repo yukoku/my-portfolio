@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.5'
+ruby '2.7.8'
 
-gem 'rails', '~> 5.2.3'
+gem 'rails', '~> 6.1.3.1'
 gem 'bootstrap-sass', '>= 3.3.7'
 gem 'jquery-rails', '~> 4.3.5'
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
@@ -15,7 +15,10 @@ gem 'jbuilder', '~> 2.5'
 gem 'mini_magick', '~> 4.8'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bootsnap', '>= 1.12.0', require: false
+
+# https://qiita.com/Taira0222/items/89fe772eb8d752da4db7
+gem 'concurrent-ruby', '1.3.4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -27,7 +30,7 @@ group :development, :test do
   gem 'webdrivers', '~> 4.1'
   gem 'factory_bot_rails', '~> 5.0'
   gem 'database_rewinder', '>= 0.9.1'
-  gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
+  gem 'shoulda-matchers'
 end
 
 group :development do
@@ -41,7 +44,6 @@ group :development do
   gem 'letter_opener', '>= 1.0'
   gem 'letter_opener_web', '>= 1.3.4'
   gem 'lol_dba', '>= 2.1.8'
-  gem 'bullet', '>= 6.0.1'
 end
 
 group :production do

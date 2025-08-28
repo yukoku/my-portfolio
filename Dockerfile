@@ -1,12 +1,20 @@
-FROM ruby:2.5.5
+FROM ruby:2.7.8-slim
 ENV LANG C.UTF-8
 
-RUN apt-get update -qq && apt-get install -y \
+# 基本ツール + mysql2 ビルド用ライブラリ
+RUN apt-get update -qq \
+ && apt-get install -y --no-install-recommends \
+    curl \
+    git \
+    default-libmysqlclient-dev \
+    xz-utils \
     build-essential \
+ && curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
+ && apt-get install -y --no-install-recommends \
     nodejs \
-  && rm -rf /var/lib/apt/lists/*
+ && rm -rf /var/lib/apt/lists/*
 
-RUN gem install bundler
+RUN gem install bundler -v 2.4.22
 
 WORKDIR /tmp
 ADD Gemfile Gemfile
