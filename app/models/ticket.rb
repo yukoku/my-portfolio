@@ -12,6 +12,7 @@ class Ticket < ApplicationRecord
   validate :validate_file_count
 
 private
+
   def validate_file_size
     return unless attached_files.attached?
     attached_files.each do |file|

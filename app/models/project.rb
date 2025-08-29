@@ -18,5 +18,4 @@ private
     TicketStatus.default_setting(self.id)
     TicketPriority.default_setting(self.id)
   end
-
 end

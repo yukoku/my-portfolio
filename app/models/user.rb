@@ -18,5 +18,4 @@ private
     Ticket.where("creator_id = ?", self.id).update_all(creator_id: nil)
     Ticket.where("assignee_id = ?", self.id).update_all(assignee_id: nil)
   end
-
 end
