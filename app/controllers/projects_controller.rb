@@ -4,10 +4,17 @@ class ProjectsController < ApplicationController
   PER = 5
 
   def index
-    if current_user.admin?
-      @projects = Project.order(:due_on).page(params[:page]).per(PER)
-    else
-      @projects = current_user.projects.order(:due_on).page(params[:page]).per(PER)
+    base = if current_user.admin?
+             Project.all
+           else
+             current_user.projects
+           end
+    @projects = base.includes(:tickets, :project_members).order(:due_on).page(params[:page]).per(PER)
+    # MEMO:
+    # ↓Mysqlのバージョンが古くてエラーになる
+    # @tickets_count = Ticket.where(project: @projects).group(:project_id).count
+    @tickets_count = @projects.to_h do |p|
+      [p.id, p.tickets.size]
     end
   end
 

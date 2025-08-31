@@ -9,7 +9,7 @@
           <button class='btn btn-info active' type='button'>
             <%= I18n.t("project.tickets.count") %>
             <span class='badge'>
-              <%= project.tickets.count %>
+              <%= @tickets_count[project.id] || 0 %>
             </span>
           </button>
         </div>
