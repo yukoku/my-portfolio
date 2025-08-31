@@ -1,5 +1,5 @@
 class ProjectInvitationMailer < ApplicationMailer
-  add_template_helper(ProjectMembersHelper)
+  helper ProjectMembersHelper
   default from: 'noreply@secure-reef-34800.herokuapp.com'
 
   def invitation_email
