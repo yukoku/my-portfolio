@@ -44,6 +44,9 @@ group :development do
   gem 'letter_opener', '>= 1.0'
   gem 'letter_opener_web', '>= 1.3.4'
   gem 'lol_dba', '>= 2.1.8'
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
 end
 
 group :production do
