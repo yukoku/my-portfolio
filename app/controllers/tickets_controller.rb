@@ -43,7 +43,7 @@ class TicketsController < ApplicationController
   def update
     @project = Project.find(params[:project_id])
     @ticket = Ticket.find(params[:id])
-    if @ticket.update_attributes(ticket_params)
+    if @ticket.update(ticket_params)
       flash[:success] = I18n.t("#{Constants::TICKET_CRUD_FLASH}.updated")
       redirect_to project_ticket_url(@project, @ticket)
     else
