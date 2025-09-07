@@ -2,8 +2,6 @@ class TicketsController < ApplicationController
   before_action :project_member, except: %i[index]
   before_action :project_ticket, only: %i[edit show update destroy destroy_attached_file]
 
-  PER = 5
-
   def new
     @project = Project.find(params[:project_id])
     @ticket = Ticket.new
@@ -17,10 +15,10 @@ class TicketsController < ApplicationController
   def index
     if current_user.admin?
       @search = Ticket.includes(:project).order(:due_on).ransack(params[:q])
-      @tickets = @search.result.page(params[:page]).per(PER)
+      @tickets = @search.result.page(params[:page]).per(Constants::PER)
     else
       @search = Ticket.includes(:project).where(assignee_id: current_user.id).order(:due_on).ransack(params[:q])
-      @tickets = @search.result.page(params[:page]).per(PER)
+      @tickets = @search.result.page(params[:page]).per(Constants::PER)
     end
   end
 
@@ -30,7 +28,7 @@ class TicketsController < ApplicationController
     @ticket.creator_id = current_user.id
     @ticket.project_id = @project.id
     if @ticket.save
-      flash[:info] = I18n.t("ticket.crud.flash.created")
+      flash[:info] = I18n.t("#{Constants::TICKET_CRUD_FLASH}.created")
       redirect_to project_ticket_url(@project, @ticket)
     else
       render 'new'
@@ -46,7 +44,7 @@ class TicketsController < ApplicationController
     @project = Project.find(params[:project_id])
     @ticket = Ticket.find(params[:id])
     if @ticket.update_attributes(ticket_params)
-      flash[:success] = I18n.t("ticket.crud.flash.updated")
+      flash[:success] = I18n.t("#{Constants::TICKET_CRUD_FLASH}.updated")
       redirect_to project_ticket_url(@project, @ticket)
     else
       render 'edit'
@@ -57,7 +55,7 @@ class TicketsController < ApplicationController
     @project = Project.find(params[:project_id])
     ticket = Ticket.find(params[:id])
     ticket.destroy
-    flash[:success] = I18n.t("ticket.crud.flash.deleted")
+    flash[:success] = I18n.t("#{Constants::TICKET_CRUD_FLASH}.deleted")
     redirect_to @project
   end
 

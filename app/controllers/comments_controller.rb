@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
     @comment.ticket_id = @ticket.id
     if @comment.save
-      flash[:success] = I18n.t("comment.crud.flash.created")
+      flash[:success] = I18n.t("#{Constants::COMMENT_CRUD_FLASH}.created")
       redirect_to project_ticket_url(@project, @ticket)
     else
       render 'tickets/show'
@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
 
   def destroy
     Comment.find(params[:id]).destroy
-    flash[:success] = I18n.t("comment.crud.flash.deleted")
+    flash[:success] = I18n.t("#{Constants::COMMENT_CRUD_FLASH}.deleted")
     redirect_to project_ticket_url(@project, @ticket)
   end
 

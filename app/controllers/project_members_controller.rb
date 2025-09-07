@@ -22,7 +22,7 @@ class ProjectMembersController < ApplicationController
                                    project: @project,
                                    project_member: @project_member,
                                    token: raw_token).invitation_email.deliver_later
-    flash[:success] = I18n.t("project.project_member.invitation.flash.invited", user: @user.name)
+    flash[:success] = I18n.t("#{Constants::PROJECT_MEMBER_INVITATION_FLASH}.invited", user: @user.name)
     redirect_to project_path(@project)
     else
       @users = User.where.not(confirmed_at: nil)
@@ -39,14 +39,14 @@ class ProjectMembersController < ApplicationController
   def update
     @project_member = ProjectMember.find(params[:id])
     @project_member.update!(accepted_project_invitation: true, project_invitation_token: nil)
-    flash[:success] = I18n.t("project.project_member.invitation.flash.success", project: @project_member.project.name)
+    flash[:success] = I18n.t("#{Constants::PROJECT_MEMBER_INVITATION_FLASH}.success", project: @project_member.project.name)
     redirect_to project_path(id: @project_member.project_id)
   end
 
   def destroy
     ProjectMember.find(params[:id]).destroy
     @project = Project.find(params[:project_id])
-    flash[:success] = I18n.t("project.project_member.invitation.flash.deleted")
+    flash[:success] = I18n.t("#{Constants::PROJECT_MEMBER_INVITATION_FLASH}.deleted")
     redirect_to project_path(@project)
   end
 
@@ -72,7 +72,7 @@ private
   def confirm_token
     @project_member = ProjectMember.find(params[:id])
     unless @project_member.project_invitation_token == encript_token(params[:invitation_token])
-      flash[:danger] = I18n.t("project.project_member.invitation.flash.invalid_token")
+      flash[:danger] = I18n.t("#{Constants::PROJECT_MEMBER_INVITATION_FLASH}.invalid_token")
       redirect_to root_url
     end
   end
@@ -80,7 +80,7 @@ private
   def inviting_member
     @project_member = ProjectMember.find(params[:id])
     unless @project_member.user_id == current_user.id
-      flash[:danger] = I18n.t("project.project_member.invitation.flash.invalid_user")
+      flash[:danger] = I18n.t("#{Constants::PROJECT_MEMBER_INVITATION_FLASH}.invalid_user")
       redirect_to root_url
     end
   end
@@ -88,7 +88,7 @@ private
   def already_accepted
     @project_member = ProjectMember.find(params[:id])
     if @project_member.accepted_project_invitation
-      flash[:info] = I18n.t("project.project_member.invitation.flash.already_accepted")
+      flash[:info] = I18n.t("#{Constants::PROJECT_MEMBER_INVITATION_FLASH}.already_accepted")
       redirect_to root_url
     end
   end
