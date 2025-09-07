@@ -48,7 +48,7 @@ class ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-    if (@project.update_attributes(project_params))
+    if (@project.update(project_params))
       flash[:success] = I18n.t("#{Constants::PROJECT_CRUD_FLASH}.updated")
       redirect_to @project
     else
