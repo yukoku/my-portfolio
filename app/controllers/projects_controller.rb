@@ -16,6 +16,9 @@ class ProjectsController < ApplicationController
     @tickets_count = @projects.to_h do |p|
       [p.id, p.tickets.size]
     end
+    @project_members = ProjectMember.where(user: current_user, project: base).to_h do |pm|
+      [pm.project_id, pm]
+    end
   end
 
   def show
