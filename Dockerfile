@@ -1,4 +1,4 @@
-FROM ruby:2.7.8-slim
+FROM ruby:3.0.7-slim
 ENV LANG C.UTF-8
 
 # 基本ツール + mysql2 ビルド用ライブラリ
