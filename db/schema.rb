@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_09_07_013325) do
+ActiveRecord::Schema.define(version: 2025_09_13_073514) do
 
   create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -75,6 +75,24 @@ ActiveRecord::Schema.define(version: 2025_09_07_013325) do
     t.string "ticket_attribute"
     t.bigint "project_id"
     t.index ["project_id"], name: "index_ticket_attributes_on_project_id"
+  end
+
+  create_table "ticket_metadata", charset: "utf8", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_ticket_metadata_on_project_id"
+  end
+
+  create_table "ticket_metadata_values", charset: "utf8", force: :cascade do |t|
+    t.bigint "ticket_metadata_id", null: false
+    t.bigint "ticket_id", null: false
+    t.string "value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ticket_id"], name: "index_ticket_metadata_values_on_ticket_id"
+    t.index ["ticket_metadata_id"], name: "index_ticket_metadata_values_on_ticket_metadata_id"
   end
 
   create_table "ticket_priorities", charset: "utf8", force: :cascade do |t|
@@ -143,6 +161,9 @@ ActiveRecord::Schema.define(version: 2025_09_07_013325) do
   add_foreign_key "project_members", "projects"
   add_foreign_key "project_members", "users"
   add_foreign_key "ticket_attributes", "projects"
+  add_foreign_key "ticket_metadata", "projects"
+  add_foreign_key "ticket_metadata_values", "ticket_metadata", column: "ticket_metadata_id"
+  add_foreign_key "ticket_metadata_values", "tickets"
   add_foreign_key "ticket_priorities", "projects"
   add_foreign_key "ticket_statuses", "projects"
   add_foreign_key "tickets", "projects"
