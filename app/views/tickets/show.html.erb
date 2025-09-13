@@ -8,18 +8,12 @@
         <h1><%= @ticket.title%></h1>
         <table class='table table-condensed'>
           <tbody>
-            <tr>
-              <th><%= I18n.t("ticket.item.attribute") %></th>
-              <th><%= (@ticket.ticket_attribute&.ticket_attribute).to_s %></th>
-            </tr>
-            <tr>
-              <th><%= I18n.t("ticket.item.status") %></th>
-              <th><%= (@ticket.ticket_status&.status).to_s %></th>
-            </tr>
-            <tr>
-              <th><%= I18n.t("ticket.item.priority") %></th>
-              <th><%= (@ticket.ticket_priority&.priority).to_s %></th>
-            </tr>
+            <% @metadata.each do |meta| %>
+              <tr>
+                <th><%= meta.name %></th>
+                <th><%= (@metadata_values || {})[meta.id]&.value %></th>
+              </tr>
+            <% end %>
             <tr>
               <th><%= I18n.t("ticket.item.creator") %></th>
               <th><%= (@ticket.creator&.name).to_s %></th>

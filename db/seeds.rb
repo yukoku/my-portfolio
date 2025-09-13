@@ -66,9 +66,6 @@ Project.all.each do |project|
     ticket_attributes[:due_on] = rand(100).day.after
     ticket_attributes[:assignee_id] = project_members.sample.id
     ticket_attributes[:creator_id] = project_members.sample.id
-    ticket_attributes[:ticket_attribute_id] = project.ticket_attributes.sample.id
-    ticket_attributes[:ticket_status_id] = project.ticket_statuses.sample.id
-    ticket_attributes[:ticket_priority_id] = project.ticket_priorities.sample.id
     ticket = project.tickets.create!(ticket_attributes)
   end
 end

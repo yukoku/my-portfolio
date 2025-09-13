@@ -5,11 +5,20 @@ class TicketsController < ApplicationController
   def new
     @project = Project.find(params[:project_id])
     @ticket = Ticket.new
+    @metadata = TicketMetadata.where(project_id: params[:project_id])
+    @metadata.each do |m|
+      @ticket.ticket_metadata_values.build(ticket_metadata_id: m.id)
+    end
   end
 
   def edit
     @project = Project.find(params[:project_id])
-    @ticket = Ticket.find(params[:id])
+    @ticket = Ticket.includes(:ticket_metadata_values).find(params[:id])
+    @metadata = TicketMetadata.where(project_id: params[:project_id])
+    existing_metadata_ids = @ticket.ticket_metadata_values.pluck(:ticket_metadata_id)
+    @metadata.where.not(id: existing_metadata_ids).each do |m|
+      @ticket.ticket_metadata_values.build(ticket_metadata_id: m.id)
+    end
   end
 
   def index
@@ -36,8 +45,11 @@ class TicketsController < ApplicationController
   end
 
   def show
-    @ticket = Ticket.find(params[:id])
     @comment = Comment.new
+    @metadata = TicketMetadata.where(project_id: params[:project_id])
+    @metadata_values = TicketMetadataValue.where(ticket_id: @ticket.id).to_h do |mv|
+      [mv.ticket_metadata_id, mv]
+    end
   end
 
   def update
@@ -47,6 +59,7 @@ class TicketsController < ApplicationController
       flash[:success] = I18n.t("#{Constants::TICKET_CRUD_FLASH}.updated")
       redirect_to project_ticket_url(@project, @ticket)
     else
+      @metadata = TicketMetadata.where(project_id: params[:project_id])
       render 'edit'
     end
   end
@@ -72,7 +85,8 @@ private
   def ticket_params
     params.require(:ticket).permit(:title, :description, :due_on, :assignee_id,
                                    :ticket_attribute_id, :ticket_status_id, :ticket_priority_id,
-                                   attached_files: [])
+                                   attached_files: [],
+                                   ticket_metadata_values_attributes: [:id, :ticket_metadata_id, :value])
   end
 
   def project_member
