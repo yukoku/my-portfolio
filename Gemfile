@@ -31,6 +31,9 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 5.0'
   gem 'database_rewinder', '>= 0.9.1'
   gem 'shoulda-matchers'
+  gem 'pry'
+  gem 'pry-byebug'
+  gem 'pry-rails'
 end
 
 group :development do
