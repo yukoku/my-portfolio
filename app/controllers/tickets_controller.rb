@@ -84,7 +84,6 @@ private
 
   def ticket_params
     params.require(:ticket).permit(:title, :description, :due_on, :assignee_id,
-                                   :ticket_attribute_id, :ticket_status_id, :ticket_priority_id,
                                    attached_files: [],
                                    ticket_metadata_values_attributes: [:id, :ticket_metadata_id, :value])
   end

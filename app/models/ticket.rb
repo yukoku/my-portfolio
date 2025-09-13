@@ -2,9 +2,6 @@ class Ticket < ApplicationRecord
   belongs_to :project
   belongs_to :assignee, class_name: "User", optional: true
   belongs_to :creator, class_name: "User", optional: true
-  belongs_to :ticket_attribute, optional: true
-  belongs_to :ticket_status, optional: true
-  belongs_to :ticket_priority, optional: true
   has_many_attached :attached_files
   has_many :comments, dependent: :destroy
   has_many :ticket_metadata_values, dependent: :destroy, inverse_of: :ticket

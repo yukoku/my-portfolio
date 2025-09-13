@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_09_13_073514) do
+ActiveRecord::Schema.define(version: 2025_09_13_113636) do
 
   create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -71,12 +71,6 @@ ActiveRecord::Schema.define(version: 2025_09_13_073514) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "ticket_attributes", charset: "utf8", force: :cascade do |t|
-    t.string "ticket_attribute"
-    t.bigint "project_id"
-    t.index ["project_id"], name: "index_ticket_attributes_on_project_id"
-  end
-
   create_table "ticket_metadata", charset: "utf8", force: :cascade do |t|
     t.bigint "project_id", null: false
     t.string "name", null: false
@@ -95,18 +89,6 @@ ActiveRecord::Schema.define(version: 2025_09_13_073514) do
     t.index ["ticket_metadata_id"], name: "index_ticket_metadata_values_on_ticket_metadata_id"
   end
 
-  create_table "ticket_priorities", charset: "utf8", force: :cascade do |t|
-    t.string "priority"
-    t.bigint "project_id"
-    t.index ["project_id"], name: "index_ticket_priorities_on_project_id"
-  end
-
-  create_table "ticket_statuses", charset: "utf8", force: :cascade do |t|
-    t.string "status"
-    t.bigint "project_id"
-    t.index ["project_id"], name: "index_ticket_statuses_on_project_id"
-  end
-
   create_table "tickets", charset: "utf8", force: :cascade do |t|
     t.bigint "project_id"
     t.bigint "creator_id"
@@ -116,15 +98,9 @@ ActiveRecord::Schema.define(version: 2025_09_13_073514) do
     t.date "due_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "ticket_attribute_id"
-    t.bigint "ticket_status_id"
-    t.bigint "ticket_priority_id"
     t.index ["assignee_id"], name: "index_tickets_on_assignee_id"
     t.index ["creator_id"], name: "index_tickets_on_creator_id"
     t.index ["project_id"], name: "index_tickets_on_project_id"
-    t.index ["ticket_attribute_id"], name: "index_tickets_on_ticket_attribute_id"
-    t.index ["ticket_priority_id"], name: "index_tickets_on_ticket_priority_id"
-    t.index ["ticket_status_id"], name: "index_tickets_on_ticket_status_id"
   end
 
   create_table "users", charset: "utf8", force: :cascade do |t|
@@ -160,16 +136,10 @@ ActiveRecord::Schema.define(version: 2025_09_13_073514) do
   add_foreign_key "comments", "users"
   add_foreign_key "project_members", "projects"
   add_foreign_key "project_members", "users"
-  add_foreign_key "ticket_attributes", "projects"
   add_foreign_key "ticket_metadata", "projects"
   add_foreign_key "ticket_metadata_values", "ticket_metadata", column: "ticket_metadata_id"
   add_foreign_key "ticket_metadata_values", "tickets"
-  add_foreign_key "ticket_priorities", "projects"
-  add_foreign_key "ticket_statuses", "projects"
   add_foreign_key "tickets", "projects"
-  add_foreign_key "tickets", "ticket_attributes"
-  add_foreign_key "tickets", "ticket_priorities"
-  add_foreign_key "tickets", "ticket_statuses"
   add_foreign_key "tickets", "users", column: "assignee_id"
   add_foreign_key "tickets", "users", column: "creator_id"
 end
