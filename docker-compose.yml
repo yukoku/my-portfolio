@@ -15,6 +15,8 @@ services:
     depends_on:
       - db
       - chrome
+    stdin_open: true
+    tty: true
   chrome:
     image: selenium/standalone-chrome:3.141.59-titanium
     volumes:
