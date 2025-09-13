@@ -25,7 +25,7 @@ group :development, :test do
   gem 'byebug', '~> 11.0', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 3.8'
   gem 'simplecov', '>= 0.17.0'
-  gem 'capybara', '~>2.15.2'
+  gem 'capybara', '~>3.39'
   gem 'launchy', '~> 2.4.3'
   gem 'webdrivers', '~> 4.1'
   gem 'factory_bot_rails', '~> 5.0'
