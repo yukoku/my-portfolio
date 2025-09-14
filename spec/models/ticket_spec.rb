@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Ticket, type: :model do
-  let(:project) { FactoryBot.create(:project)}
+  let(:project) { FactoryBot.create(:project) }
   describe "association" do
     describe "belongs_to" do
       it { is_expected.to belong_to(:project) }
-      it { is_expected.to belong_to(:assignee).class_name("User") }
-      it { is_expected.to belong_to(:creator).class_name("User") }
+      it { is_expected.to belong_to(:assignee).class_name("User").optional }
+      it { is_expected.to belong_to(:creator).class_name("User").optional }
     end
     describe "has_many" do
       it { is_expected.to have_many(:comments) }
@@ -53,6 +53,7 @@ RSpec.describe Ticket, type: :model do
         expect(@ticket).to be_valid
       end
       it "is invalid with over 512KB file" do
+        allow_any_instance_of(ActiveStorage::Attachment).to receive(:purge).and_return(true)
         file_path = Rails.root.to_s + '/spec/support/test_files/test_513KB.png'
         File.open(file_path) { |f| @ticket.attached_files.attach(io: f, filename: "test.png", content_type: 'image/png')}
         @ticket.valid?
@@ -62,6 +63,7 @@ RSpec.describe Ticket, type: :model do
 
     describe "validate with file count" do
       it "is valid with 10 attached files" do
+        allow_any_instance_of(ActiveStorage::Attachment).to receive(:purge).and_return(true)
         10.times do |n|
           file_path = Rails.root.to_s + "/spec/support/test_files/test_#{(n + 1).to_s.rjust(2, '0')}.png"
           File.open(file_path) { |f| @ticket.attached_files.attach(io: f, filename: "test#{n + 1}.png", content_type: 'image/png')}
@@ -70,6 +72,7 @@ RSpec.describe Ticket, type: :model do
         expect(@ticket).to be_valid
       end
       it "is invalid with 11 attached files" do
+        allow_any_instance_of(ActiveStorage::Attachment).to receive(:purge).and_return(true)
         11.times do |n|
           file_path = Rails.root.to_s + "/spec/support/test_files/test_#{(n + 1).to_s.rjust(2, '0')}.png"
           File.open(file_path) { |f| @ticket.attached_files.attach(io: f, filename: "test#{n + 1}.png", content_type: 'image/png')}

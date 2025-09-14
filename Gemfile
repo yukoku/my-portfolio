@@ -34,6 +34,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-byebug'
   gem 'pry-rails'
+  gem 'image_processing', '~> 1.2'
 end
 
 group :development do

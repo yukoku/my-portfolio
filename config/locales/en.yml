@@ -148,6 +148,7 @@ en:
       too_long: is too long (maximum is %{count} characters)
       too_short: is too short (minimum is %{count} characters)
       wrong_length: is the wrong length (should be %{count} characters)
+      on_or_after: "must be on or after %{restriction}"
       file_too_large: you can upload file under %{file_size}
       file_too_many: you can upload within %{file_count} files
     template:
@@ -224,3 +225,8 @@ en:
       long: "%B %d, %Y %H:%M"
       short: "%d %b %H:%M"
     pm: pmization
+  validates_timeliness:
+    error_value_formats:
+      date: '%Y-%m-%d'
+      time: '%H:%M:%S'
+      datetime: '%Y-%m-%d %H:%M:%S'

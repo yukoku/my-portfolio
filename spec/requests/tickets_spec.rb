@@ -123,6 +123,7 @@ RSpec.describe "Tickets", type: :request do
       end
       context "over 512KB size file" do
         it "fails to update ticket for file size validation" do
+          allow_any_instance_of(ActiveStorage::Attachment).to receive(:purge).and_return(true)
           file_path = Rails.root.to_s + '/spec/support/test_files/test_513KB.png'
           File.open(file_path) { |f| @ticket.attached_files.attach(io: f, filename: "test.png", content_type: 'image/png')}
           patch project_ticket_path(@project, @ticket), params: { ticket: @ticket.attributes }
@@ -132,6 +133,7 @@ RSpec.describe "Tickets", type: :request do
       end
       context "too many files" do
         it "fails to update ticket for file count validation" do
+          allow_any_instance_of(ActiveStorage::Attachment).to receive(:purge).and_return(true)
           11.times do |n|
             file_path = Rails.root.to_s + "/spec/support/test_files/test_#{(n + 1).to_s.rjust(2, '0')}.png"
             File.open(file_path) { |f| @ticket.attached_files.attach(io: f, filename: "test.png", content_type: 'image/png')}

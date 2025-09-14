@@ -28,8 +28,17 @@ Capybara.server_port = 3001
 
 Capybara.register_driver :selenium_remote do |app|
   url = "http://chrome:4444/wd/hub"
-  opts = { desired_capabilities: :chrome, browser: :remote, url: url }
-  driver = Capybara::Selenium::Driver.new(app, opts)
+  options = ::Selenium::WebDriver::Chrome::Options.new
+  options.add_argument('no-sandbox')
+  options.add_argument('headless')
+  options.add_argument('disable-gpu')
+  options.add_argument('disable-dev-shm-usage')
+  options.add_argument('window-size=1280x800')
+
+  Capybara::Selenium::Driver.new(app,
+    browser: :remote,
+    url: url,
+    options: options)
 end
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.

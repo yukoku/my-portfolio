@@ -6,6 +6,7 @@ RSpec.describe "Comments", type: :request do
     @user.confirm
     sign_in @user
     @project = @user.projects.first
+    FactoryBot.create_list(:ticket_metadata, 3, project: @project)
     @ticket = @project.tickets.first
     @comment = @user.comments.first
   end

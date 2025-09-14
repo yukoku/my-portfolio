@@ -9,6 +9,7 @@ RUN apt-get update -qq \
     default-libmysqlclient-dev \
     xz-utils \
     build-essential \
+    imagemagick \
  && curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
  && apt-get install -y --no-install-recommends \
     nodejs \
