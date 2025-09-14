@@ -47,8 +47,8 @@ class TicketsController < ApplicationController
   def show
     @comment = Comment.new
     @metadata = TicketMetadata.where(project_id: params[:project_id])
-    @metadata_values = TicketMetadataValue.where(ticket_id: @ticket.id).to_h do |mv|
-      [mv.ticket_metadata_id, mv]
+    @metadata_values = TicketMetadataValue.where(ticket_id: @ticket.id).index_by do |mv|
+      mv.ticket_metadata_id
     end
   end
 
@@ -85,7 +85,7 @@ private
   def ticket_params
     params.require(:ticket).permit(:title, :description, :due_on, :assignee_id,
                                    attached_files: [],
-                                   ticket_metadata_values_attributes: [:id, :ticket_metadata_id, :value])
+                                   ticket_metadata_values_attributes: %i[id ticket_metadata_id value])
   end
 
   def project_member

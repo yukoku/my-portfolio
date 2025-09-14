@@ -5,7 +5,7 @@ class TicketMetadata < ApplicationRecord
   DEFAULT_METADATA = [
     "activerecord.attributes.ticket.attribute",
     "activerecord.attributes.ticket.status",
-    "activerecord.attributes.ticket.priority",
+    "activerecord.attributes.ticket.priority"
   ]
 
   def self.default_setting(project_id)
