@@ -12,10 +12,7 @@ FactoryBot.define do
     after(:create) do |user|
       project = create(:project)
       create(:project_member, user: user, project: project)
-      ticket = create(:ticket, assignee: user, creator: user, project: project,
-                       ticket_attribute: project.ticket_attributes.first,
-                       ticket_priority: project.ticket_priorities.first,
-                       ticket_status: project.ticket_statuses.first)
+      ticket = create(:ticket, assignee: user, creator: user, project: project)
       create(:comment, user_id: user.id, ticket_id: ticket.id)
     end
   end

@@ -6,9 +6,6 @@ RSpec.describe Project, type: :model do
       it { is_expected.to have_many(:project_members).dependent(:destroy) }
       it { is_expected.to have_many(:users).through(:project_members) }
       it { is_expected.to have_many(:tickets).dependent(:destroy) }
-      it { is_expected.to have_many(:ticket_attributes).dependent(:destroy) }
-      it { is_expected.to have_many(:ticket_priorities).dependent(:destroy) }
-      it { is_expected.to have_many(:ticket_statuses).dependent(:destroy) }
     end
   end
   it { is_expected.to validate_presence_of :name }

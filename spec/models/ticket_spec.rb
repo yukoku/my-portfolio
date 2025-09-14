@@ -7,9 +7,6 @@ RSpec.describe Ticket, type: :model do
       it { is_expected.to belong_to(:project) }
       it { is_expected.to belong_to(:assignee).class_name("User") }
       it { is_expected.to belong_to(:creator).class_name("User") }
-      it { is_expected.to belong_to(:ticket_attribute) }
-      it { is_expected.to belong_to(:ticket_status) }
-      it { is_expected.to belong_to(:ticket_priority) }
     end
     describe "has_many" do
       it { is_expected.to have_many(:comments) }

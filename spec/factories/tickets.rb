@@ -6,8 +6,5 @@ FactoryBot.define do
     association :assignee, factory: :user
     creator
     association :project, factory: :project, name: "test"
-    ticket_attribute
-    ticket_status
-    ticket_priority
   end
 end

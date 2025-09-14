@@ -11,9 +11,6 @@ RSpec.describe "Tickets", type: :request do
   end
 
   def set_attributes(ticket_attribute)
-    ticket_attribute[:ticket_attribute_id] = @project.ticket_attributes.first.id
-    ticket_attribute[:ticket_status_id] = @project.ticket_statuses.second.id
-    ticket_attribute[:ticket_priority_id] = @project.ticket_priorities.last.id
     ticket_attribute[:assignee_id] = @user.id
     ticket_attribute[:creator_id] = @user.id
     ticket_attribute[:project_id] = @project.id

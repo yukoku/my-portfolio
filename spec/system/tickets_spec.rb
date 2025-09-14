@@ -15,9 +15,6 @@ RSpec.feature "Tickets", type: :system do
     fill_in I18n.t("#{form_label}.title"), with: ticket.title
     fill_in I18n.t("#{form_label}.description"), with: ticket.description
     select user.name, from: 'ticket[assignee_id]'
-    select project.ticket_attributes.first.ticket_attribute, from:'ticket[ticket_attribute_id]'
-    select project.ticket_statuses.first.status, from:'ticket[ticket_status_id]'
-    select project.ticket_priorities.first.priority, from:'ticket[ticket_priority_id]'
     file_path = Rails.root.join('spec', 'support', 'test_files', 'for-feature-spec.jpg')
     attach_file(I18n.t("#{form_label}.attached_files"), file_path)
     # 期日を設定すると全て年情報に値が入力されてうまく行かないのでデフォルトの値を使用する
