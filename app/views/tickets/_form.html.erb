@@ -41,10 +41,10 @@
   <%= f.file_field :attached_files, multiple: true, class: 'form-control' %>
 
   <ul>
-    <% @ticket.attached_files.includes(:blob).each do |attached_file| %>
+    <% @ticket.attached_files.attachments.each do |attached_file| %>
       <!-- 保存に失敗したファイルをpurgeしても表示されるのでため -->
       <!-- 保存されていないファイルは表示しない -->
-      <% unless attached_file.saved_changes? %>
+      <% if attached_file.persisted? %>
         <li>
           <% if attached_file.previewable? %>
             <%= image_tag attached_file.preview(resize: "100x100>") %>

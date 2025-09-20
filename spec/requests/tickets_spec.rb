@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Tickets", type: :request do
+  include ActionDispatch::TestProcess::FixtureFile
   before do
     @user = FactoryBot.create(:user)
     @user.confirm
@@ -123,22 +124,19 @@ RSpec.describe "Tickets", type: :request do
       end
       context "over 512KB size file" do
         it "fails to update ticket for file size validation" do
-          allow_any_instance_of(ActiveStorage::Attachment).to receive(:purge).and_return(true)
-          file_path = Rails.root.to_s + '/spec/support/test_files/test_513KB.png'
-          File.open(file_path) { |f| @ticket.attached_files.attach(io: f, filename: "test.png", content_type: 'image/png')}
-          patch project_ticket_path(@project, @ticket), params: { ticket: @ticket.attributes }
+          file = fixture_file_upload(Rails.root.join('spec/support/test_files/test_513KB.png'), 'image/png')
+          patch project_ticket_path(@project, @ticket), params: { ticket: { attached_files: [file] } }
           @ticket.reload
           expect(response.body.include?(I18n.t("errors.messages.file_too_large", file_size: "512Kbyte"))).to eq(true)
         end
       end
       context "too many files" do
         it "fails to update ticket for file count validation" do
-          allow_any_instance_of(ActiveStorage::Attachment).to receive(:purge).and_return(true)
+          files = []
           11.times do |n|
-            file_path = Rails.root.to_s + "/spec/support/test_files/test_#{(n + 1).to_s.rjust(2, '0')}.png"
-            File.open(file_path) { |f| @ticket.attached_files.attach(io: f, filename: "test.png", content_type: 'image/png')}
+            files += [fixture_file_upload(Rails.root.join("spec/support/test_files/test_#{(n + 1).to_s.rjust(2, '0')}.png"), 'image/png')]
           end
-          patch project_ticket_path(@project, @ticket), params: { ticket: @ticket.attributes }
+          patch project_ticket_path(@project, @ticket), params: { ticket: { attached_files: files } }
           @ticket.reload
           expect(response.body.include?(I18n.t("errors.messages.file_too_many", file_count: 10))).to eq(true)
         end

@@ -16,7 +16,6 @@ private
     return unless attached_files.attached?
     attached_files.each do |file|
       if file.blob.byte_size > 512.kilobytes
-        file.purge
         errors.add(:file, I18n.t("errors.messages.file_too_large", file_size: "512Kbyte"))
       end
     end
@@ -25,7 +24,6 @@ private
   def validate_file_count
     return unless attached_files.attached?
     if attached_files.count > 10
-      attached_files[10..-1].map(&:purge)
       errors.add(:file, I18n.t("errors.messages.file_too_many", file_count: 10))
     end
   end
