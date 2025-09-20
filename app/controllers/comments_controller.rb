@@ -11,6 +11,10 @@ class CommentsController < ApplicationController
       flash[:success] = I18n.t("#{Constants::COMMENT_CRUD_FLASH}.created")
       redirect_to project_ticket_url(@project, @ticket)
     else
+      @metadata = TicketMetadata.where(project_id: @project.id)
+      @metadata_values = TicketMetadataValue.where(ticket_id: @ticket.id).index_by do |mv|
+        mv.ticket_metadata_id
+      end
       render 'tickets/show'
     end
   end
