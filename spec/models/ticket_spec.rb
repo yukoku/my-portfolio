@@ -44,7 +44,6 @@ RSpec.describe Ticket, type: :model do
     before do
       @ticket = FactoryBot.create(:ticket, project_id: project.id)
     end
-
     describe "validate with file size" do
       it "is valid with under 512KB file" do
         file_path = Rails.root.to_s + '/spec/support/test_files/test_512KB.png'
@@ -53,7 +52,6 @@ RSpec.describe Ticket, type: :model do
         expect(@ticket).to be_valid
       end
       it "is invalid with over 512KB file" do
-        allow_any_instance_of(ActiveStorage::Attachment).to receive(:purge).and_return(true)
         file_path = Rails.root.to_s + '/spec/support/test_files/test_513KB.png'
         File.open(file_path) { |f| @ticket.attached_files.attach(io: f, filename: "test.png", content_type: 'image/png')}
         @ticket.valid?
@@ -63,16 +61,16 @@ RSpec.describe Ticket, type: :model do
 
     describe "validate with file count" do
       it "is valid with 10 attached files" do
-        allow_any_instance_of(ActiveStorage::Attachment).to receive(:purge).and_return(true)
+        files = []
         10.times do |n|
           file_path = Rails.root.to_s + "/spec/support/test_files/test_#{(n + 1).to_s.rjust(2, '0')}.png"
-          File.open(file_path) { |f| @ticket.attached_files.attach(io: f, filename: "test#{n + 1}.png", content_type: 'image/png')}
+          files << { io: File.open(file_path), filename: "test#{n + 1}.png" }
         end
+        @ticket.attached_files.attach files
         @ticket.valid?
         expect(@ticket).to be_valid
       end
       it "is invalid with 11 attached files" do
-        allow_any_instance_of(ActiveStorage::Attachment).to receive(:purge).and_return(true)
         11.times do |n|
           file_path = Rails.root.to_s + "/spec/support/test_files/test_#{(n + 1).to_s.rjust(2, '0')}.png"
           File.open(file_path) { |f| @ticket.attached_files.attach(io: f, filename: "test#{n + 1}.png", content_type: 'image/png')}
