@@ -38,26 +38,24 @@ class ProjectsController < ApplicationController
       flash[:info] = I18n.t("#{Constants::PROJECT_CRUD_FLASH}.created")
       redirect_to projects_path
     else
-      render 'new'
+      render 'new', status: :unprocessable_entity
     end
   end
 
   def edit
-    @project = Project.find(params[:id])
   end
 
   def update
-    @project = Project.find(params[:id])
-    if (@project.update(project_params))
+    if @project.update(project_params)
       flash[:success] = I18n.t("#{Constants::PROJECT_CRUD_FLASH}.updated")
       redirect_to @project
     else
-      render 'edit'
+      render 'edit', status: :unprocessable_entity
     end
   end
 
   def destroy
-    Project.find(params[:id]).destroy
+    @project.destroy
     flash[:success] = I18n.t("#{Constants::PROJECT_CRUD_FLASH}.deleted")
     redirect_to projects_path
   end
@@ -69,7 +67,7 @@ private
   end
 
   def authenticate_project_member
-    @project = Project.find_by(id: params[:id])
-    redirect_to projects_path if @project&.users.where(id: current_user.id).empty? && !current_user.admin?
+    @project = Project.find_by!(id: params[:id])
+    redirect_to projects_path if !@project.users.exists?(id: current_user.id) && !current_user.admin?
   end
 end
