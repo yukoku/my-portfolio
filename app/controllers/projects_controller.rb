@@ -1,22 +1,11 @@
 class ProjectsController < ApplicationController
+  before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_project_member, except: [:index, :new, :create]
 
   def index
-    base = if current_user.admin?
-             Project.all
-           else
-             current_user.projects
-           end
-    @projects = base.includes(:tickets, :project_members).order(:due_on).page(params[:page]).per(Constants::PER)
-    # MEMO:
-    # ↓Mysqlのバージョンが古くてエラーになる
-    # @tickets_count = Ticket.where(project: @projects).group(:project_id).count
-    @tickets_count = @projects.to_h do |p|
-      [p.id, p.tickets.size]
-    end
-    @project_members = ProjectMember.where(user: current_user, project: base).to_h do |pm|
-      [pm.project_id, pm]
-    end
+    @projects = fetch_projects.includes(:tickets, :project_members).order(:due_on).page(params[:page]).per(Constants::PER)
+    @tickets_count = @projects.to_h { |p| [p.id, p.tickets.size] }
+    @project_members = ProjectMember.where(user_id: current_user.id, project_id: @projects.pluck(:id)).index_by(&:project_id)
   end
 
   def show
@@ -32,9 +21,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     if @project.save
-      # プロジェクトオーナーは自動的にプロジェクトユーザーに追加する
-      current_user.project_members.create!(project_id: @project.id,
-                                        accepted_project_invitation: true, owner: true)
+      current_user.project_members.create!(project_id: @project.id, accepted_project_invitation: true, owner: true)
       flash[:info] = I18n.t("#{Constants::PROJECT_CRUD_FLASH}.created")
       redirect_to projects_path
     else
@@ -42,8 +29,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @project.update(project_params)
@@ -60,14 +46,23 @@ class ProjectsController < ApplicationController
     redirect_to projects_path
   end
 
-private
+  private
+
+  def set_project
+    @project = Project.find_by!(id: params[:id])
+  end
+
+  def authenticate_project_member
+    unless @project.users.exists?(id: current_user.id) || current_user.admin?
+      redirect_to projects_path
+    end
+  end
 
   def project_params
     params.require(:project).permit(:name, :description, :due_on)
   end
 
-  def authenticate_project_member
-    @project = Project.find_by!(id: params[:id])
-    redirect_to projects_path if !@project.users.exists?(id: current_user.id) && !current_user.admin?
+  def fetch_projects
+    current_user.admin? ? Project.all : current_user.projects
   end
 end
