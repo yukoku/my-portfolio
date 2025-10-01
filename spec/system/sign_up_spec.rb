@@ -31,7 +31,7 @@ RSpec.feature "SignUp", type: :system do
     mail = ActionMailer::Base.deliveries.last
     url = extract_confirmation_url(mail)
     visit url
-    expect(page).to have_content I18n.t("users.confirmations.confirmed")
+    expect(page).to have_content I18n.t("devise.confirmations.confirmed")
 
     # log in
     fill_in I18n.t("#{form_label}.email"), with: user.email

@@ -28,10 +28,13 @@ RSpec.feature "InviteProjectMembers", type: :system do
 
     select @new_member.name, from: "project_member[user_id]"
 
-    expect {
-      click_button I18n.t("devise.invitations.new.header")
-      expect(page).to have_content I18n.t("project.project_member.invitation.flash.invited", user: @new_member.name)
-    }.to change(ProjectMember.where(project_id: @project.id), :count).by(1)
+    # メール送信をトリガーするため
+    perform_enqueued_jobs do
+      expect {
+        click_button I18n.t("devise.invitations.new.header")
+        expect(page).to have_content I18n.t("project.project_member.invitation.flash.invited", user: @new_member.name)
+      }.to change(ProjectMember.where(project_id: @project.id), :count).by(1)
+    end
   end
 
   scenario "invite new member and confirm"do
