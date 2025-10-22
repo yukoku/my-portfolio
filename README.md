@@ -1,6 +1,5 @@
 # my-portfolio
 This is my portfolio site. This app is project management tool.  
-[application](https://secure-reef-34800.herokuapp.com/)  
 
 概要  
 プロジェクト管理ツール
@@ -25,5 +24,6 @@ This is my portfolio site. This app is project management tool.
 - heroku
 - S3(AWS)
 - bootstrap3
+- docker
 
 詳細はポートフォリオのaboutページに記載しています。
