@@ -66,7 +66,7 @@ gem 'devise-i18n', '~> 1.8'
 gem 'devise-i18n-views', '~> 0.3'
 gem 'validates_timeliness', '~> 6.0.1'
 gem 'faker', '~> 2.1'      # production環境でも使用する
-gem 'kaminari', '~> 1.1'
+gem 'kaminari', '~> 1.2', '>= 1.2.1'
 gem 'kaminari-bootstrap', '~> 3.0.1'
 gem 'gretel', '~> 3.0'
 gem 'ransack', '~> 2.1'
