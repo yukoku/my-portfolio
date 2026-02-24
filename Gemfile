@@ -23,7 +23,7 @@ gem 'concurrent-ruby', '1.3.4'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', '~> 11.0', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec-rails', '~> 3.8'
+  gem 'rspec-rails', '~> 8.0', '>= 8.0.0'
   gem 'simplecov', '>= 0.17.0'
   gem 'capybara', '~>3.39'
   gem 'launchy', '~> 2.4.3'
