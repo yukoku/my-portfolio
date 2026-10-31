@@ -36,6 +36,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # coffee-rails / sass のアセットコンパイルに JavaScript ランタイム (ExecJS) が必要
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
       - name: Install bundler
         run: gem install bundler -v 2.4.22
 
