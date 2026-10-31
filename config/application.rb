@@ -21,7 +21,9 @@ Bundler.require(*Rails.groups)
 module Myportfolio
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.2
+    config.load_defaults 7.0
+    # 7.0 のデフォルトは :vips だが、既存環境は ImageMagick (mini_magick) を使用
+    config.active_storage.variant_processor = :mini_magick
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

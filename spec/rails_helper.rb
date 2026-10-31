@@ -80,6 +80,7 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :feature
   config.include Devise::Test::IntegrationHelpers, type: :system
   config.include RequestSpecHelper, type: :request
+  config.include ActiveJob::TestHelper, type: :system
 
   config.before(:each, type: :system) do
     driven_by :rack_test
@@ -87,7 +88,7 @@ RSpec.configure do |config|
 
   config.before(:each, type: :system, js: true) do
     driven_by :selenium_remote
-    host! "http://#{Capybara.server_host}:#{Capybara.server_port}"
+    Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
   end
 
   config.before(:suite) do

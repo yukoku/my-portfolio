@@ -10,14 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_09_13_113636) do
-
+ActiveRecord::Schema[7.0].define(version: 2025_09_13_113636) do
   create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -29,7 +28,7 @@ ActiveRecord::Schema.define(version: 2025_09_13_113636) do
     t.text "metadata"
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
@@ -44,8 +43,8 @@ ActiveRecord::Schema.define(version: 2025_09_13_113636) do
     t.text "content"
     t.bigint "ticket_id"
     t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["ticket_id"], name: "index_comments_on_ticket_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
@@ -53,8 +52,8 @@ ActiveRecord::Schema.define(version: 2025_09_13_113636) do
   create_table "project_members", charset: "utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "project_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "accepted_project_invitation", default: false
     t.string "project_invitation_token"
     t.boolean "owner", default: false
@@ -67,15 +66,15 @@ ActiveRecord::Schema.define(version: 2025_09_13_113636) do
     t.string "name"
     t.text "description"
     t.date "due_on"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "ticket_metadata", charset: "utf8", force: :cascade do |t|
     t.bigint "project_id", null: false
     t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_ticket_metadata_on_project_id"
   end
 
@@ -83,8 +82,8 @@ ActiveRecord::Schema.define(version: 2025_09_13_113636) do
     t.bigint "ticket_metadata_id", null: false
     t.bigint "ticket_id", null: false
     t.string "value"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["ticket_id"], name: "index_ticket_metadata_values_on_ticket_id"
     t.index ["ticket_metadata_id"], name: "index_ticket_metadata_values_on_ticket_metadata_id"
   end
@@ -96,8 +95,8 @@ ActiveRecord::Schema.define(version: 2025_09_13_113636) do
     t.string "title"
     t.text "description"
     t.date "due_on"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["assignee_id"], name: "index_tickets_on_assignee_id"
     t.index ["creator_id"], name: "index_tickets_on_creator_id"
     t.index ["project_id"], name: "index_tickets_on_project_id"
@@ -108,18 +107,18 @@ ActiveRecord::Schema.define(version: 2025_09_13_113636) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
     t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
+    t.datetime "confirmed_at", precision: nil
+    t.datetime "confirmation_sent_at", precision: nil
     t.string "unconfirmed_email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "invitation_token"
-    t.datetime "invitation_created_at"
-    t.datetime "invitation_sent_at"
-    t.datetime "invitation_accepted_at"
+    t.datetime "invitation_created_at", precision: nil
+    t.datetime "invitation_sent_at", precision: nil
+    t.datetime "invitation_accepted_at", precision: nil
     t.integer "invitation_limit"
     t.bigint "invited_by_id"
     t.string "invited_by_type"
