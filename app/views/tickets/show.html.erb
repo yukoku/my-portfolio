@@ -40,7 +40,7 @@
                   <% if attached_file.previewable? %>
                     <%= image_tag attached_file.preview(resize: "100x100>") %>
                   <% elsif attached_file.variable? %>
-                    <%= image_tag attached_file.variant(resize: "100x100>") %>
+                    <%= image_tag attached_file.variant(resize_to_limit: [100, 100]) %>
                   <% end %>
                 </div>
                 <div class='col-sm-8'>
@@ -80,7 +80,7 @@
             <%= comment.user.name %>
             <span class='glyphicon glyphicon-user' aria-hidden='true'></span>
           </th>
-           <th><%= comment.updated_at.localtime.to_s(:db) %></th>
+           <th><%= comment.updated_at.localtime.to_fs(:db) %></th>
           <th><strong><%= link_to I18n.t("comment.crud.delete"), project_ticket_comment_path(@project, @ticket, comment),
                                              method: :delete, data: { confirm: I18n.t("comment.crud.confirm_delete") } %></strong>
           <span class='glyphicon glyphicon-trash' aria-hidden='true'></span></th>

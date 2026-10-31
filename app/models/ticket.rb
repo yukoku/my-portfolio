@@ -10,6 +10,15 @@ class Ticket < ApplicationRecord
   validate :validate_file_size
   validate :validate_file_count
 
+  # ransack 4 以降は検索可能な属性・関連を明示する必要がある
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[title description due_on]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    []
+  end
+
 private
 
   def validate_file_size
