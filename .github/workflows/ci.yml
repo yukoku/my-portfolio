@@ -36,11 +36,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install system packages
-        run: |
-          apt-get update -qq
-          apt-get install -y --no-install-recommends default-libmysqlclient-dev imagemagick
-
       - name: Install bundler
         run: gem install bundler -v 2.4.22
 
